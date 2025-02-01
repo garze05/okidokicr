@@ -1,0 +1,38 @@
+---
+
+import { Icon } from 'astro-icon/components';
+
+const { 
+  platform, 
+  username, 
+  url, 
+  iconName, 
+  icon = true, 
+  size = 25,
+  color = "currentColor"
+} = Astro.props;
+
+const href = url || `https://www.${platform}.com/${username}`;
+const ariaLabel = `Visítanos en ${platform}`;
+---
+
+<li class="hover:scale-110 transition-transform">
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    aria-label={ariaLabel}
+    class="inline-block"
+  >
+    {icon && (
+      <Icon 
+        name={iconName} 
+        width={size}
+        height={size} 
+        class={`text-${color} hover:text-orange-600`}
+        aria-hidden="true"
+      />
+    )}
+    {!icon && <span class="sr-only">{platform}</span>}
+  </a>
+</li>

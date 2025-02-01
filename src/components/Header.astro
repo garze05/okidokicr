@@ -1,9 +1,14 @@
 ---
 import Navigation from '../components/Navigation.astro';
+import Image from 'astro/components/Image.astro';
+import Logo from '../images/logo.svg';
 ---
 
 <header>
   <nav>
-    <Navigation />
+    <div class="text-secundary-500 font-semibold flex gap-5 items-center justify-between px-10">
+      <a href="/"><Image src={Logo} alt="OkiDoki Producciones Rana Rocky Logo" width="150" height="150"></Image></a>
+      <Navigation />
+    </div>
   </nav>
 </header>

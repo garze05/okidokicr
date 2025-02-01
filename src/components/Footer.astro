@@ -1,0 +1,53 @@
+---
+// components/Footer.astro
+import Social from "./Social.astro";
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+const socialLinks = [
+  { platform: "tiktok", icon: "simple-icons:tiktok", username: "@okidokicr_" },
+  { platform: "instagram", icon: "simple-icons:instagram", username: "okidoki_cr" },
+  { platform: "facebook", icon: "simple-icons:facebook", username: "fiestacrdeHeredia" },
+  { platform: "youtube", icon: "simple-icons:youtube", username: "@okidokicr" },
+  { platform: "twitter", icon: "simple-icons:x", username: "MrFiestaCR" },
+  { platform: "whatsapp", icon: "simple-icons:whatsapp", url: "https://api.whatsapp.com/send?phone=50688313232" },
+  { platform: "linkedin", icon: "mdi:linkedin", url: "https://www.linkedin.com/in/oki-doki-cr-0b88a2b1/" },
+  { platform: "email", icon: "mdi:email", url: "mailto:hr@okidokicr.com" }
+];
+---
+
+<footer class="bg-orange-900 p-10 text-white">
+  <div class="grid items-center gap-4 lg:grid-cols-3 mx-auto">
+    <span class="flex justify-center items-center gap-2 lg:order-1 lg:justify-start">
+      <Icon name="mdi:phone"></Icon>
+      <p>(506) 8831-3232</p>
+    </span>
+    <p class="text-center lg:order-2">&copy; {year} | OkiDoki</p>
+    
+    <ul class="flex justify-center gap-5 md:order-3 lg:justify-end">
+      {socialLinks.map((link) => (
+        <Social 
+          platform={link.platform}
+          iconName={link.icon}
+          username={link.username}
+          url={link.url}
+          size={22}
+        />
+      ))}
+    </ul>
+  </div>
+</footer>
+<script is:inline>
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OkiDoki Producciones",
+    "url": "https://okidokicr.com",
+    "logo": "https://okidokicr.com/logo.webp",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+506-8831-3232",
+      "contactType": "customer service"
+    }
+  };
+</script>

@@ -1,10 +1,17 @@
 ---
+const links = [
+  { href: '/', text: 'Inicio' },
+  { href: '/nosotros', text: 'Nosotros' },
+  { href: '/aniversario', text: '30 aniversario' },
+  { href: '/servicios', text: 'Servicios' },
+  { href: '/testimonios', text: 'Testimonios' },
+  { href: '/galeria', text: 'Galería de personajes' },
+  { href: '/contacto', text: 'Contacto' },
+]
 ---
-
-<a href="/">Incio</a>
-<a href="/nosotros">Nosotros</a>
-<a href="/aniversario">30 años</a>
-<a href="/servicios">Servicios</a>
-<a href="/testimonios">Testimonios</a>
-<a href="/galeria">Galería</a>
-<a href="/contacto">Contacto</a>
+{
+  //loop
+  links.map((link) => (
+    <a href={link.href}>{link.text}</a>
+  ))
+}

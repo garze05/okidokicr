@@ -1,26 +1,19 @@
 ---
 import '../styles/global.css';
 // Component Imports
+import MainLayout from '../layouts/MainLayout.astro';
 import Button from '../components/Button.astro';
 
-const pageTitle = 'OkiDoki Producciones';
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/FAVICON.png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-
+<MainLayout title="OkiDoki Producciones">
 	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
+			<main class="container mx-auto">
+				<div class="grid place-items-center h-screen content-center">
+					<Button>Tailwind Button in Astro!</Button>
+					<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
+				</div>
+			</main>
 	</body>
-</html>
+</MainLayout>
