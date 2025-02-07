@@ -1,13 +1,32 @@
 ---
 // Click button, get confetti!
 // Styled by Tailwind :)
----
+import { Icon } from 'astro-icon/components';
 
-<button
-	class="appearance-none py-2 px-4 bg-purple-500 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75"
->
-	<slot />
+const { icon } = Astro.props;
+
+---
+<button class="w-full gap-2 inline-flex justify-center items-center cursor-pointer h-20 rounded-[15px] shadow-[0px_3px_7.599999904632568px_-1px_rgba(0,0,0,0.25)]">
+		<div class="text-center text-white text-sm font-bold font-secondary uppercase"><slot /></div>
+		{icon && 
+		<Icon
+			name={icon}
+			width=30
+			height=30
+			class="text-white"
+		/>
+		}
 </button>
+
+<style>
+	button {
+		background: var(--gradient-primary);
+	}
+
+	button:hover {
+		background: var(--gradient-secondary);
+	}
+</style>
 
 <script>
 	import confetti from 'canvas-confetti';

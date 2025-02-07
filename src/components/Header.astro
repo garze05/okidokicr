@@ -8,29 +8,36 @@ import { Icon } from 'astro-icon/components';
 import Image from 'astro/components/Image.astro';
 ---
 
-<header>
-  <div class="container mx-auto flex items-center justify-between px-4 py-3">
-    <a href="/" class="z-20 flex items-center">
-      <Image src={Logo} alt="OkiDoki Producciones Rana Logo" width="150" height="150" />
-      <Image src={Logo2} alt="OkiDoki Producciones Logo" width="200" height="200" class="hidden" />
-    </a>
-    <button class="z-20 lg:hidden p-2 text-orange-950 hover:text-orange-600 cursor-pointer" id="menu-button" aria-controls="mobile-menu" aria-expanded="false">
-      <Icon name="mdi:menu" id="burger-btn-open" size="45" />
-      <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45"/>
-      <span class="sr-only">Abrir menu principal</span>
-    </button>
-
-    <nav id="menu" class="hidden lg:flex text-orange-950 font-semibold gap-5">
-      <Navigation />
-    </nav>
-
-    <nav id="mobile-menu" class="px-5 absolute top-0 left-0 w-full h-fit z-10 bg-white p-2 text-orange-950 font-semibold lg:hidden hidden">
-      <div class="flex flex-col mt-40 gap-10">  
-          <Navigation />
-        <div class="bg-orange-950 w-full h-0.5"></div>
+<header class="container w-full px-5 mx-auto flex items-center justify-between">
+  <a href="/" class="z-20"> <!--hover:scale-110 transition-transform -->
+    <div class="group w-40 h-40 hover:scale-110 transition-transform duration-350 ease-in-out relative">
+      <!-- First Logo with fade-out on hover -->
+      <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0">
+        <Image src={Logo} alt="OkiDoki Producciones Rana Logo" class="w-full h-full" />
       </div>
-    </nav>
-  </div>
+      
+      <!-- Second Logo with fade-in on hover -->
+      <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out opacity-0 group-hover:opacity-100">
+        <Image src={Logo2} alt="OkiDoki Producciones Logo" class="w-full h-full" /> 
+      </div>
+    </div>
+  </a>
+  <button class="z-20 lg:hidden text-secondary-500 hover:text-orange-600 cursor-pointer" id="menu-button" aria-controls="mobile-menu" aria-expanded="false">
+    <Icon name="mdi:menu" id="burger-btn-open" size="45" />
+    <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45"/>
+    <span class="sr-only">Abrir menu principal</span>
+  </button>
+
+  <nav id="menu" class="hidden lg:flex text-secondary-500 font-semibold gap-5">
+    <Navigation />
+  </nav>
+
+  <nav id="mobile-menu" class="px-5 absolute top-0 left-0 w-full h-fit z-10 bg-white p-2 text-orange-950 font-semibold lg:hidden hidden">
+    <div class="flex flex-col mt-40 gap-10">  
+        <Navigation />
+      <div class="bg-orange-950 w-full h-0.5"></div>
+    </div>
+  </nav>
 </header>
 
 <script>

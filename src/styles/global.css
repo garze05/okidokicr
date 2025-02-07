@@ -1,7 +1,25 @@
+/* Register your custom font family and tell the browser where to find it. */
+@font-face {
+  font-family: 'Curlz Mt';
+  src: url('/public/fonts/curlzmt.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Montserrat', 'sans-serif';
-  --color-primary-500: #FF4F00;
-  --color-secundary-500: #431200;
+  --font-sans: 'Lexend Variable', 'sans-serif';
+  --font-primary: 'Lexend Giga Variable', 'sans-serif';
+  --font-secondary: 'Lexend Exa Variable', 'sans-serif';
+  --font-okidoki: 'Curlz Mt', 'sans-serif'; 
+  --color-primary-500: #FF4500;
+  --color-secondary-500: #3D1600;
+  --color-action-500: #FFCC00;
+  --color-gray-okidoki: #B9B9B9;
+  --color-black-okidoki: #1E1E1E;
+  --gradient-primary: linear-gradient(90deg, #FF4500, #FF7E00);
+  --gradient-secondary: linear-gradient(90deg, #af2f00, #852300);
 }
+
