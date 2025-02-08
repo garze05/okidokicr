@@ -16,14 +16,13 @@ import "@fontsource-variable/lexend-giga";
 
 // Props
 const { title } = Astro.props;
-
 ---
 
 <html lang="es" class="h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/FAVICON.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -33,27 +32,28 @@ const { title } = Astro.props;
     <div
       class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
     >
-    <!-- Sticky Whatsapp Icon -->
-    <a
-      href={socialLinksList.whatsapp.url}
-      class="fixed bottom-4 right-4 z-50 bg-green-500 w-18 h-18 rounded-full flex items-center justify-center"
-      target="_blank"
-    >
-      <Icon
-        name="simple-icons:whatsapp"
-        width="40"
-        height="40"
-        class="text-white"
-      />
-    </a>
-      <Header/>
+      <!-- Sticky Whatsapp Icon -->
+      <a
+        href={socialLinksList.whatsapp.url}
+        class="fixed right-4 bottom-4 z-50 flex h-18 w-18 items-center justify-center rounded-full bg-green-500"
+        target="_blank"
+      >
+        <Icon
+          name="simple-icons:whatsapp"
+          width="40"
+          height="40"
+          class="text-white"
+        />
+      </a>
+      <Header />
       <main class="relative grid gap-7 overflow-x-hidden">
         <slot />
       </main>
       <Footer />
-    <script>
-      import AOS from "aos";
-      AOS.init();
-    </script>
+      <script>
+        import AOS from "aos";
+        AOS.init();
+      </script>
+    </div>
   </body>
 </html>

@@ -6,20 +6,36 @@ import { socialLinksList } from "../components/SocialLinks.astro";
 // Component Imports
 import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
+import ServicioCard from "../components/ServicioCard.astro";
+// Astro
 import Image from "astro/components/Image.astro";
-import RanaRockera from "../images/rana_rocky1.png";
+import { Icon } from "astro-icon/components";
+
+// Images
+// Hero
 import RanaHero from "../images/rana_rocky2.png";
 import AniversarioHero from "../images/aniversario-hero.svg";
+
+// Que es OkiDoki
+import RanaRockera from "../images/rana_rocky1.png";
+
+// Testimonios
+
+// Servicios
+import Botargas from "../images/MarioBros.jpeg";
+import Magos from "../images/MagoLuigi.jpg";
+import PintaCaritas from "../images/PintaCaritas.jpg";
+import Payasos from "../images/Payasita.jpg";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <MainLayout title="OkiDoki Producciones">
-  <section data-aos="fade-in"
-    class="-mx-4 mb-30 grid grid-cols-1 gap-8 px-0 md:mb-0 md:grid-cols-2 lg:px-20"
+  <section
+    class="mb-30 grid grid-cols-1 gap-8 px-0 md:mb-0 md:grid-cols-2 lg:px-20"
   >
-    <div class="mx-auto">
+    <div class="mx-auto" data-aos="fade-right">
       <Image
         src={AniversarioHero}
         alt="30 aniversario OkiDoki Costa Rica"
@@ -29,7 +45,7 @@ import AniversarioHero from "../images/aniversario-hero.svg";
       <div class="z-30 mx-auto w-[90%] md:mx-0 md:pl-4 xl:pl-8">
         <a href={socialLinksList.whatsapp.url} target="_blank">
           <Button icon="mdi:arrow-up-right-thick">
-            🎉 PLANEAR MI evento mágico
+            🎉 QUIERO PLANEAR MI EVENTO
           </Button>
         </a>
       </div>
@@ -39,21 +55,13 @@ import AniversarioHero from "../images/aniversario-hero.svg";
       alt=""
       class="-z-50 mx-auto -mt-20 hidden w-screen max-w-[70%] drop-shadow-2xl md:flex"
       loading="eager"
+      data-aos="fade-left"
     />
   </section>
-  <!-- <svg width="390" height="724" viewBox="0 0 390 724" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<rect x="-96.9681" y="0.430786" width="913" height="71" transform="rotate(40.6065 -96.9681 0.430786)" fill="#FFCC00"/>
-			<rect x="-150.789" y="75" width="913" height="71" transform="rotate(40.6065 -150.789 75)" fill="#3D1600"/>
-		</svg> -->
-  <!-- <img
-		src="/images/decor/yellow_and_brown_lines.svg"
-		class="-z-10 w-full absolute top-[100px]"
-		alt=""
-		> -->
-  <section class="-mx-4">
+  <section>
     <!-- <img class="-z-10 w-md absolute left-[150px] sm:left-[50%]" alt="" src="/src/images/rana_rocky1.png" /> -->
     <div
-      class="bg-black-okidoki -z-20 grid h-fit grid-cols-1 gap-8 px-4 pt-30 pb-20 sm:px-10 lg:grid-cols-2 lg:px-40"
+      class="bg-black-okidoki -z-20 grid h-fit grid-cols-1 gap-8 px-4 pt-30 pb-20 sm:px-10 lg:grid-cols-2 lg:px-30 xl:px-40"
     >
       <div>
         <p class="text-gray-okidoki font-okidoki text-4xl opacity-50">
@@ -61,7 +69,7 @@ import AniversarioHero from "../images/aniversario-hero.svg";
         </p>
         <p
           data-aos="fade-in"
-          class="font-secondary mt-4 max-w-md text-3xl text-white sm:text-4xl md:text-5xl md:leading-13 lg:leading-12"
+          class="font-secondary mt-4 max-w-md text-4xl text-white md:text-5xl md:leading-13 lg:leading-12"
         >
           Creamos momentos
           <span
@@ -88,53 +96,135 @@ import AniversarioHero from "../images/aniversario-hero.svg";
       </div>
     </div>
   </section>
+
   <!-- Testimonios -->
-  <section class="grid grid-cols-1">
-    <h1 class="text-secondary-500 font-primary pb-7 text-5xl font-semibold">
+  <section class="container mx-auto p-4">
+    <h1
+      id="testimonios"
+      data-aos="fade-in"
+      class="text-secondary-500 font-primary py-10 text-center text-4xl font-semibold md:text-left xl:text-7xl"
+    >
       NUESTROS CLIENTES
     </h1>
-    <div class="bg-white shadow-lg rounded-md overflow-hidden min-w-0">
-      <video
-        class="w-full h-96 object-cover"
-        controls
-        poster="https://via.placeholder.com/400"
+    <div class="mb-50 grid gap-5">
+      <!-- First row - full width -->
+      <div
+        data-aos="fade-up"
+        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
       >
-        <source
-          src="https://www.w3schools.com/html/mov_bbb.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
+        <video class="h-full max-h-dvh w-full object-cover" controls>
+          <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Second row - three columns on md and up -->
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div
+          data-aos="fade-up"
+          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
+        >
+          <video
+            class="h-96 w-full object-cover"
+            controls
+            poster="/src/images/rana_rocky1.png"
+          >
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div
+          data-aos="fade-up"
+          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
+        >
+          <video
+            class="h-96 w-full object-cover"
+            controls
+            poster="/src/images/rana_rocky1.png"
+          >
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div
+          data-aos="fade-up"
+          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
+        >
+          <video
+            class="h-96 w-full object-cover"
+            controls
+            poster="/src/images/rana_rocky1.png"
+          >
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
     </div>
   </section>
+  <!-- Servicios -->
+  <section id="servicios">
+    <div class="bg-primary-500 mx-auto px-4 py-15 sm:px-10 lg:px-30 xl:px-40">
+      <h1
+        data-aos="fade-in"
+        class="font-primary py-10 text-center text-4xl font-semibold text-white xl:text-9xl"
+      >
+        SERVICIOS
+      </h1>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ServicioCard
+          image={Botargas}
+          title="Botargas"
+          icon="hugeicons:super-mario"
+        >
+          Más de <span class="text-xl font-semibold">100</span> personajes del cine,
+          videojuegos y TV
+        </ServicioCard>
 
-  <!-- <div class="container mx-auto p-4">
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ServicioCard image={Magos} title="Magos" icon="mdi:magic">
+          Efectos mágicos que sorprenden a chicos y adultos
+        </ServicioCard>
 
-				<div class="bg-white shadow-lg rounded-lg overflow-hidden min-w-0">
-					<img src="https://via.placeholder.com/400" alt="Placeholder" class="w-full h-48 object-cover">
-					<div class="p-6">
-						<h2 class="text-xl font-bold mb-2">Card Title</h2>
-						<p class="text-gray-700">This is a responsive card that adjusts its width based on the screen size.</p>
-					</div>
-				</div>
-		
+        <ServicioCard
+          image={PintaCaritas}
+          title="Pinta Caritas"
+          icon="mdi:paintbrush-outline"
+        >
+          Transformamos rostros en obras de arte
+        </ServicioCard>
 
-				<div class="bg-white shadow-lg rounded-lg overflow-hidden min-w-0">
-					<img src="https://via.placeholder.com/400" alt="Placeholder" class="w-full h-48 object-cover">
-					<div class="p-6">
-						<h2 class="text-xl font-bold mb-2">Card Title</h2>
-						<p class="text-gray-700">This is a responsive card that adjusts its width based on the screen size.</p>
-					</div>
-				</div>
-		
+        <ServicioCard image={Payasos} title="Payasos" icon="game-icons:clown">
+          Transformamos rostros en obras de arte
+        </ServicioCard>
 
-				<div class="bg-white shadow-lg rounded-lg overflow-hidden min-w-0">
-					<img src="https://via.placeholder.com/400" alt="Placeholder" class="w-full h-48 object-cover">
-					<div class="p-6">
-						<h2 class="text-xl font-bold mb-2">Card Title</h2>
-						<p class="text-gray-700">This is a responsive card that adjusts its width based on the screen size.</p>
-					</div>
-				</div>
-			</div>
-		</div> -->
+        <ServicioCard
+          image={PintaCaritas}
+          title="Pinta Caritas"
+          icon="mdi:paintbrush-outline"
+        >
+          Transformamos rostros en obras de arte
+        </ServicioCard>
+
+        <ServicioCard
+          image={PintaCaritas}
+          title="Pinta Caritas"
+          icon="mdi:paintbrush-outline"
+        >
+          Transformamos rostros en obras de arte
+        </ServicioCard>
+      </div>
+    </div>
+  </section>
 </MainLayout>
