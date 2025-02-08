@@ -1,33 +1,59 @@
 ---
-import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Icon } from "astro-icon/components";
+import { socialLinksList } from "../components/SocialLinks.astro";
+// Scroller anims
+import "aos/dist/aos.css";
 
 // fonts
-import '@fontsource/alex-brush';
-import '@fontsource/montserrat';
-import '@fontsource-variable/lexend';
-import '@fontsource-variable/lexend-exa';
-import '@fontsource-variable/lexend-giga';
+import "@fontsource/alex-brush";
+import "@fontsource/montserrat";
+import "@fontsource-variable/lexend";
+import "@fontsource-variable/lexend-exa";
+import "@fontsource-variable/lexend-giga";
 
+// Props
 const { title } = Astro.props;
+
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/FAVICON.png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="bg-no-repeat bg-fixed bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100">
-		<div class="min-h-[100dvh] grid grid-rows-[auto_1fr_auto]">
-			<Header />
-				<main class="md:px-4 mx-auto relative">
-					<slot />
-				</main>
-			<Footer />
-		</div>
-	</body>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/FAVICON.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class="h-full bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
+  >
+    <div
+      class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
+    >
+    <!-- Sticky Whatsapp Icon -->
+    <a
+      href={socialLinksList.whatsapp.url}
+      class="fixed bottom-4 right-4 z-50 bg-green-500 w-18 h-18 rounded-full flex items-center justify-center"
+      target="_blank"
+    >
+      <Icon
+        name="simple-icons:whatsapp"
+        width="40"
+        height="40"
+        class="text-white"
+      />
+    </a>
+      <Header/>
+      <main class="relative grid gap-7 overflow-x-hidden">
+        <slot />
+      </main>
+      <Footer />
+    <script>
+      import AOS from "aos";
+      AOS.init();
+    </script>
+  </body>
 </html>

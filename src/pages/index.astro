@@ -1,49 +1,113 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
+
+import { socialLinksList } from "../components/SocialLinks.astro";
+
 // Component Imports
-import MainLayout from '../layouts/MainLayout.astro';
-import Button from '../components/Button.astro';
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from "../components/Button.astro";
+import Image from "astro/components/Image.astro";
+import RanaRockera from "../images/rana_rocky1.png";
+import RanaHero from "../images/rana_rocky2.png";
+import AniversarioHero from "../images/aniversario-hero.svg";
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
+
 <MainLayout title="OkiDoki Producciones">
-		<section class="grid grid-cols-1 gap-8 md:grid-cols-2">
-			<div>
-				<img
-				src="/images/aniversario-hero.svg" 
-				alt="30 aniversario OkiDoki Costa Rica"
-				class="w-screen m-0"
-				>
-				<div class="z-30 w-full mx-auto md:w-md md:mx-0 p-5">
-					<a href="https://api.whatsapp.com/send?phone=50688313232">
-						<Button 
-						icon="mdi:arrow-up-right-thick">
-						🎉 PLANEAR MI evento mágico
-						</Button>
-					</a>
-				</div>
-			</div>
-			<img
-			src="/src/images/rana_rocky2.png"
-			alt=""
-			class="hidden -mt-40 w-screen max-w-[90%] md:flex">
-		</section>
-		<!-- <svg width="390" height="724" viewBox="0 0 390 724" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <section data-aos="fade-in"
+    class="-mx-4 mb-30 grid grid-cols-1 gap-8 px-0 md:mb-0 md:grid-cols-2 lg:px-20"
+  >
+    <div class="mx-auto">
+      <Image
+        src={AniversarioHero}
+        alt="30 aniversario OkiDoki Costa Rica"
+        class="m-0 w-screen"
+        loading="eager"
+      />
+      <div class="z-30 mx-auto w-[90%] md:mx-0 md:pl-4 xl:pl-8">
+        <a href={socialLinksList.whatsapp.url} target="_blank">
+          <Button icon="mdi:arrow-up-right-thick">
+            🎉 PLANEAR MI evento mágico
+          </Button>
+        </a>
+      </div>
+    </div>
+    <Image
+      src={RanaHero}
+      alt=""
+      class="-z-50 mx-auto -mt-20 hidden w-screen max-w-[70%] drop-shadow-2xl md:flex"
+      loading="eager"
+    />
+  </section>
+  <!-- <svg width="390" height="724" viewBox="0 0 390 724" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect x="-96.9681" y="0.430786" width="913" height="71" transform="rotate(40.6065 -96.9681 0.430786)" fill="#FFCC00"/>
 			<rect x="-150.789" y="75" width="913" height="71" transform="rotate(40.6065 -150.789 75)" fill="#3D1600"/>
 		</svg> -->
-		<!-- <img
+  <!-- <img
 		src="/images/decor/yellow_and_brown_lines.svg"
 		class="-z-10 w-full absolute top-[100px]"
 		alt=""
 		> -->
-		<section class="gap-8 mt-40 lg:-mt-40 -mx-4">
-			<!-- <img class="-z-10 w-md absolute left-[150px] sm:left-[50%]" alt="" src="/src/images/rana_rocky1.png" /> -->
-			<div class="bg-black-okidoki h-200 -z-20">
-			</div>
-		</section>
+  <section class="-mx-4">
+    <!-- <img class="-z-10 w-md absolute left-[150px] sm:left-[50%]" alt="" src="/src/images/rana_rocky1.png" /> -->
+    <div
+      class="bg-black-okidoki -z-20 grid h-fit grid-cols-1 gap-8 px-4 pt-30 pb-20 sm:px-10 lg:grid-cols-2 lg:px-40"
+    >
+      <div>
+        <p class="text-gray-okidoki font-okidoki text-4xl opacity-50">
+          oKiDoki
+        </p>
+        <p
+          data-aos="fade-in"
+          class="font-secondary mt-4 max-w-md text-3xl text-white sm:text-4xl md:text-5xl md:leading-13 lg:leading-12"
+        >
+          Creamos momentos
+          <span
+            class="from-primary-500 font-primary bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent lg:text-6xl"
+            >inolvidables</span
+          >
+          para personas
+          <span
+            class="from-primary-500 font-primary bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent lg:text-6xl"
+            >inolvidables.</span
+          >
+        </p>
+        <p
+          data-aos="fade-in"
+          class="text-gray-okidoki text-md mt-10 max-w-lg leading-10 md:text-lg"
+        >
+          Nuestra experiencia nos ha enseñado que cada evento es único, y por
+          eso nos especializamos en ofrecer experiencias personalizadas que van
+          más allá de lo esperado.
+        </p>
+      </div>
+      <div data-aos="fade-left" class="flex items-center">
+        <Image src={RanaRockera} alt="" />
+      </div>
+    </div>
+  </section>
+  <!-- Testimonios -->
+  <section class="grid grid-cols-1">
+    <h1 class="text-secondary-500 font-primary pb-7 text-5xl font-semibold">
+      NUESTROS CLIENTES
+    </h1>
+    <div class="bg-white shadow-lg rounded-md overflow-hidden min-w-0">
+      <video
+        class="w-full h-96 object-cover"
+        controls
+        poster="https://via.placeholder.com/400"
+      >
+        <source
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+    </div>
+  </section>
 
-		<!-- <div class="container mx-auto p-4">
+  <!-- <div class="container mx-auto p-4">
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
 				<div class="bg-white shadow-lg rounded-lg overflow-hidden min-w-0">

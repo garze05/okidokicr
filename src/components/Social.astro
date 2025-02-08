@@ -1,38 +1,39 @@
 ---
+import { Icon } from "astro-icon/components";
 
-import { Icon } from 'astro-icon/components';
-
-const { 
-  platform, 
-  username, 
-  url, 
-  iconName, 
-  icon = true, 
+const {
+  platform,
+  username,
+  url,
+  iconName,
+  icon = true,
   size = 25,
-  color = "currentColor"
+  color = "currentColor",
 } = Astro.props;
 
 const href = url || `https://www.${platform}.com/${username}`;
 const ariaLabel = `Visítanos en ${platform}`;
 ---
 
-<li class="hover:scale-110 transition-transform">
-  <a 
-    href={href} 
-    target="_blank" 
+<li class="transition-transform hover:scale-110">
+  <a
+    href={href}
+    target="_blank"
     rel="noopener noreferrer"
     aria-label={ariaLabel}
     class="inline-block"
   >
-    {icon && (
-      <Icon 
-        name={iconName} 
-        width={size}
-        height={size} 
-        class={`text-${color} hover:text-primary-500`}
-        aria-hidden="true"
-      />
-    )}
+    {
+      icon && (
+        <Icon
+          name={iconName}
+          width={size}
+          height={size}
+          class={`text-${color} hover:text-primary-500`}
+          aria-hidden="true"
+        />
+      )
+    }
     {!icon && <span class="sr-only">{platform}</span>}
   </a>
 </li>

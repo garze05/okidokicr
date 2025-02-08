@@ -1,38 +1,37 @@
 ---
 // Click button, get confetti!
 // Styled by Tailwind :)
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 const { icon } = Astro.props;
-
 ---
-<button class="w-full gap-2 inline-flex justify-center items-center cursor-pointer h-20 rounded-[15px] shadow-[0px_3px_7.599999904632568px_-1px_rgba(0,0,0,0.25)]">
-		<div class="text-center text-white text-sm font-bold font-secondary uppercase"><slot /></div>
-		{icon && 
-		<Icon
-			name={icon}
-			width=30
-			height=30
-			class="text-white"
-		/>
-		}
+
+<button
+  class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl py-4 drop-shadow-2xl md:py-5 lg:py-6"
+>
+  <div
+    class="font-secondary text-center text-[3vw] font-bold text-white uppercase md:text-[1.5vw] lg:text-[1.3vw]"
+  >
+    <slot />
+  </div>
+  {icon && <Icon name={icon} width="30" height="30" class="text-white" />}
 </button>
 
 <style>
-	button {
-		background: var(--gradient-primary);
-	}
+  button {
+    background: var(--gradient-primary);
+  }
 
-	button:hover {
-		background: var(--gradient-secondary);
-	}
+  button:hover {
+    background: var(--gradient-secondary);
+  }
 </style>
 
 <script>
-	import confetti from 'canvas-confetti';
-	const button = document.body.querySelector('button');
+  import confetti from "canvas-confetti";
+  const button = document.body.querySelector("button");
 
-	if (button) {
-		button.addEventListener('click', () => confetti());
-	}
+  if (button) {
+    button.addEventListener("click", () => confetti());
+  }
 </script>

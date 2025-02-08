@@ -1,45 +1,42 @@
 ---
 // components/Footer.astro
 import Social from "./Social.astro";
-import { Icon } from 'astro-icon/components';
-
+import { Icon } from "astro-icon/components";
+import { socialLinksList } from "./SocialLinks.astro";
 const year = new Date().getFullYear();
-const socialLinks = [
-{ platform: "whatsapp", icon: "simple-icons:whatsapp", url: "https://api.whatsapp.com/send?phone=50688313232" },
-  { platform: "tiktok", icon: "simple-icons:tiktok", username: "@okidokicr_" },
-  { platform: "instagram", icon: "simple-icons:instagram", username: "okidoki_cr" },
-  { platform: "facebook", icon: "simple-icons:facebook", username: "fiestacrdeHeredia" },
-  { platform: "youtube", icon: "simple-icons:youtube", username: "@okidokicr" },
-  { platform: "twitter", icon: "simple-icons:x", username: "MrFiestaCR" },
-  { platform: "linkedin", icon: "mdi:linkedin", url: "https://www.linkedin.com/in/oki-doki-cr-0b88a2b1/" },
-  { platform: "email", icon: "mdi:email", url: "mailto:hr@okidokicr.com" }
-];
 ---
 
-<footer class="bg-secondary-500 px-2 sm:px-5 py-10 text-gray-okidoki text-xs sm:text-sm font-light font-primary md:px-10">
-  <div class="grid lg:grid-cols-3 lg:grid-rows-[auto_1fr] mx-auto gap-5 items-center">  
-    <div class="text-center items-center gap-2">
-      <a href="/"><div class="text-5xl font-okidoki">oKiDoki</div></a>
-      <span class="flex justify-center items-center gap-2">
-        <Icon name="mdi:phone"></Icon>
+<footer
+  class="bg-secondary-500 text-gray-okidoki font-primary px-2 py-10 text-xs font-light sm:px-5 sm:text-sm md:px-10"
+>
+  <div
+    class="mx-auto grid items-center gap-5 lg:grid-cols-3 lg:grid-rows-[auto_1fr]"
+  >
+    <div class="items-center gap-2 text-center">
+      <a href="/"><div class="font-okidoki text-5xl">oKiDoki</div></a>
+      <span class="flex items-center justify-center gap-2">
+        <Icon name="mdi:phone" />
         <p>(506) 8831-3232</p>
       </span>
     </div>
     <ul class="flex justify-center gap-5 lg:order-3">
-      {socialLinks.map((link) => (
-        <Social 
-          platform={link.platform}
-          iconName={link.icon}
-          username={link.username}
-          url={link.url}
-          size={18}
-        />
-      ))}
+      {
+        Object.values(socialLinksList).map((link) => (
+          <Social
+            platform={link.platform}
+            iconName={link.icon}
+            username={link.username}
+            url={link.url}
+            size={18}
+            key={link.platform}
+          />
+        ))
+      }
     </ul>
     <div class="text-center lg:order-2">
       <p>&copy; {year}, OkiDoki Costa Rica</p>
     </div>
-    <div class="text-center lg:row-start-2 lg:col-start-2">
+    <div class="text-center lg:col-start-2 lg:row-start-2">
       <p class="text-xs">Diseñado con ❤️ por Gabriel Rodríguez</p>
     </div>
   </div>
@@ -48,13 +45,13 @@ const socialLinks = [
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "OkiDoki Producciones",
-    "url": "https://okidokicr.com",
-    "logo": "https://okidokicr.com/logo.webp",
-    "contactPoint": {
+    name: "OkiDoki Producciones",
+    url: "https://okidokicr.com",
+    logo: "https://okidokicr.com/logo.webp",
+    contactPoint: {
       "@type": "ContactPoint",
-      "telephone": "+506-8831-3232",
-      "contactType": "customer service"
-    }
+      telephone: "+506-8831-3232",
+      contactType: "customer service",
+    },
   };
 </script>

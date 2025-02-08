@@ -1,58 +1,124 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Logo from '../images/logo.svg';
-import Logo2 from '../images/logo2.svg';
+import Navigation from "../components/Navigation.astro";
+import Logo from "../images/logo.svg";
+import Logo2 from "../images/logo2.svg";
 
 // Astro Components
-import { Icon } from 'astro-icon/components';
-import Image from 'astro/components/Image.astro';
+import { Icon } from "astro-icon/components";
+import Image from "astro/components/Image.astro";
 ---
-
-<header class="container w-full px-5 mx-auto flex items-center justify-between">
-  <a href="/" class="z-20"> <!--hover:scale-110 transition-transform -->
-    <div class="group w-40 h-40 hover:scale-110 transition-transform duration-350 ease-in-out relative">
+<div class="sticky top-0 z-50">
+<!-- Anuncio de promocion -->
+<!-- <div class="py-1.5 whitespace-nowrap">
+  <span class="text-primary-500 font-primary text-sm">
+    <marquee
+      ><span class="animate-pulse font-bold">⚠️ OFERTA LIMITADA:</span> Solo reservas
+      en febrero activan el descuento para 2025. ¡No pierdas la magia!</marquee
+    ></span
+  >
+</div> -->
+<header class="lg:px-30 xl:px-40 px-5 mx-auto flex w-full items-center justify-between max-h-40">
+  <a href="/" class="z-20">
+    <!--hover:scale-110 transition-transform -->
+    <div
+      class="group relative h-40 w-40 transition-transform duration-350 ease-in-out hover:scale-110"
+    >
       <!-- First Logo with fade-out on hover -->
-      <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0">
-        <Image src={Logo} alt="OkiDoki Producciones Rana Logo" class="w-full h-full" />
+      <div
+        class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0"
+      >
+        <Image
+          src={Logo}
+          alt="OkiDoki Producciones Rana Logo"
+          loading="eager"
+          class="h-full w-full"
+        />
       </div>
-      
+
       <!-- Second Logo with fade-in on hover -->
-      <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out opacity-0 group-hover:opacity-100">
-        <Image src={Logo2} alt="OkiDoki Producciones Logo" class="w-full h-full" /> 
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-350 ease-in-out group-hover:opacity-100"
+      >
+        <Image
+          src={Logo2}
+          alt="OkiDoki Producciones Logo"
+          loading="eager"
+          class="h-full w-full"
+        />
       </div>
     </div>
   </a>
-  <button class="z-20 lg:hidden text-secondary-500 hover:text-orange-600 cursor-pointer" id="menu-button" aria-controls="mobile-menu" aria-expanded="false">
+  <button
+    class="text-secondary-500 z-20 cursor-pointer hover:text-orange-600 lg:hidden"
+    id="menu-button"
+    aria-controls="mobile-menu"
+    aria-expanded="false"
+  >
     <Icon name="mdi:menu" id="burger-btn-open" size="45" />
-    <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45"/>
+    <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45" />
     <span class="sr-only">Abrir menu principal</span>
   </button>
 
-  <nav id="menu" class="hidden lg:flex text-secondary-500 font-semibold gap-5">
+  <nav
+    id="menu"
+    class="text-secondary-500 lg:text-md font-secondary hidden gap-5 text-xs font-semibold lg:flex xl:text-[1rem]"
+  >
     <Navigation />
   </nav>
 
-  <nav id="mobile-menu" class="px-5 absolute top-0 left-0 w-full h-fit z-10 bg-white p-2 text-orange-950 font-semibold lg:hidden hidden">
-    <div class="flex flex-col mt-40 gap-10">  
-        <Navigation />
-      <div class="bg-orange-950 w-full h-0.5"></div>
+  <nav
+    id="mobile-menu"
+    class="absolute top-0 left-0 z-10 hidden h-fit w-full bg-white p-2 px-5 text-orange-950 lg:hidden"
+  >
+    <div class="mt-40 flex flex-col gap-10">
+      <Navigation />
+      <div class="h-0.5 w-full bg-orange-950"></div>
     </div>
   </nav>
 </header>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuButton = document.getElementById('menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const openBtn = document.getElementById('burger-btn-open');
-    const closeBtn = document.getElementById('burger-btn-close');
+<style>
+  header {
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease;
+  }
 
-    menuButton?.addEventListener('click', () => {
-      const isExpanded = menuButton?.getAttribute('aria-expanded') === 'true';
-      menuButton?.setAttribute('aria-expanded', !isExpanded);
-      mobileMenu?.classList.toggle('hidden');
-      openBtn?.classList.toggle('hidden');
-      closeBtn?.classList.toggle('hidden');
+  header.scrolled {
+    width: 100vw;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+</style>
+
+<script>
+  // Mobile menu
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.getElementById("menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const openBtn = document.getElementById("burger-btn-open");
+    const closeBtn = document.getElementById("burger-btn-close");
+
+    menuButton?.addEventListener("click", () => {
+      const isExpanded = menuButton?.getAttribute("aria-expanded") === "true";
+      menuButton?.setAttribute("aria-expanded", !isExpanded);
+      mobileMenu?.classList.toggle("hidden");
+      openBtn?.classList.toggle("hidden");
+      closeBtn?.classList.toggle("hidden");
     });
   });
+
+  // Sticky header past scroll
+  document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+
+  if (header) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) { // Ajusta este valor según cuándo quieres que se active
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+  }
+});
 </script>

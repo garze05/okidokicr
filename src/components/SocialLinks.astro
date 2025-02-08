@@ -1,0 +1,7 @@
+---
+import socialLinks from '../data/socialLinks.json';
+
+export const socialLinksList = Object.fromEntries(
+  socialLinks.map(link => [link.platform, link])
+);
+---

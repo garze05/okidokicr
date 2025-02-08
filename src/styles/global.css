@@ -1,25 +1,30 @@
 /* Register your custom font family and tell the browser where to find it. */
 @font-face {
-  font-family: 'Curlz Mt';
-  src: url('/public/fonts/curlzmt.ttf') format('ttf');
+  font-family: "Curlz Mt";
+  src: url("/public/fonts/curlzmt.ttf") format("ttf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --font-sans: 'Lexend Variable', 'sans-serif';
-  --font-primary: 'Lexend Giga Variable', 'sans-serif';
-  --font-secondary: 'Lexend Exa Variable', 'sans-serif';
-  --font-okidoki: 'Curlz Mt', 'sans-serif'; 
-  --color-primary-500: #FF4500;
-  --color-secondary-500: #3D1600;
-  --color-action-500: #FFCC00;
-  --color-gray-okidoki: #B9B9B9;
-  --color-black-okidoki: #1E1E1E;
-  --gradient-primary: linear-gradient(90deg, #FF4500, #FF7E00);
+  --font-sans: "Lexend Variable", "sans-serif";
+  --font-primary: "Lexend Giga Variable", "sans-serif";
+  --font-secondary: "Lexend Exa Variable", "sans-serif";
+  --font-okidoki: "Curlz Mt", "sans-serif";
+  --color-primary-500: #ff4500;
+  --color-secondary-500: #3d1600;
+  --color-action-500: #ffcc00;
+  --color-gray-okidoki: #b9b9b9;
+  --color-black-okidoki: #1e1e1e;
+  --gradient-primary: linear-gradient(90deg, #ff4500, #ff7e00);
   --gradient-secondary: linear-gradient(90deg, #af2f00, #852300);
 }
 
+@layer base {
+  body {
+    @apply font-light;
+  }
+}
