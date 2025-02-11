@@ -6,48 +6,47 @@ const { image, title, icon } = Astro.props;
 ---
 
 <div
-  data-aos="zoom-in"
-  data-aos-offset="200"
-  class="group relative min-w-0 overflow-hidden rounded-lg bg-white shadow-lg"
+  data-aos="zoom-out"
+  data-aos-offset="100"
+  class="group relative min-w-0 overflow-hidden rounded-lg shadow-lg duration-300 hover:shadow-2xl aspect-square"  
 >
-  <div class="relative">
-    <Image
-      src={image}
-      alt="Placeholder"
-      class="h-60 w-full object-cover object-[25%_30%]"
-      loading="lazy"
-    />
-    <div
-      class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-60"
-    >
-    </div>
-    <div
-      class="absolute inset-0 flex items-center justify-center px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-    >
-      <p class="text-lg text-white">
-        <slot name="hover-description">Descubre más sobre este servicio</slot>
-      </p>
-    </div>
+  <!-- Single overlay for the entire card -->
+  <div
+    class="absolute inset-0 z-10 bg-black opacity-0 duration-300 group-hover:opacity-30 transition-all"
+  >
   </div>
-  <div class="relative p-6 text-center md:text-left">
+
+  <Image
+    src={image}
+    alt="Placeholder"
+    class="absolute h-full w-full object-cover object-[25%_30%] group-hover:blur-xs duration-300 backdrop-filter"
+    loading="lazy"
+  />
+
+  <!-- Gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90"></div>
+
+  <div
+    class="absolute inset-x-0 bottom-0 px-6 py-4 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 transform translate-y-full group-hover:translate-y-0"
+  >
+    <p class="lg:text-lg text-white leading-8">
+      <slot name="hover-description"></slot>
+    </p>
+  </div>
+  <div class="relative p-6 text-center md:text-left flex flex-col justify-end h-full z-20 transition-transform duration-300 group-hover:-translate-y-20">
     <Icon
       name={icon}
-      class="text-secondary-500 relative z-10 mx-auto h-15 w-15 md:mx-0"
+      class="text-white opacity-50 shadow-md mx-auto h-15 w-15 md:mx-0 transition-colors duration-300 group-hover:text-white group-hover:opacity-100"
     />
     <h2
-      class="font-primary text-primary-500 relative z-10 mb-2 text-3xl font-bold transition-colors duration-300 group-hover:text-white"
+      class="font-primary text-primary-500 mb-2 text-2xl md:text-3xl font-bold transition-colors duration-300 group-hover:text-white"
     >
       {title}
     </h2>
-    <p
-      class="text-black-okidoki relative z-10 transition-colors duration-300 group-hover:text-white"
+    <!-- <p
+      class="lg:hidden text-black-okidoki transition-colors duration-300 group-hover:text-white"
     >
       <slot />
-    </p>
-
-    <div
-      class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-60"
-    >
-    </div>
+    </p> -->
   </div>
 </div>

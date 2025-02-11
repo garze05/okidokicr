@@ -2,8 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { Icon } from "astro-icon/components";
-import { socialLinksList } from "../components/SocialLinks.astro";
+import WhatsappStickyButton from "../components/WhatsappStickyButton.astro";
 // Scroller anims
 import "aos/dist/aos.css";
 
@@ -22,7 +21,7 @@ const { title } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/FAVICON.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -32,21 +31,9 @@ const { title } = Astro.props;
     <div
       class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
     >
-      <!-- Sticky Whatsapp Icon -->
-      <a
-        href={socialLinksList.whatsapp.url}
-        class="fixed right-4 bottom-4 z-50 flex h-18 w-18 items-center justify-center rounded-full bg-green-500"
-        target="_blank"
-      >
-        <Icon
-          name="simple-icons:whatsapp"
-          width="40"
-          height="40"
-          class="text-white"
-        />
-      </a>
+      <WhatsappStickyButton />
       <Header />
-      <main class="relative grid gap-7 overflow-x-hidden">
+      <main class="relative grid overflow-x-hidden">
         <slot />
       </main>
       <Footer />
@@ -57,3 +44,30 @@ const { title } = Astro.props;
     </div>
   </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const headerElement = document.querySelector('header');
+    const headerHeight = headerElement?.offsetHeight ?? 0;
+    console.log(headerHeight);
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(this: HTMLAnchorElement, e: MouseEvent) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (!href) return;
+        
+        console.log(href);
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - headerHeight,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>

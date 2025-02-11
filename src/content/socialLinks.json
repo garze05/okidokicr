@@ -1,0 +1,42 @@
+[
+  {
+    "platform": "whatsapp",
+    "icon": "simple-icons:whatsapp",
+    "url": "https://bit.ly/42qjF2U"
+  },
+  {
+    "platform": "tiktok",
+    "icon": "simple-icons:tiktok",
+    "username": "@okidokicr_"
+  },
+  {
+    "platform": "instagram",
+    "icon": "simple-icons:instagram",
+    "username": "okidoki_cr"
+  },
+  {
+    "platform": "facebook",
+    "icon": "simple-icons:facebook",
+    "username": "fiestacrdeHeredia"
+  },
+  {
+    "platform": "youtube",
+    "icon": "simple-icons:youtube",
+    "username": "@okidokicr"
+  },
+  {
+    "platform": "twitter",
+    "icon": "simple-icons:x",
+    "username": "MrFiestaCR"
+  },
+  {
+    "platform": "linkedin",
+    "icon": "mdi:linkedin",
+    "url": "https://www.linkedin.com/in/oki-doki-cr-0b88a2b1/"
+  },
+  {
+    "platform": "email",
+    "icon": "mdi:email",
+    "url": "mailto:hr@okidokicr.com"
+  }
+]

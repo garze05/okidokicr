@@ -1,0 +1,116 @@
+--- 
+// import styles bundle
+import 'swiper/css/bundle';
+
+import Image from "astro/components/Image.astro";
+import Button from "./Button.astro";
+
+// Hero images
+import RanaHero from "../images/rana_rocky2.png";
+import AniversarioHero from "../images/aniversario-hero.svg";
+import { socialLinksList } from "../components/SocialLinks.astro";
+
+// Promociones Slider image
+
+import Promocion1 from "../images/promocion.png";
+import Promocion2 from "../images/promocion2.jpeg";
+---
+
+<!-- Slider main container -->
+<div class="mx-auto max-w-screen">
+  <div class="hero-swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="grid grid-cols-1 gap-8 px-0 md:grid-cols-2 lg:px-20">
+          <div class="mx-auto" data-aos="fade-right">
+            <Image
+              src={AniversarioHero}
+              alt="30 aniversario OkiDoki Costa Rica"
+              class="m-0 w-screen"
+              loading="eager"
+            />
+            <div class="z-30 mx-auto w-[90%] md:mx-0 md:pl-4 xl:pl-8">
+              <a href={socialLinksList.whatsapp.url} target="_blank">
+                <Button icon="mdi:arrow-up-right-thick">
+                  🎉 CELEBRA CON NOSOTROS
+                </Button>
+              </a>
+            </div>
+          </div>
+          <Image
+            src={RanaHero}
+            alt=""
+            class="z-[-50] mx-auto -mt-20 hidden w-screen max-w-[70%] drop-shadow-2xl md:flex"
+            loading="eager"
+            data-aos="fade-left"
+          />
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <Image
+          src={Promocion1}
+          alt="Promocion 25% de descuento en mes de Febrero"
+          class="mx-auto w-screen h-screen object-cover"
+          loading="eager"
+        />
+      </div>
+      <div class="swiper-slide">
+        <Image
+          src={Promocion2}
+          alt="Nos vemos en City Mall este 14 de Febrero"
+          class="mx-auto w-screen h-screen object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<script>
+  // Import Swiper bundle with all modules installed
+  import Swiper from 'swiper/bundle';
+
+  const swiper = new Swiper('.hero-swiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    autoplay: {
+      delay: 8000,
+    },
+    allowTouchMove: true,
+    // Pagination configuration
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    centeredSlides: true,
+    // Navigation arrows configuration
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    speed: 500,
+  // Responsive breakpoints
+  breakpoints: {
+    // when window width is >= 480px
+    480: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+  },
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false,
+  },
+
+  });
+</script>

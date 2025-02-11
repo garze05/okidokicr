@@ -1,12 +1,11 @@
 ---
 import "../styles/global.css";
 
-import { socialLinksList } from "../components/SocialLinks.astro";
-
 // Component Imports
 import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
 import ServicioCard from "../components/ServicioCard.astro";
+import HeroCarousel from "../components/HeroCarousel.astro";
 // Astro
 import Image from "astro/components/Image.astro";
 import { Icon } from "astro-icon/components";
@@ -20,44 +19,48 @@ import AniversarioHero from "../images/aniversario-hero.svg";
 import RanaRockera from "../images/rana_rocky1.png";
 
 // Testimonios
+import testimonios from "../content/testimonials.json";
+// import promos from "../content/promotions.json";
+
+// Ordenar por prioridad (opcional)
+testimonios.sort((a, b) => a.priority - b.priority);
+// promos.sort((a, b) => a.priority - b.priority);
 
 // Servicios
 import Botargas from "../images/MarioBros.jpeg";
 import Magos from "../images/MagoLuigi.jpg";
 import PintaCaritas from "../images/PintaCaritas.jpg";
 import Payasos from "../images/Payasita.jpg";
+import Inflables from "../images/Inflable.jpg";
+import MasServicios from "../images/grupopersonajes.jpg";
+
+// Links
+import { socialLinksList } from "../components/SocialLinks.astro";
+const whatsappLink = socialLinksList.whatsapp.url;
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <MainLayout title="OkiDoki Producciones">
-  <section
-    class="mb-30 grid grid-cols-1 gap-8 px-0 md:mb-0 md:grid-cols-2 lg:px-20"
-  >
-    <div class="mx-auto" data-aos="fade-right">
-      <Image
-        src={AniversarioHero}
-        alt="30 aniversario OkiDoki Costa Rica"
-        class="m-0 w-screen"
-        loading="eager"
-      />
-      <div class="z-30 mx-auto w-[90%] md:mx-0 md:pl-4 xl:pl-8">
-        <a href={socialLinksList.whatsapp.url} target="_blank">
-          <Button icon="mdi:arrow-up-right-thick">
-            🎉 QUIERO PLANEAR MI EVENTO
-          </Button>
-        </a>
-      </div>
-    </div>
-    <Image
-      src={RanaHero}
-      alt=""
-      class="-z-50 mx-auto -mt-20 hidden w-screen max-w-[70%] drop-shadow-2xl md:flex"
-      loading="eager"
-      data-aos="fade-left"
-    />
+  <!-- Hero Carousel -->
+  <section class="relative">
+    <HeroCarousel></HeroCarousel>
   </section>
+  <!-- Timeline -->
+  <!-- <div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Nuestra Historia</h2>
+    <div class="relative">
+
+      <div class="border-l-4 border-blue-500 pl-8 mb-12 relative">
+        <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-[10px] top-0"></div>
+        <h3 class="text-xl font-bold">1994: Fundación</h3>
+        <p class="mt-2">Abrimos nuestras puertas en el corazón de la ciudad...</p>
+      </div>
+
+    </div>
+  </div> -->
+  <!--Galeria https://github.com/claudiabdm/astro-carousel?tab=readme-ov-file -->
   <section>
     <!-- <img class="-z-10 w-md absolute left-[150px] sm:left-[50%]" alt="" src="/src/images/rana_rocky1.png" /> -->
     <div
@@ -97,43 +100,125 @@ import Payasos from "../images/Payasita.jpg";
     </div>
   </section>
 
-  <!-- Testimonios -->
-  <section class="container mx-auto p-4">
-    <h1
-      id="testimonios"
-      data-aos="fade-in"
-      class="text-secondary-500 font-primary py-10 text-center text-4xl font-semibold md:text-left xl:text-7xl"
-    >
-      NUESTROS CLIENTES
-    </h1>
-    <div class="mb-50 grid gap-5">
-      <!-- First row - full width -->
-      <div
-        data-aos="fade-up"
-        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
-      >
-        <video class="h-full max-h-dvh w-full object-cover" controls>
-          <source
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
+      {testimonios.map((testimonio) => (
+        <div class="testimonios swiper-slide w-full">
+          <div
+          data-aos="fade-up"
+          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
+          >
+          <video
+            class="h-full w-full object-contain"
+            controls
+            preload="metadata"
+          >
+            <source
+            src={testimonio.videoSrc}
             type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          </div>
+        </div>
+      ))}
+          >
+            <source
+            src="/src/videos/testimonio3.mp4"
+            type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          </div>
+        ))}
+      </div>
+      <div class="testimonios swiper-slide w-full">
+        <div
+        data-aos="fade-up"
+        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
+        >
+        <video
+          class="h-full w-full object-contain"
+          controls
+          preload="metadata"
+        >
+          <source
+          src="/src/videos/testimonio1.mp4"
+          type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
+        </div>
       </div>
+      <div class="testimonios swiper-slide w-full">
+        <div
+        data-aos="fade-up"
+        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
+        >
+        <video
+          class="h-full w-full object-contain"
+          controls
+          preload="metadata"
+        >
+          <source
+          src="/src/videos/testimonio2.mp4"
+          type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        </div>
+      </div>
+      <div class="testimonios swiper-slide w-full">
+        <div
+        data-aos="fade-up"
+        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
+        >
+        <video
+          class="h-full w-full object-contain"
+          controls
+          preload="metadata"
+        >
+          <source
+          src="/src/videos/testimonio4.mp4"
+          type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        </div>
+      </div>
+      </div>
+    <!-- Navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    </div>
+
+    <div class="mb-50 grid gap-5">
+      <!-- First row - full width -->
+      <!-- <div
+        data-aos="fade-up"
+        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
+      >
+        <video class="h-full max-h-dvh w-full object-cover" controls poster="/src/images/rana_rocky1.png">
+          <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+            
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div> -->
 
       <!-- Second row - three columns on md and up -->
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <!-- <div class="max-w-1/3 mx-auto">
         <div
           data-aos="fade-up"
           class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
         >
           <video
-            class="h-96 w-full object-cover"
+            class="h-full w-full object-cover"
             controls
-            poster="/src/images/rana_rocky1.png"
           >
             <source
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              src="/src/videos/testimonio3.mp4"
               type="video/mp4"
             />
             Your browser does not support the video tag.
@@ -144,12 +229,11 @@ import Payasos from "../images/Payasita.jpg";
           class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
         >
           <video
-            class="h-96 w-full object-cover"
+            class="h-full w-full object-cover"
             controls
-            poster="/src/images/rana_rocky1.png"
           >
             <source
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              src="/src/videos/testimonio1.mp4"
               type="video/mp4"
             />
             Your browser does not support the video tag.
@@ -160,53 +244,44 @@ import Payasos from "../images/Payasita.jpg";
           class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
         >
           <video
-            class="h-96 w-full object-cover"
+            class="h-full w-full object-cover"
             controls
-            poster="/src/images/rana_rocky1.png"
           >
             <source
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              src="/src/videos/testimonio2.mp4"
               type="video/mp4"
             />
             Your browser does not support the video tag.
           </video>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
+
   <!-- Servicios -->
   <section id="servicios">
-    <div class="bg-primary-500 mx-auto px-4 py-15 sm:px-10 lg:px-30 xl:px-40">
+    <div class="bg-primary-500 mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-20">
       <h1
         data-aos="fade-in"
-        class="font-primary py-10 text-center text-4xl font-semibold text-white xl:text-9xl"
+        class="font-primary py-10 text-center text-4xl font-semibold text-white lg:text-8xl xl:text-9xl"
       >
         SERVICIOS
       </h1>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         <ServicioCard
           image={Botargas}
           title="Botargas"
           icon="hugeicons:super-mario"
         >
-          Más de <span class="text-xl font-semibold">100</span> personajes del cine,
-          videojuegos y TV
+          <Fragment slot="hover-description">Más de <span class="text-xl font-semibold">100</span> personajes del cine,
+            videojuegos y TV</Fragment>
         </ServicioCard>
 
-        <ServicioCard image={Magos} title="Magos" icon="mdi:magic">
-          Efectos mágicos que sorprenden a chicos y adultos
-        </ServicioCard>
-
-        <ServicioCard
-          image={PintaCaritas}
-          title="Pinta Caritas"
-          icon="mdi:paintbrush-outline"
-        >
-          Transformamos rostros en obras de arte
-        </ServicioCard>
-
-        <ServicioCard image={Payasos} title="Payasos" icon="game-icons:clown">
-          Transformamos rostros en obras de arte
+        <ServicioCard 
+        image={Magos} 
+        title="Magos" 
+        icon="mdi:magic">
+          <Fragment slot="hover-description">Efectos mágicos que sorprenden a chicos y adultos</Fragment>
         </ServicioCard>
 
         <ServicioCard
@@ -214,17 +289,103 @@ import Payasos from "../images/Payasita.jpg";
           title="Pinta Caritas"
           icon="mdi:paintbrush-outline"
         >
-          Transformamos rostros en obras de arte
+
+          <Fragment slot="hover-description">Diseños únicos y personalizados para cada niño y niña.</Fragment>
+        </ServicioCard>
+
+        <ServicioCard image={Payasos} title="Payasos(sitas)" icon="game-icons:clown">
+
+          <Fragment slot="hover-description">Malabares, globoflexia y canciones que enamoran a niños… ¡y derriten hasta a los papás más serios!</Fragment>
         </ServicioCard>
 
         <ServicioCard
-          image={PintaCaritas}
-          title="Pinta Caritas"
-          icon="mdi:paintbrush-outline"
+          image={Inflables}
+          title="Inflables"
+          icon="game-icons:elven-castle"
         >
-          Transformamos rostros en obras de arte
+
+          <Fragment slot="hover-description">Castillos inflabes, toboganes gigantes y juegos seguros para que la diversión no pare. </Fragment>
+        </ServicioCard>
+
+        <ServicioCard
+          image={MasServicios}
+          title="Y mucho más..."
+          icon="mdi:star"
+        >
+        <Fragment slot="hover-description"><a href="https://wa.me/c/50688313232"><Button type="secondary" icon="mdi:arrow-up-right-thick">Ver todos los servicios</Button></a></Fragment>
         </ServicioCard>
       </div>
     </div>
   </section>
+
+  <!-- CTA -->
+  <section class="bg-black-okidoki px-4 py-30 text-center sm:px-10 lg:px-30 xl:px-40">
+    <h2 class="font-primary text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+      ¡30 años de magia merecen una <span class="from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text text-transparent uppercase">celebración</span> a TU medida!
+    </h2>
+    <h3 class="text-gray-okidoki mx-auto mt-6 max-w-3xl text-lg md:text-xl">
+      Reserva hoy y lleva a casa la experiencia OkiDoki.
+    </h3>
+    <div class="mt-10">
+      <a href={whatsappLink}>
+        <Button icon="mdi:whatsapp">¡Sí, quiero mi evento con 25% OFF!</Button>
+      </a>
+    </div>
+    <h4 class="text-gray-okidoki mt-6 text-sm font-medium">⏳ Solo hasta el 28 de febrero: Este descuento desaparece con las últimas campanadas del mes.</h4>
+  </section>
 </MainLayout>
+
+<script>
+  import Swiper from "swiper/bundle";
+
+// Swiper
+const swiper = new Swiper(".testimonios", {
+  effect: "cards",
+  centeredSlides: true,
+  slidesPerView: "auto",
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  // Add event listeners for slide changes
+  on: {
+    slideChange: function () {
+      // Get all video elements
+      const videos = document.querySelectorAll('.testimonios video');
+      
+      // Pause all videos
+      videos.forEach(video => {
+        video.pause();
+      });
+      
+      // Play the video in the active slide (if exists)
+      const activeSlide = this.slides[this.activeIndex];
+      const activeVideo = activeSlide.querySelector('video');
+      if (activeVideo) {
+        activeVideo.currentTime = 0; // Reset video to start
+      }
+    }
+  }
+});
+
+// Additional initialization to pause videos in non-active slides
+document.addEventListener('DOMContentLoaded', () => {
+  const videos = document.querySelectorAll('.testimonios video');
+  videos.forEach(video => {
+    video.pause();
+  });
+});
+</script>
+
+<style>
+
+  .testimonios.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+</style>

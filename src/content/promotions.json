@@ -1,0 +1,26 @@
+[
+  {
+    "id": "promo1",
+    "image": {
+      "src": "/media/promotions/promocion_febrero.jpg",
+      "alt": "Oferta de verano"
+    },
+    "content": {
+      "heading": "¡Gran oferta!",
+      "subheading": "50% de descuento en cursos seleccionados"
+    },
+    "priority": 1
+  },
+  {
+    "id": "promo2",
+    "image": {
+      "src": "/media/promotions/anuncio_citymall.jpeg",
+      "alt": "Oferta de invierno"
+    },
+    "content": {
+      "heading": "Invierno caliente",
+      "subheading": "Cursos con hasta 30% OFF"
+    },
+    "priority": 2
+  }
+]

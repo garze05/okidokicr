@@ -1,0 +1,46 @@
+[
+  {
+    "id": "testimonial1",
+    "title": "Increíble experiencia",
+    "author": "Autor",
+    "role": "Rol del Autor",
+    "video": {
+      "src": "/media/testimonials/video1.mp4",
+      "poster": "/src/images/logo_rocky_cara.svg"
+    },
+    "priority": 1
+  },
+  {
+    "id": "testimonial2",
+    "title": "Increíble experiencia",
+    "author": "Autor",
+    "role": "Rol del Autor",
+    "video": {
+      "src": "/media/testimonials/video2.mp4",
+      "poster": "/src/images/logo_rocky_cara.svg"
+    },
+    "priority": 2
+  },
+  {
+    "id": "testimonial3",
+    "title": "Increíble experiencia",
+    "author": "Autor",
+    "role": "Rol del Autor",
+    "video": {
+      "src": "/media/testimonials/video3.mp4",
+      "poster": "/src/images/logo_rocky_cara.svg"
+    },
+    "priority": 3
+  },
+  {
+    "id": "testimonial4",
+    "title": "Increíble experiencia",
+    "author": "Autor",
+    "role": "Rol del Autor",
+    "video": {
+      "src": "/media/testimonials/video4.mp4",
+      "poster": "/src/images/logo_rocky_cara.svg"
+    },
+    "priority": 4
+  }
+]
