@@ -1,0 +1,199 @@
+---
+// Testimonios
+import testimonios from "../content/testimonials.json";
+testimonios.sort((a, b) => a.priority - b.priority);
+---
+
+<!-- Update the testimonials section --><!-- <section class="container mx-auto p-2 sm:p-4 py-10 sm:py-20">
+  <h1
+    data-aos="fade-in"
+    class="text-secondary-500 max-w-[100%] font-primary py-5 sm:py-10 text-center text-3xl sm:text-4xl font-medium md:text-left lg:text-7xl xl:text-8xl"
+  >
+    NUESTROS CLIENTES <span class="font-bold text-transparent bg-clip-text from-primary-500 bg-gradient-to-r to-[#FF7E00]">HABLAN</span>
+  </h1>
+  
+  <div class="swiper testimonios-slider">
+    <div class="swiper-wrapper">
+      {testimonios.map((testimonio) => (
+        <div class="testimonio swiper-slide">
+          <div class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16]">
+            <video
+              class="h-full w-full object-cover"
+              controls
+              preload="none"
+              playsinline
+              poster={testimonio.video.poster || ''}
+            >
+              <source src={testimonio.video.src} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+
+<script>
+  import Swiper from "swiper/bundle";
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const testimoniosSlider = new Swiper(".testimonios-slider", {
+      effect: window.innerWidth < 640 ? "slide" : "cards",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: window.innerWidth < 640 ? 1 : "auto",
+      initialSlide: 0,
+      resistance: true,
+      resistanceRatio: 0.85,
+      navigation: {
+        enabled: window.innerWidth >= 640,
+        nextEl: '.testimonios-slider .swiper-button-next',
+        prevEl: '.testimonios-slider .swiper-button-prev',
+      },
+      breakpoints: {
+        0: {  // Cambiamos el breakpoint inicial
+          slidesPerView: 1,
+          effect: "slide",
+          spaceBetween: 16,
+          navigation: {
+            enabled: false,
+          }
+        },
+        641: {  // Evitamos el punto exacto de 640
+          slidesPerView: "auto",
+          effect: "cards",
+          spaceBetween: 24,
+          navigation: {
+            enabled: true,
+          }
+        }
+      },
+      on: {
+        beforeInit: function() {
+          // Forzar el estado inicial de la navegación
+          this.navigation.enabled = window.innerWidth >= 641;
+        },
+        resize: function() {
+          // Manejar el cambio de tamaño de manera más estable
+          const width = window.innerWidth;
+          const shouldEnableNav = width >= 641;
+          
+          if (this.navigation.enabled !== shouldEnableNav) {
+            this.navigation.enabled = shouldEnableNav;
+            this.update();
+          }
+        }
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .testimonios-slider {
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+    overflow: visible;
+  }
+
+  .testimonio.swiper-slide {
+    width: min(320px, 90vw);
+    height: auto;
+    aspect-ratio: 9/16;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  @media (max-width: 639px) {
+    .testimonios-slider {
+      padding: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .testimonio.swiper-slide {
+      width: 100%;
+    }
+
+    /* Force hide navigation buttons below 640px */
+    .testimonios-slider .swiper-button-prev,
+    .testimonios-slider .swiper-button-next {
+      display: none !important;
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+</style> -->
+<section class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+  <h1
+    data-aos="fade-in"
+    class="text-secondary-500 font-primary max-w-[100%] py-5 text-center text-3xl font-medium sm:py-10 sm:text-4xl md:text-left lg:text-7xl xl:text-8xl"
+  >
+    NUESTROS CLIENTES <span
+      class="from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent"
+      >HABLAN</span
+    >
+  </h1>
+
+  <div
+    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    {
+      testimonios.map((testimonio, index) => (
+        <div
+          data-aos="fade-up"
+          class={`bg-primary-500 aspect-[9/16] overflow-hidden rounded-lg shadow-lg ${
+            // If it's the last item and alone in its row
+            index === testimonios.length - 1 && testimonios.length % 4 === 1
+              ? "aspect-video xl:col-span-4"
+              : index === testimonios.length - 1 && testimonios.length % 3 === 1
+                ? "aspect-video lg:col-span-3 xl:col-span-4"
+                : index === testimonios.length - 1 &&
+                    testimonios.length % 2 === 1
+                  ? "aspect-video sm:col-span-2 lg:col-span-3 xl:col-span-4"
+                  : ""
+          }`}
+        >
+          <video class="h-full w-full object-cover" controls playsinline>
+            <source src={testimonio.video.src} type="video/mp4" />
+            Tu navegador no soporta el elemento video.
+          </video>
+        </div>
+      ))
+    }
+  </div>
+</section>
+<!-- poster={testimonio.video.poster || ''} 
+ preload="none"-->
+<script>
+  // Manejar la reproducción de videos
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+
+    videos.forEach((video) => {
+      video.addEventListener("play", () => {
+        // Pausar todos los otros videos cuando uno comienza a reproducirse
+        videos.forEach((otherVideo) => {
+          if (otherVideo !== video && !otherVideo.paused) {
+            otherVideo.pause();
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  video {
+    max-height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  video:hover {
+    transform: scale(1.02);
+  }
+</style>

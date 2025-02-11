@@ -11,6 +11,7 @@ import Image from "astro/components/Image.astro";
 import { socialLinksList } from "./SocialLinks.astro";
 const whatsappLink = socialLinksList.whatsapp.url;
 ---
+
 <div class="sticky top-0 z-50">
   <!-- Anuncio de promocion -->
   <!-- <div class="bg-white py-1.5 whitespace-nowrap">
@@ -21,77 +22,76 @@ const whatsappLink = socialLinksList.whatsapp.url;
       ></span
     >
   </div> -->
-<header
-  class="mx-auto flex max-h-30 w-full items-center justify-between px-10 xl:px-40"
+  <header
+    class="mx-auto flex max-h-30 w-full items-center justify-between px-10 xl:px-40"
   >
-  <!-- Logo (left) -->
-  <a href="/" class="z-20 flex-shrink-0">
-    <div
-    class="group relative h-40 w-40 transition-transform duration-350 ease-in-out hover:scale-110"
+    <!-- Logo (left) -->
+    <a href="/" class="z-20 flex-shrink-0">
+      <div
+        class="group relative h-40 w-40 transition-transform duration-350 ease-in-out hover:scale-110"
+      >
+        <div
+          class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0"
+        >
+          <Image
+            src={Logo}
+            alt="OkiDoki Producciones Rana Logo"
+            loading="eager"
+            class="h-full w-full"
+          />
+        </div>
+        <div
+          class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-350 ease-in-out group-hover:opacity-100"
+        >
+          <Image
+            src={Logo2}
+            alt="OkiDoki Producciones Logo"
+            loading="eager"
+            class="h-full w-full"
+          />
+        </div>
+      </div>
+    </a>
+
+    <!-- Mobile menu button -->
+    <button
+      class="text-secondary-500 z-20 cursor-pointer hover:text-orange-600 lg:hidden"
+      id="menu-button"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
     >
-    <div
-      class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0"
+      <Icon name="mdi:menu" id="burger-btn-open" size="45" />
+      <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45" />
+      <span class="sr-only">Abrir menu principal</span>
+    </button>
+
+    <!-- Desktop navigation (centered) -->
+    <nav
+      id="menu"
+      class="text-secondary-500 lg:text-md font-secondary absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-5 text-xs font-semibold lg:flex xl:text-[1rem]"
     >
-      <Image
-      src={Logo}
-      alt="OkiDoki Producciones Rana Logo"
-      loading="eager"
-      class="h-full w-full"
-      />
-    </div>
-    <div
-      class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-350 ease-in-out group-hover:opacity-100"
-    >
-      <Image
-      src={Logo2}
-      alt="OkiDoki Producciones Logo"
-      loading="eager"
-      class="h-full w-full"
-      />
-    </div>
-    </div>
-  </a>
+      <Navigation />
+    </nav>
 
-  <!-- Mobile menu button -->
-  <button
-    class="text-secondary-500 z-20 cursor-pointer hover:text-orange-600 lg:hidden"
-    id="menu-button"
-    aria-controls="mobile-menu"
-    aria-expanded="false"
-  >
-    <Icon name="mdi:menu" id="burger-btn-open" size="45" />
-    <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45" />
-    <span class="sr-only">Abrir menu principal</span>
-  </button>
-
-  <!-- Desktop navigation (centered) -->
-  <nav
-    id="menu"
-    class="text-secondary-500 lg:text-md font-secondary hidden absolute left-1/2 transform -translate-x-1/2 items-center gap-5 text-xs font-semibold lg:flex xl:text-[1rem]"
-  >
-    <Navigation />
-  </nav>
-
-  <!-- Contact button (right) -->
-  <div class="hidden lg:block flex-shrink-0">
-    <a href={whatsappLink}><Button class="text-xs"> Contacto </Button></a>
-  </div>
-
-  <!-- Mobile menu (unchanged) -->
-  <nav
-    id="mobile-menu"
-    class="absolute top-0 left-0 z-10 hidden h-fit w-full bg-white p-2 px-5 text-orange-950 lg:hidden"
-  >
-    <div class="mt-40 flex flex-col gap-10">
-    <Navigation />
-    <div class="w-50">
+    <!-- Contact button (right) -->
+    <div class="hidden flex-shrink-0 lg:block">
       <a href={whatsappLink}><Button class="text-xs"> Contacto </Button></a>
     </div>
-    <div class="h-0.5 w-full bg-orange-950"></div>
-    </div>
-  </nav>
-  </header>
 
+    <!-- Mobile menu (unchanged) -->
+    <nav
+      id="mobile-menu"
+      class="absolute top-0 left-0 z-10 hidden h-fit w-full bg-white p-2 px-5 text-orange-950 lg:hidden"
+    >
+      <div class="mt-40 flex flex-col gap-10">
+        <Navigation />
+        <div class="w-50">
+          <a href={whatsappLink}><Button class="text-xs"> Contacto </Button></a>
+        </div>
+        <div class="h-0.5 w-full bg-orange-950"></div>
+      </div>
+    </nav>
+  </header>
 </div>
 
 <style>
@@ -133,7 +133,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
       if (!header) return;
       if (window.scrollY > SCROLL_TRIGGER_HEIGHT) {
         header.classList.add("scrolled");
-        
+
         // If menu is open, close it
         if (!mobileMenu?.classList.contains("hidden")) {
           mobileMenu?.classList.add("hidden");

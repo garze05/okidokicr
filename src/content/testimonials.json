@@ -6,7 +6,7 @@
     "role": "Rol del Autor",
     "video": {
       "src": "/media/testimonials/video1.mp4",
-      "poster": "/src/images/logo_rocky_cara.svg"
+      "poster": "/src/images/rana_rocky1.png"
     },
     "priority": 1
   },
@@ -17,7 +17,7 @@
     "role": "Rol del Autor",
     "video": {
       "src": "/media/testimonials/video2.mp4",
-      "poster": "/src/images/logo_rocky_cara.svg"
+      "poster": "/src/images/rana_rocky1.png"
     },
     "priority": 2
   },
@@ -28,7 +28,7 @@
     "role": "Rol del Autor",
     "video": {
       "src": "/media/testimonials/video3.mp4",
-      "poster": "/src/images/logo_rocky_cara.svg"
+      "poster": "/src/images/rana_rocky1.png"
     },
     "priority": 3
   },
@@ -39,7 +39,18 @@
     "role": "Rol del Autor",
     "video": {
       "src": "/media/testimonials/video4.mp4",
-      "poster": "/src/images/logo_rocky_cara.svg"
+      "poster": "/src/images/rana_rocky1.png"
+    },
+    "priority": 4
+  },
+  {
+    "id": "testimonial5",
+    "title": "Increíble experiencia",
+    "author": "Autor",
+    "role": "Rol del Autor",
+    "video": {
+      "src": "/media/testimonials/bebote.mp4",
+      "poster": "/src/images/rana_rocky1.png"
     },
     "priority": 4
   }

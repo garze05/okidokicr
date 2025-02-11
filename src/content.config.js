@@ -1,8 +1,8 @@
 // 1. Import utilities from `astro:content`
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 // 2. Import loader(s)
-import { glob, file } from 'astro/loaders';
+import { glob, file } from "astro/loaders";
 
 // 3. Define your collection(s)
 const testimonials = defineCollection({
@@ -16,8 +16,7 @@ const testimonials = defineCollection({
   }),
 });
 
-const ads = defineCollection({
-});
+const ads = defineCollection({});
 // const blog = defineCollection({ /* ... */ });
 // const dogs = defineCollection({ /* ... */ });
 

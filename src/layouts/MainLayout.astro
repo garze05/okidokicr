@@ -46,28 +46,31 @@ const { title } = Astro.props;
 </html>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const headerElement = document.querySelector('header');
+  document.addEventListener("DOMContentLoaded", () => {
+    const headerElement = document.querySelector("header");
     const headerHeight = headerElement?.offsetHeight ?? 0;
     console.log(headerHeight);
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(this: HTMLAnchorElement, e: MouseEvent) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        if (!href) return;
-        
-        console.log(href);
-        const targetId = href.substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - headerHeight,
-            behavior: 'smooth'
-          });
-        }
-      });
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener(
+        "click",
+        function (this: HTMLAnchorElement, e: MouseEvent) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          if (!href) return;
+
+          console.log(href);
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - headerHeight,
+              behavior: "smooth",
+            });
+          }
+        },
+      );
     });
   });
 </script>

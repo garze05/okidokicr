@@ -8,45 +8,69 @@ const { image, title, icon } = Astro.props;
 <div
   data-aos="zoom-out"
   data-aos-offset="100"
-  class="group relative min-w-0 overflow-hidden rounded-lg shadow-lg duration-300 hover:shadow-2xl aspect-square"  
+  class="group touch:drop-shadow-2xl relative aspect-square min-w-0 cursor-pointer overflow-hidden rounded-lg shadow-lg duration-300 select-none hover:drop-shadow-2xl md:cursor-default md:focus:drop-shadow-2xl"
+  tabindex="0"
 >
   <!-- Single overlay for the entire card -->
   <div
-    class="absolute inset-0 z-10 bg-black opacity-0 duration-300 group-hover:opacity-30 transition-all"
+    class="absolute inset-0 z-10 bg-black opacity-0 transition-all duration-300 group-[.active]:opacity-30 md:group-hover:opacity-30 md:group-active:opacity-0"
   >
   </div>
 
   <Image
     src={image}
     alt="Placeholder"
-    class="absolute h-full w-full object-cover object-[25%_30%] group-hover:blur-xs duration-300 backdrop-filter"
-    loading="lazy"
+    class="absolute h-full w-full object-cover object-[25%_30%] backdrop-filter duration-300 group-[.active]:scale-110 group-[.active]:blur-xs md:group-hover:scale-110 md:group-hover:blur-xs md:group-active:scale-100 md:group-active:blur-none"
   />
 
   <!-- Gradient overlay -->
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90"></div>
-
   <div
-    class="absolute inset-x-0 bottom-0 px-6 py-4 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 transform translate-y-full group-hover:translate-y-0"
+    class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90"
   >
-    <p class="lg:text-lg text-white leading-8">
-      <slot name="hover-description"></slot>
+  </div>
+
+  <!-- Información adicional (Descripción) -->
+  <div
+    class="info absolute inset-x-0 bottom-0 z-20 translate-y-full transform px-6 py-4 opacity-0 transition-all duration-300 select-none group-[.active]:translate-y-0 group-[.active]:opacity-100 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-active:translate-y-full md:group-active:opacity-0"
+  >
+    <p class="leading-8 text-white lg:text-lg">
+      <slot name="hover-description" />
     </p>
   </div>
-  <div class="relative p-6 text-center md:text-left flex flex-col justify-end h-full z-20 transition-transform duration-300 group-hover:-translate-y-20">
+
+  <div
+    class="relative z-20 flex h-full flex-col justify-end p-6 text-center transition-transform duration-300 select-none group-[.active]:-translate-y-20 md:text-left md:group-hover:-translate-y-20 md:group-active:translate-y-0"
+  >
     <Icon
       name={icon}
-      class="text-white opacity-50 shadow-md mx-auto h-15 w-15 md:mx-0 transition-colors duration-300 group-hover:text-white group-hover:opacity-100"
+      class="mx-auto h-15 w-15 text-white opacity-50 drop-shadow-md transition-colors duration-300 group-[.active]:text-white group-[.active]:opacity-100 md:mx-0 md:group-hover:text-white md:group-hover:opacity-100 md:group-active:opacity-50"
     />
     <h2
-      class="font-primary text-primary-500 mb-2 text-2xl md:text-3xl font-bold transition-colors duration-300 group-hover:text-white"
+      class="font-primary text-primary-500 md:group-active:text-primary-500 mb-2 text-2xl font-bold transition-colors duration-300 group-[.active]:text-white md:text-3xl md:group-hover:text-white"
     >
       {title}
     </h2>
-    <!-- <p
-      class="lg:hidden text-black-okidoki transition-colors duration-300 group-hover:text-white"
-    >
-      <slot />
-    </p> -->
   </div>
 </div>
+
+<script>
+  // Solo se ejecuta en dispositivos móviles (ancho < 768px)
+  if (window.innerWidth < 768) {
+    const cards = document.querySelectorAll('[data-aos="zoom-out"]');
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("active");
+      });
+    });
+  }
+</script>
+
+<style>
+  /* Estilos para asegurar que el foco sea visible solo en desktop */
+  @media (min-width: 768px) {
+    div[tabindex="0"]:focus {
+      outline: 2px solid orangered;
+      outline-offset: 2px;
+    }
+  }
+</style>

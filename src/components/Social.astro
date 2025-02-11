@@ -15,7 +15,7 @@ const href = url || `https://www.${platform}.com/${username}`;
 const ariaLabel = `Visítanos en ${platform}`;
 ---
 
-<li class="transition-transform duration-300 hover:scale-120 drop-shadow-lg">
+<li class="drop-shadow-lg transition-transform duration-300 hover:scale-120">
   <a
     href={href}
     target="_blank"
@@ -29,7 +29,7 @@ const ariaLabel = `Visítanos en ${platform}`;
           name={iconName}
           width={size}
           height={size}
-          class={`text-${color} transition-color duration-500 hover:text-primary-500`}
+          class={`text-${color} transition-color hover:text-primary-500 duration-500`}
           aria-hidden="true"
         />
       )

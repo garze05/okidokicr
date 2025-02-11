@@ -6,6 +6,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
 import ServicioCard from "../components/ServicioCard.astro";
 import HeroCarousel from "../components/HeroCarousel.astro";
+import Testimonios from "../components/Testimonios.astro";
 // Astro
 import Image from "astro/components/Image.astro";
 import { Icon } from "astro-icon/components";
@@ -18,12 +19,6 @@ import AniversarioHero from "../images/aniversario-hero.svg";
 // Que es OkiDoki
 import RanaRockera from "../images/rana_rocky1.png";
 
-// Testimonios
-import testimonios from "../content/testimonials.json";
-// import promos from "../content/promotions.json";
-
-// Ordenar por prioridad (opcional)
-testimonios.sort((a, b) => a.priority - b.priority);
 // promos.sort((a, b) => a.priority - b.priority);
 
 // Servicios
@@ -45,7 +40,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
 <MainLayout title="OkiDoki Producciones">
   <!-- Hero Carousel -->
   <section class="relative">
-    <HeroCarousel></HeroCarousel>
+    <HeroCarousel />
   </section>
   <!-- Timeline -->
   <!-- <div class="container mx-auto px-4 py-16">
@@ -72,7 +67,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
         </p>
         <p
           data-aos="fade-in"
-          class="font-secondary mt-4 max-w-md text-4xl text-white md:text-5xl md:leading-13 lg:leading-12"
+          class="font-secondary mt-4 max-w-md text-3xl text-white sm:text-4xl md:text-5xl md:leading-13 lg:leading-12"
         >
           Creamos momentos
           <span
@@ -99,101 +94,17 @@ const whatsappLink = socialLinksList.whatsapp.url;
       </div>
     </div>
   </section>
+  <div id="testimonios"></div>
 
-      {testimonios.map((testimonio) => (
-        <div class="testimonios swiper-slide w-full">
-          <div
-          data-aos="fade-up"
-          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
-          >
-          <video
-            class="h-full w-full object-contain"
-            controls
-            preload="metadata"
-          >
-            <source
-            src={testimonio.videoSrc}
-            type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          </div>
-        </div>
-      ))}
-          >
-            <source
-            src="/src/videos/testimonio3.mp4"
-            type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          </div>
-        ))}
-      </div>
-      <div class="testimonios swiper-slide w-full">
-        <div
-        data-aos="fade-up"
-        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
-        >
-        <video
-          class="h-full w-full object-contain"
-          controls
-          preload="metadata"
-        >
-          <source
-          src="/src/videos/testimonio1.mp4"
-          type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        </div>
-      </div>
-      <div class="testimonios swiper-slide w-full">
-        <div
-        data-aos="fade-up"
-        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
-        >
-        <video
-          class="h-full w-full object-contain"
-          controls
-          preload="metadata"
-        >
-          <source
-          src="/src/videos/testimonio2.mp4"
-          type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        </div>
-      </div>
-      <div class="testimonios swiper-slide w-full">
-        <div
-        data-aos="fade-up"
-        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg aspect-[9/16] h-[600px]"
-        >
-        <video
-          class="h-full w-full object-contain"
-          controls
-          preload="metadata"
-        >
-          <source
-          src="/src/videos/testimonio4.mp4"
-          type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        </div>
-      </div>
-      </div>
-    <!-- Navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+  <!-- Testimonios -->
+  <Testimonios />
 
-    </div>
+  <!--poster={testimonio.video.poster || ''} -->
+  <!--preload="none" -->
 
-    <div class="mb-50 grid gap-5">
-      <!-- First row - full width -->
-      <!-- <div
+  <!-- <div class="mb-50 grid gap-5"> -->
+  <!-- First row - full width -->
+  <!-- <div
         data-aos="fade-up"
         class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
       >
@@ -207,8 +118,8 @@ const whatsappLink = socialLinksList.whatsapp.url;
         </video>
       </div> -->
 
-      <!-- Second row - three columns on md and up -->
-      <!-- <div class="max-w-1/3 mx-auto">
+  <!-- Second row - three columns on md and up -->
+  <!-- <div class="max-w-1/3 mx-auto">
         <div
           data-aos="fade-up"
           class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
@@ -255,15 +166,14 @@ const whatsappLink = socialLinksList.whatsapp.url;
           </video>
         </div>
       </div> -->
-    </div>
-  </section>
+  <!-- </div> -->
 
   <!-- Servicios -->
   <section id="servicios">
     <div class="bg-primary-500 mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-20">
       <h1
         data-aos="fade-in"
-        class="font-primary py-10 text-center text-4xl font-semibold text-white lg:text-8xl xl:text-9xl"
+        class="font-primary py-10 text-center text-4xl font-semibold text-white sm:text-7xl lg:text-8xl xl:text-9xl"
       >
         SERVICIOS
       </h1>
@@ -273,15 +183,16 @@ const whatsappLink = socialLinksList.whatsapp.url;
           title="Botargas"
           icon="hugeicons:super-mario"
         >
-          <Fragment slot="hover-description">Más de <span class="text-xl font-semibold">100</span> personajes del cine,
-            videojuegos y TV</Fragment>
+          <Fragment slot="hover-description"
+            >Más de <span class="text-xl font-semibold">100</span> personajes del
+            cine, videojuegos y TV</Fragment
+          >
         </ServicioCard>
 
-        <ServicioCard 
-        image={Magos} 
-        title="Magos" 
-        icon="mdi:magic">
-          <Fragment slot="hover-description">Efectos mágicos que sorprenden a chicos y adultos</Fragment>
+        <ServicioCard image={Magos} title="Magos" icon="mdi:magic">
+          <Fragment slot="hover-description"
+            >Efectos mágicos que sorprenden a chicos y adultos</Fragment
+          >
         </ServicioCard>
 
         <ServicioCard
@@ -289,13 +200,20 @@ const whatsappLink = socialLinksList.whatsapp.url;
           title="Pinta Caritas"
           icon="mdi:paintbrush-outline"
         >
-
-          <Fragment slot="hover-description">Diseños únicos y personalizados para cada niño y niña.</Fragment>
+          <Fragment slot="hover-description"
+            >Diseños únicos y personalizados para cada niño y niña.</Fragment
+          >
         </ServicioCard>
 
-        <ServicioCard image={Payasos} title="Payasos(sitas)" icon="game-icons:clown">
-
-          <Fragment slot="hover-description">Malabares, globoflexia y canciones que enamoran a niños… ¡y derriten hasta a los papás más serios!</Fragment>
+        <ServicioCard
+          image={Payasos}
+          title="Payasos(sitas)"
+          icon="game-icons:clown"
+        >
+          <Fragment slot="hover-description"
+            >Malabares, globoflexia y canciones que enamoran a niños… ¡y
+            derriten hasta a los papás más serios!</Fragment
+          >
         </ServicioCard>
 
         <ServicioCard
@@ -303,8 +221,10 @@ const whatsappLink = socialLinksList.whatsapp.url;
           title="Inflables"
           icon="game-icons:elven-castle"
         >
-
-          <Fragment slot="hover-description">Castillos inflabes, toboganes gigantes y juegos seguros para que la diversión no pare. </Fragment>
+          <Fragment slot="hover-description"
+            >Castillos inflabes, toboganes gigantes y juegos seguros para que la
+            diversión no pare.
+          </Fragment>
         </ServicioCard>
 
         <ServicioCard
@@ -312,80 +232,143 @@ const whatsappLink = socialLinksList.whatsapp.url;
           title="Y mucho más..."
           icon="mdi:star"
         >
-        <Fragment slot="hover-description"><a href="https://wa.me/c/50688313232"><Button type="secondary" icon="mdi:arrow-up-right-thick">Ver todos los servicios</Button></a></Fragment>
+          <Fragment slot="hover-description"
+            ><a href="https://wa.me/c/50688313232"
+              ><Button type="secondary" icon="mdi:arrow-up-right-thick"
+                >Ver todos los servicios</Button
+              ></a
+            ></Fragment
+          >
         </ServicioCard>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="bg-black-okidoki px-4 py-30 text-center sm:px-10 lg:px-30 xl:px-40">
-    <h2 class="font-primary text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-      ¡30 años de magia merecen una <span class="from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text text-transparent uppercase">celebración</span> a TU medida!
-    </h2>
-    <h3 class="text-gray-okidoki mx-auto mt-6 max-w-3xl text-lg md:text-xl">
-      Reserva hoy y lleva a casa la experiencia OkiDoki.
-    </h3>
-    <div class="mt-10">
-      <a href={whatsappLink}>
-        <Button icon="mdi:whatsapp">¡Sí, quiero mi evento con 25% OFF!</Button>
-      </a>
+  <section class="relative px-4 py-30 text-center sm:px-10 lg:px-30 xl:px-40">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 h-full w-full object-cover"
+    >
+      <source src="/media/fireworks.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-black-okidoki/80 absolute inset-0"></div>
+    <div class="relative z-10">
+      <h2
+        class="font-primary text-3xl font-bold text-white md:text-5xl lg:text-6xl"
+      >
+        ¡30 años de magia merecen una <span
+          class="from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text text-transparent uppercase"
+          >celebración</span
+        > a TU medida!
+      </h2>
+      <h3 class="text-gray-okidoki mx-auto mt-6 max-w-3xl text-lg md:text-xl">
+        Reserva hoy y lleva a casa la experiencia OkiDoki.
+      </h3>
+      <div class="mt-10">
+        <a href={whatsappLink}>
+          <Button icon="mdi:whatsapp">¡Sí, quiero mi evento con 25% OFF!</Button
+          >
+        </a>
+      </div>
+      <h4 class="text-gray-okidoki mt-6 text-sm font-medium">
+        ⏳ Solo hasta el 28 de febrero: Este descuento desaparece con las
+        últimas campanadas del mes.
+      </h4>
     </div>
-    <h4 class="text-gray-okidoki mt-6 text-sm font-medium">⏳ Solo hasta el 28 de febrero: Este descuento desaparece con las últimas campanadas del mes.</h4>
   </section>
 </MainLayout>
+
+<style is:global>
+  .testimonios-slider {
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+    overflow: visible;
+  }
+
+  .testimonio.swiper-slide {
+    width: min(320px, 90vw);
+    height: auto;
+    aspect-ratio: 9/16;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  @media (max-width: 640px) {
+    .testimonios-slider {
+      padding: 0.5rem;
+      overflow: hidden;
+    }
+
+    .testimonio.swiper-slide {
+      width: 100%;
+    }
+
+    .testimonios-slider .swiper-button-prev,
+    .testimonios-slider .swiper-button-next {
+      display: none;
+    }
+  }
+</style>
 
 <script>
   import Swiper from "swiper/bundle";
 
-// Swiper
-const swiper = new Swiper(".testimonios", {
-  effect: "cards",
-  centeredSlides: true,
-  slidesPerView: "auto",
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  // Add event listeners for slide changes
-  on: {
-    slideChange: function () {
-      // Get all video elements
-      const videos = document.querySelectorAll('.testimonios video');
-      
-      // Pause all videos
-      videos.forEach(video => {
-        video.pause();
+  document.addEventListener("DOMContentLoaded", () => {
+    const testimoniosSlider = new Swiper(".testimonios-slider", {
+      effect: "cards",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      initialSlide: 0,
+      updateOnWindowResize: true,
+      observer: true,
+      observeParents: true,
+      navigation: {
+        nextEl: ".testimonios-slider .swiper-button-next",
+        prevEl: ".testimonios-slider .swiper-button-prev",
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          effect: "slide",
+          spaceBetween: 16,
+          watchOverflow: true,
+        },
+        640: {
+          slidesPerView: "auto",
+          effect: "cards",
+          spaceBetween: 24,
+        },
+      },
+      on: {
+        init: function () {
+          setTimeout(() => {
+            this.update();
+          }, 100);
+        },
+        slideChange: function () {
+          const videos = document.querySelectorAll(".testimonios-slider video");
+          videos.forEach((video) => video.pause());
+        },
+      },
+    });
+
+    // Handle video playback
+    const videos = document.querySelectorAll(".testimonios-slider video");
+    videos.forEach((video) => {
+      video.pause();
+      video.addEventListener("play", () => {
+        videos.forEach((v) => {
+          if (v !== video) v.pause();
+        });
       });
-      
-      // Play the video in the active slide (if exists)
-      const activeSlide = this.slides[this.activeIndex];
-      const activeVideo = activeSlide.querySelector('video');
-      if (activeVideo) {
-        activeVideo.currentTime = 0; // Reset video to start
-      }
-    }
-  }
-});
-
-// Additional initialization to pause videos in non-active slides
-document.addEventListener('DOMContentLoaded', () => {
-  const videos = document.querySelectorAll('.testimonios video');
-  videos.forEach(video => {
-    video.pause();
+    });
   });
-});
 </script>
-
-<style>
-
-  .testimonios.swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-  }
-</style>
