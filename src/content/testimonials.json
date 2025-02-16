@@ -1,57 +1,47 @@
 [
   {
-    "id": "testimonial1",
-    "title": "Increíble experiencia",
-    "author": "Autor",
-    "role": "Rol del Autor",
-    "video": {
-      "src": "/media/testimonials/video1.mp4",
-      "poster": "/src/images/rana_rocky1.png"
-    },
-    "priority": 1
+    "videoId": "t_parquealajuela",
+    "title": "Experiencia en Parque Alajuela",
+    "author": "",
+    "role": "Organizadora de Eventos",
+    "description": "Evento realizado en el Parque de Alajuela con servicios de animación y entretenimiento",
+    "metaDescription": "Testimonio sobre servicios de animación y entretenimiento en Parque Alajuela",
+    "orientation": "vertical"
   },
   {
-    "id": "testimonial2",
-    "title": "Increíble experiencia",
-    "author": "Autor",
-    "role": "Rol del Autor",
-    "video": {
-      "src": "/media/testimonials/video2.mp4",
-      "poster": "/src/images/rana_rocky1.png"
-    },
-    "priority": 2
+    "videoId": "t_artistapersonajes",
+    "title": "Artista de Personajes",
+    "author": "",
+    "role": "Cliente Satisfecho",
+    "description": "Experiencia con nuestros artistas caracterizados como personajes populares",
+    "metaDescription": "Testimonio sobre nuestros artistas y personajes para eventos",
+    "orientation": "vertical"
   },
   {
-    "id": "testimonial3",
-    "title": "Increíble experiencia",
-    "author": "Autor",
-    "role": "Rol del Autor",
-    "video": {
-      "src": "/media/testimonials/video3.mp4",
-      "poster": "/src/images/rana_rocky1.png"
-    },
-    "priority": 3
+    "videoId": "t_eventosinfinity",
+    "title": "Eventos Infinity",
+    "author": "",
+    "role": "Coordinador de Eventos",
+    "description": "Experiencia con nuestros servicios en eventos corporativos",
+    "metaDescription": "Testimonio sobre servicios de entretenimiento en eventos corporativos",
+    "orientation": "vertical"
   },
   {
-    "id": "testimonial4",
-    "title": "Increíble experiencia",
-    "author": "Autor",
-    "role": "Rol del Autor",
-    "video": {
-      "src": "/media/testimonials/video4.mp4",
-      "poster": "/src/images/rana_rocky1.png"
-    },
-    "priority": 4
+    "videoId": "t_escuelaquebradilla",
+    "title": "Evento Escuela Quebradilla",
+    "author": "",
+    "role": "Directora de Escuela",
+    "description": "Servicios de animación y entretenimiento en evento escolar",
+    "metaDescription": "Testimonio sobre servicios de entretenimiento en evento escolar en Quebradilla",
+    "orientation": "vertical"
   },
   {
-    "id": "testimonial5",
-    "title": "Increíble experiencia",
-    "author": "Autor",
-    "role": "Rol del Autor",
-    "video": {
-      "src": "/media/testimonials/bebote.mp4",
-      "poster": "/src/images/rana_rocky1.png"
-    },
-    "priority": 4
+    "videoId": "t_animadorbebote",
+    "title": "Animación con Bebote",
+    "author": "",
+    "role": "Animador",
+    "description": "Servicio de animación con nuestro personaje Bebote",
+    "metaDescription": "Testimonio sobre la animación con el personaje Bebote",
+    "orientation": "horizontal"
   }
 ]

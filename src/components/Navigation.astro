@@ -4,6 +4,11 @@ const links = [
   { href: "/#testimonios", text: "Testimonios" },
   { href: "/#servicios", text: "Servicios" },
 ];
+
+// If we are in dev mode, add a pruebas link { href: "/index2", text: "Pruebas" }
+if (import.meta.env.MODE === "development") {
+  links.push({ href: "/index2", text: "Pruebas" });
+}
 ---
 
 {
