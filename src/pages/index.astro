@@ -28,6 +28,7 @@ import PintaCaritas from "../images/PintaCaritas.jpg";
 import Payasos from "../images/Payasita.jpg";
 import Inflables from "../images/Inflable.jpg";
 import MasServicios from "../images/grupopersonajes.jpg";
+import WelcomeVideo from "../components/WelcomeVideo.astro";
 
 // Links
 import { socialLinksList } from "../components/SocialLinks.astro";
@@ -38,6 +39,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
 ---
 
 <MainLayout title="Inicio">
+  <WelcomeVideo pathMp4="/media/30aniversario.mp4" />
   <!-- Hero Carousel -->
   <section class="relative">
     <HeroCarousel />

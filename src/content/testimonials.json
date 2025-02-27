@@ -43,5 +43,23 @@
     "description": "Servicio de animación con nuestro personaje Bebote",
     "metaDescription": "Testimonio sobre la animación con el personaje Bebote",
     "orientation": "horizontal"
+  },
+  {
+    "videoId": "t_luigimago",
+    "title": "Luigi",
+    "author": "",
+    "role": "Socio de OkiDoki",
+    "description": "Servicio de animación con nuestro personaje Bebote",
+    "metaDescription": "Testimonio sobre un mago que trabaja con nosotros",
+    "orientation": "horizontal"
+  },
+  {
+    "videoId": "t_fernando",
+    "title": "Fernando",
+    "author": "",
+    "role": "Socio de OkiDoki",
+    "description": "Servicio de animación con nuestro personaje Bebote",
+    "metaDescription": "Testimonio de un amigo y socio muy cercano",
+    "orientation": "vertical"
   }
 ]
