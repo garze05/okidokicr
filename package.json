@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
+    "@astrojs/node": "^9.1.1",
     "@fontsource-variable/lexend": "^5.1.2",
     "@fontsource-variable/lexend-exa": "^5.1.1",
     "@fontsource-variable/lexend-giga": "^5.1.1",
@@ -21,6 +22,8 @@
     "aos": "^2.3.4",
     "astro": "^5.2.3",
     "canvas-confetti": "^1.9.3",
+    "photoswipe": "^5.4.4",
+    "sharp": "^0.33.5",
     "swiper": "^11.2.2",
     "tailwindcss": "^4.0.1"
   },

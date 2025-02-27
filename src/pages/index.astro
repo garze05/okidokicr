@@ -28,6 +28,7 @@ import PintaCaritas from "../images/PintaCaritas.jpg";
 import Payasos from "../images/Payasita.jpg";
 import Inflables from "../images/Inflable.jpg";
 import MasServicios from "../images/grupopersonajes.jpg";
+import WelcomeVideo from "../components/WelcomeVideo.astro";
 
 // Links
 import { socialLinksList } from "../components/SocialLinks.astro";
@@ -37,7 +38,8 @@ const whatsappLink = socialLinksList.whatsapp.url;
 // https://docs.astro.build/basics/astro-components/
 ---
 
-<MainLayout title="OkiDoki Producciones">
+<MainLayout title="Inicio">
+  <WelcomeVideo pathMp4="/media/30aniversario.mp4" />
   <!-- Hero Carousel -->
   <section class="relative">
     <HeroCarousel />
@@ -98,75 +100,6 @@ const whatsappLink = socialLinksList.whatsapp.url;
 
   <!-- Testimonios -->
   <Testimonios />
-
-  <!--poster={testimonio.video.poster || ''} -->
-  <!--preload="none" -->
-
-  <!-- <div class="mb-50 grid gap-5"> -->
-  <!-- First row - full width -->
-  <!-- <div
-        data-aos="fade-up"
-        class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
-      >
-        <video class="h-full max-h-dvh w-full object-cover" controls poster="/src/images/rana_rocky1.png">
-          <source
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4"
-            
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div> -->
-
-  <!-- Second row - three columns on md and up -->
-  <!-- <div class="max-w-1/3 mx-auto">
-        <div
-          data-aos="fade-up"
-          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
-        >
-          <video
-            class="h-full w-full object-cover"
-            controls
-          >
-            <source
-              src="/src/videos/testimonio3.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div
-          data-aos="fade-up"
-          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
-        >
-          <video
-            class="h-full w-full object-cover"
-            controls
-          >
-            <source
-              src="/src/videos/testimonio1.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div
-          data-aos="fade-up"
-          class="bg-primary-500 min-w-0 overflow-hidden rounded-md shadow-lg"
-        >
-          <video
-            class="h-full w-full object-cover"
-            controls
-          >
-            <source
-              src="/src/videos/testimonio2.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div> -->
-  <!-- </div> -->
 
   <!-- Servicios -->
   <section id="servicios">
