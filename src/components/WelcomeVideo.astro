@@ -5,7 +5,7 @@ const { pathMp4, pathWebM=pathMp4 } = Astro.props;
 <div id="welcome-video-container" class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden opacity-0 pointer-events-none">
   <video 
     id="welcome-video"
-    class="absolute inset-0 min-w-full min-h-full w-auto h-auto object-contain z-10"
+    class="absolute inset-0 min-w-full min-h-full w-auto h-auto md:object-contain object-cover z-10"
     autoplay
     muted
     playsinline
@@ -15,19 +15,9 @@ const { pathMp4, pathWebM=pathMp4 } = Astro.props;
     <source src={pathWebM} type="video/webm">
     Your browser does not support the video tag.
   </video>
-
-  <div class="absolute inset-0 bg-black/40 z-20"></div>
-  
-  <div class="relative z-30 text-center text-white px-4">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4">30 aniversario OkiDoki</h1>
-    <p class="text-xl md:text-2xl mb-8">Muchas promociones para tu evento especial</p>
-    <button id="enter-site-btn" class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-8 rounded-lg transition duration-300">
-      Entrar al sitio
-    </button>
-  </div>
   
   <button id="skip-video-btn" class="absolute top-4 right-4 text-white opacity-70 hover:opacity-100 p-2 z-30">
-    Saltar <span class="ml-2">→</span>
+    Entrar a la página <span class="ml-2">→</span>
   </button>
 
   <!-- Add unmute overlay -->
@@ -151,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   display: block;
   opacity: 1;
   visibility: visible;
-  object-fit: contain;
   object-position: center;
   width: 100%;
   height: 100%;
@@ -162,9 +151,4 @@ document.addEventListener('DOMContentLoaded', () => {
   transition: opacity 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  #welcome-video {
-    object-fit: contain;
-  }
-}
 </style>
