@@ -110,7 +110,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  function setupHeader() {
     // Mobile menu
     const menuButton = document.getElementById("menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -127,7 +127,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
 
     // Sticky header classes
     const header = document.querySelector("header");
-    const SCROLL_TRIGGER_HEIGHT = 100; // Altura en píxeles donde se activa el efecto
+    const SCROLL_TRIGGER_HEIGHT = 100;
 
     function updateHeaderScroll() {
       if (!header) return;
@@ -146,11 +146,14 @@ const whatsappLink = socialLinksList.whatsapp.url;
     }
 
     if (header) {
-      // Ejecutar al cargar (para manejar recargas)
       updateHeaderScroll();
-
-      // Ejecutar al hacer scroll
       window.addEventListener("scroll", updateHeaderScroll);
     }
-  });
+  }
+
+  // Run on initial load
+  setupHeader();
+
+  // Run on view transitions
+  document.addEventListener('astro:after-swap', setupHeader);
 </script>
