@@ -2,78 +2,90 @@
 import CatalogCard from "../components/CatalogCard.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
+import { socialLinksList } from "../components/SocialLinks.astro";
+const whatsappLink = socialLinksList.whatsapp.url;
+
 // This data would typically come from a database or API
 // For now, we'll use static data as an example
-const characters = [
+const catalog = [
   {
     id: 1,
-    name: "Princess Ella",
-    description: "A magical princess character that brings joy and wonder to children's parties with her elegant costume and storytelling.",
-    imageUrl: "/images/princess-ella.jpg",
+    name: "Mario y Luigi Bros",
+    description: "Llega Mario Bros a tu fiesta para hacerla inolvidable. ¡Salta, corre y diviértete con el personaje más famoso de los videojuegos!",
+    category: "Videojuegos",
+    imageUrl: "src/images/catalogo/personajes/mario_y_luigi.jpg",
     totalImages: 5,
+    totalVideos: 2,
     availability: true,
     price: 149.99
   },
   {
     id: 2,
-    name: "Space Hero Max",
+    name: "Bob Esponja",
     description: "An intergalactic hero with a cool space suit that will make any party feel out of this world!",
-    imageUrl: "/images/space-max.jpg",
+    imageUrl: "src/images/catalogo/personajes/bob_esponja.jpg",
     totalImages: 4,
+    totalVideos: 2,
     availability: true,
     price: 159.99
   },
   {
     id: 3,
-    name: "Dino Friend Rex",
+    name: "Payaso Plim Plim",
     description: "A friendly dinosaur character that teaches kids about prehistoric times through fun games and activities.",
-    imageUrl: "/images/dino-rex.jpg",
+    imageUrl: "src/images/catalogo/personajes/payaso_plim_plim.jpg",
     totalImages: 6,
+    totalVideos: 0,
     availability: false,
     price: 139.99
   },
   {
     id: 4,
-    name: "Magical Unicorn Luna",
+    name: "Gigantes OkiDoki",
     description: "A sparkly unicorn character that brings magic and rainbows to every birthday party.",
-    imageUrl: "/images/unicorn-luna.jpg",
+    imageUrl: "src/images/catalogo/personajes/pandilla_selvatica.jpg",
     totalImages: 7,
+    totalVideos: 4,
     availability: true,
     price: 169.99
   },
   {
     id: 5,
-    name: "Superhero Captain",
-    description: "A brave superhero who will inspire children with amazing powers and teach them about courage and helping others.",
-    imageUrl: "/images/captain-hero.jpg",
+    name: "Paw Patrol",
+    description: "La Patrulla Canina conformada por Chase, Marshall y Skye llega a tu fiesta para hacerla inolvidable.",
+    imageUrl: "src/images/catalogo/personajes/paw_patrol.jpg",
     totalImages: 6,
+    totalVideos: 2,
     availability: true,
     price: 159.99
   },
   {
     id: 6,
-    name: "Wizard Merlin",
+    name: "Minions",
     description: "A magical wizard who performs incredible magic tricks and tells fascinating stories about magical kingdoms.",
-    imageUrl: "/images/wizard-merlin.jpg",
+    imageUrl: "src/images/catalogo/personajes/minions.jpg",
     totalImages: 5,
+    totalVideos: 2,
     availability: false,
     price: 149.99
   },
   {
     id: 7,
-    name: "Pirate Adventure",
+    name: "Mickey y Minie Mouse",
     description: "An exciting pirate character who takes children on a treasure hunt adventure with maps and golden coins.",
-    imageUrl: "/images/pirate-adventure.jpg",
+    imageUrl: "src/images/catalogo/personajes/mickey_y_minnie.jpg",
     totalImages: 4,
+    totalVideos: 2,
     availability: true,
     price: 144.99
   },
   {
     id: 8,
-    name: "Fairy Sparkle",
+    name: "Spiderman",
     description: "A delightful fairy who spreads joy with her sparkling wings and teaches children about nature and magic.",
-    imageUrl: "/images/fairy-sparkle.jpg",
+    imageUrl: "src/images/catalogo/personajes/spiderman.jpg",
     totalImages: 8,
+    totalVideos: 2,
     availability: true,
     price: 154.99
   }
@@ -83,7 +95,7 @@ const characters = [
 <MainLayout title="Catálogo">
   <div class="container mx-auto">
     <section class="px-4 py-10 md:py-12">
-      <h1 class="text-5xl md:text-6xl xl:text-8xl from-primary-500 to-secondary-500 font-primary bg-gradient-to-r bg-clip-text font-medium text-transparent">NUESTRO CATÁLOGO</h1>
+      <h1 class="text-5xl md:text-6xl xl:text-8xl from-primary-500 to-[#FF7E00] font-primary bg-gradient-to-r bg-clip-text font-medium text-transparent">NUESTRO CATÁLOGO</h1>
       <p class="text-lg md:text-xl text-primary-500 mt-2">
         ¡Conoce nuestros personajes y servicios!
       </p>
@@ -109,16 +121,16 @@ const characters = [
     <!-- Filtros (opcionales) -->
     <div class="flex flex-wrap items-center gap-2 px-4 mb-6">
       <span class="text-gray-700 font-medium">Filtrar por:</span>
-      <button class="px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
+      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
         Disponibles
       </button>
-      <button class="px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
+      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
         Princesas
       </button>
-      <button class="px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
+      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
         Superhéroes
       </button>
-      <button class="px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
+      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
         Animales
       </button>
     </div>
@@ -126,15 +138,17 @@ const characters = [
     <!-- Personajes -->
     <div class="px-4 pb-12">
       <div id="character-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {characters.map((character) => (
+        {catalog.map((item) => (
           <div class="character-card h-full">
             <CatalogCard 
-              name={character.name}
-              description={character.description}
-              imageUrl={character.imageUrl}
-              totalImages={character.totalImages}
-              availability={character.availability}
-              price={character.price}
+              name={item.name}
+              description={item.description}
+              category={item.category}
+              imageUrl={item.imageUrl}
+              totalImages={item.totalImages}
+              totalVideos={item.totalVideos}
+              availability={item.availability}
+              price={item.price}
             />
           </div>
         ))}
@@ -152,7 +166,7 @@ const characters = [
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-4">¿No encuentras lo que buscas?</h2>
         <p class="text-lg mb-6">Podemos personalizar personajes específicos para tu evento. ¡Cuéntanos tu idea!</p>
-        <a href="/contacto" class="inline-block px-6 py-3 bg-white text-primary-500 font-bold rounded-lg hover:bg-gray-100 transition-colors duration-300">
+        <a href={whatsappLink} class="inline-block px-6 py-3 bg-white text-primary-500 font-bold rounded-lg hover:bg-gray-100 transition-colors duration-300">
           Contáctanos
         </a>
       </div>

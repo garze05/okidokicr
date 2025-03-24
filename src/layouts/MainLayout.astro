@@ -17,7 +17,7 @@ import "@fontsource-variable/lexend";
 import "@fontsource-variable/lexend-exa";
 import "@fontsource-variable/lexend-giga";
 
-import { ClientRouter } from "astro:transitions";
+//import { ViewTransitions } from "astro:transitions";
 
 // Props
 const { title, description="Empresa de Costa Rica. Ofrecemos Botargas, Fiestas de Cumpleaños, Eventos Familiares y Empresariales con 30 años de Experiencia." } = Astro.props;
@@ -33,7 +33,7 @@ const { title, description="Empresa de Costa Rica. Ofrecemos Botargas, Fiestas d
     <title>OkiDoki - {title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <ClientRouter />
+    <!-- <ViewTransitions /> -->
   </head>
   <body
     class="h-full bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"

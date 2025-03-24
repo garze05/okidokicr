@@ -1,59 +1,76 @@
 ---
-// CharacterCard.astro
+import Button from './Button.astro';
+
 export interface Props {
   name: string;
   description: string;
+  category: string;
   imageUrl: string;
   totalImages: number;
+  totalVideos: number;
   availability: boolean;
   price: number;
 }
 
-const { name, description, imageUrl, totalImages, availability, price } = Astro.props;
+const { name, description, category, imageUrl, totalImages, totalVideos, availability, price } = Astro.props;
 ---
 
 <div
-  class="group relative cursor-pointer overflow-hidden bg-white rounded-xl sm:rounded-2xl px-4 sm:px-6 pt-8 sm:pt-10 pb-6 sm:pb-8 shadow-lg sm:shadow-xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl w-full h-full"
+  class="group relative cursor-pointer overflow-hidden bg-white rounded-xl sm:rounded-2xl px-4 sm:px-6 pt-8 sm:pt-10 pb-6 sm:pb-8 shadow-lg sm:shadow-xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl w-full h-full flex flex-col"
 >
   <span
-    class="absolute top-0 left-0 z-0 h-24 sm:h-32 w-24 sm:w-32 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 opacity-75 transition-all duration-500 transform group-hover:scale-[15]"
+    class="absolute top-0 left-0 z-0 h-24 sm:h-32 w-24 sm:w-32 rounded-full bg-gradient-to-r bg-black-okidoki transition-all duration-500 transform group-hover:scale-[15]"
   ></span>
   
-  <div class="relative z-10 mx-auto">
+  <div class="relative z-10 mx-auto flex flex-col h-full w-full gap-3 sm:gap-4">
     <!-- Character Image -->
     <div class="w-full h-40 sm:h-48 overflow-hidden rounded-lg sm:rounded-xl">
       <img 
         src={imageUrl} 
-        alt={`${name} character costume`} 
+        alt={`Imagen de ${name}`} 
         class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
       />
     </div>
     
     <!-- Character Info -->
-    <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-      <h3 class="text-lg sm:text-xl font-bold text-gray-800 transition-all duration-500 group-hover:text-white">{name}</h3>
-      
-      <p class="text-xs sm:text-sm leading-relaxed text-gray-600 transition-all duration-500 group-hover:text-white line-clamp-2 sm:line-clamp-3">
-        {description}
-      </p>
-      
-      <div class="pt-3 sm:pt-4 flex justify-between items-center">
-        <span class="text-primary-500 font-bold transition-all duration-500 group-hover:text-white">
-          ${price}
-        </span>
-        
+     <div class="flex gap-2 items-center">
+      <h3 class="text-lg sm:text-xl font-bold text-gray-800 transition-all duration-500 group-hover:text-white">{name}</h3> <!-- · -->
+      <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">{category}</span>
+     </div>
+    
+    
+    <p class="text-xs sm:text-sm leading-relaxed text-gray-600 transition-all duration-500 group-hover:text-white overflow-hidden line-clamp-2 sm:line-clamp-3">
+      {description}
+    </p>
+    
+    <!-- This spacer pushes the bottom content to the bottom of the card -->
+    <div class="flex-grow"></div>
+    
+    <!-- Bottom section with fixed height -->
+    <div class="mt-auto space-y-2">
+      <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
           <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">
-            {totalImages} photos
+            {totalImages} fotos
+          </span>
+        
+          <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">
+            {totalVideos} videos
           </span>
           
           <span class={`inline-flex h-2 sm:h-3 w-2 sm:w-3 rounded-full ${availability ? 'bg-green-500' : 'bg-red-500'}`}></span>
         </div>
       </div>
       
-      <button class="mt-2 w-full py-1.5 sm:py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm sm:text-base rounded-lg transform transition-all duration-300 hover:scale-105">
-        Book Now
-      </button>
+      <!-- <button class="cursor-pointer w-full py-1.5 sm:py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm sm:text-base rounded-lg transform transition-all duration-300 hover:scale-105">
+        Pedir ahora
+      </button> -->
+      <Button 
+        type="primary" 
+        class="w-full py-1.5 sm:py-2 text-sm sm:text-base rounded-lg"
+      >
+        Pedir ahora
+      </Button>
     </div>
   </div>
 </div>
