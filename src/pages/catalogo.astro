@@ -1,5 +1,5 @@
 ---
-import CatalogCard from "../components/CatalogCard.astro";
+import CatalogCard from "../components/Catalog/CatalogCard.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
 import { socialLinksList } from "../components/SocialLinks.astro";
@@ -90,19 +90,25 @@ const catalog = [
     price: 154.99
   }
 ];
+
+const filters = [
+  { id: 1, name: "Disponibles" },
+  { id: 2, name: "Princesas" },
+  { id: 3, name: "Superhéroes" },
+  { id: 4, name: "Animales" },
+  { id: 5, name: "Videojuegos" },
+  { id: 6, name: "Series de TV" }
+];
 ---
 
 <MainLayout title="Catálogo">
   <div class="container mx-auto">
-    <section class="px-4 py-10 md:py-12">
-      <h1 class="text-5xl md:text-6xl xl:text-8xl from-primary-500 to-[#FF7E00] font-primary bg-gradient-to-r bg-clip-text font-medium text-transparent">NUESTRO CATÁLOGO</h1>
-      <p class="text-lg md:text-xl text-primary-500 mt-2">
-        ¡Conoce nuestros personajes y servicios!
-      </p>
+    <section class="px-4 md:pt-5 md:pb-5">
+      <h1 class="text-center text-3xl md:text-6xl xl:text-8xl text-primary-500 font-secondary font-medium">CATÁLOGO <span class="font-okidoki text-9xl">oKiDoki</span></h1>
     </section>
 
     <!-- Barra de busqueda con icono -->
-    <div class="flex items-center justify-center px-4 mb-8">
+    <div class="flex items-center justify-center px-4 mb-12">
       <div class="relative w-full max-w-3xl">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,27 +118,20 @@ const catalog = [
         <input
           id="character-search"
           type="text"
-          class="w-full pl-10 pr-4 py-3 text-gray-700 text-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30 rounded-lg transition-all duration-300"
-          placeholder="Buscar personajes..."
+          class="w-full pl-10 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+          placeholder="Buscar personajes, servicios.."
         />
       </div>
     </div>
 
-    <!-- Filtros (opcionales) -->
+    <!-- Filtros -->
     <div class="flex flex-wrap items-center gap-2 px-4 mb-6">
       <span class="text-gray-700 font-medium">Filtrar por:</span>
+      {filters.map((filter) => (
       <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
-        Disponibles
+        {filter.name}
       </button>
-      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
-        Princesas
-      </button>
-      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
-        Superhéroes
-      </button>
-      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
-        Animales
-      </button>
+      ))}
     </div>
 
     <!-- Personajes -->
@@ -207,7 +206,6 @@ const catalog = [
       }
     });
 
-    // Optional: Filter button functionality
     const filterButtons = document.querySelectorAll('.px-3.py-1.bg-white');
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -216,8 +214,7 @@ const catalog = [
         button.classList.toggle('bg-white');
         button.classList.toggle('text-primary-500');
         
-        // Here you would add actual filtering logic based on button selection
-        // This is just the UI toggle for now
+
       });
     });
   });
