@@ -5,6 +5,8 @@ dist/
 
 # dependencies
 node_modules/
+/api/node_modules/
+
 
 # logs
 npm-debug.log*
@@ -15,6 +17,7 @@ pnpm-debug.log*
 
 # environment variables
 .env
+/api/.env
 .env.production
 
 # macOS-specific files

@@ -1,8 +1,9 @@
 {
-  "catalogId": 0,
-  "media": [
-    ""
+  "id": 0,
+  "photos": [
+
   ],
-  "numberOfImages": 0,
-  "numberOfVideos": 0
+  "videos": [
+
+  ]
 }
