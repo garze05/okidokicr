@@ -9,6 +9,9 @@ import RanaUpload from "../images/rana_upload.png";
 <MainLayout title="Subir Medios">
   <section class="grid place-items-center min-h-[50vh]">
     <div class="w-full max-w-lg p-3 md:p-5 lg:p-10 bg-white rounded-xl shadow-lg">
+      <h3 class="text-3xl mt-2 from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent text-center">
+        Subir archivos a <span class="font-okidoki text-5xl font-normal">oKiDoki</span>
+      </h3>
       <div class="flex justify-center mb-4">
         <Image
           src={RanaUpload}
@@ -17,59 +20,93 @@ import RanaUpload from "../images/rana_upload.png";
           class="w-1/2"
         />
       </div>
-      <h3 class="mt-2 font-bold text-3xl text-center">Subir Fotos y Videos a la página de <span class="font-okidoki text-4xl font-normal">oKiDoki</span></h3>
-      
+
       <form id="upload-form" class="mt-6 grid gap-4">
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="text-gray-400">
-              <path fill="currentColor" d="M5 20h14v-2H5v2zm7-9L5.33 9l6.67-4 6.67 4L12 11zm0 2l6.67-4-1.33-2L12 9l-5.33-4L5.33 11 12 13z"/>
-            </svg>
-          </span>
+        <div id="drop-zone" class="relative border-2 border-dashed border-gray-300 rounded-3xl p-8 text-center hover:border-primary-500 transition-all duration-300">
           <input
             type="file"
-            name="file"
+            name="files"
             accept="image/*,video/*"
+            multiple
             required
-            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
+          <div id="file-list" class="space-y-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mx-auto h-12 w-12 text-gray-400">
+              <path fill="currentColor" d="M9 16v-6H5l7-7l7 7h-4v6zm-4 4v-2h14v2z" />
+            </svg>
+            <p class="text-gray-600">Arrastra y suelta archivos aquí o</p>
+            <p class="text-primary-500">Haz clic para seleccionar archivos</p>
+          </div>
         </div>
 
         <div class="pt-6">
-          <Button action="submit" class="w-full">Subir</Button>
+          <Button icon="mdi:cloud-upload" action="submit" class="w-full">Subir</Button>
         </div>
       </form>
     </div>
   </section>
 
   <script>
-    document
-      .getElementById('upload-form')
-      .addEventListener('submit', async (e) => {
-        e.preventDefault()
-        const token = localStorage.getItem('token')
-        if (!token) {
-          alert('Debes iniciar sesión')
-          return window.location.href = '/login'
-        }
+    const dropZone = document.getElementById('drop-zone');
+    const fileList = document.getElementById('file-list');
 
-        const formData = new FormData(e.target)
+    // Mostrar archivos seleccionados antes de subir
+    dropZone.querySelector('input[type="file"]').addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      fileList.innerHTML = '';
+      files.forEach(file => {
+        const p = document.createElement('p');
+        p.textContent = file.name;
+        p.className = 'text-gray-700 break-all';
+        fileList.appendChild(p);
+      });
+    });
+
+    document.getElementById('upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Debes iniciar sesión');
+        return window.location.href = '/login';
+      }
+
+      const input = dropZone.querySelector('input[type="file"]');
+      const files = Array.from(input.files);
+      const results = [];
+
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+
         const res = await fetch('http://localhost:4000/api/upload', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: formData
-        })
+        });
 
         if (res.ok) {
-          const { url } = await res.json()
-          alert('¡Subida exitosa! URL: ' + url)
-        } else if (res.status === 401) {
-          alert('Tu sesión expiró. Por favor inicia sesión de nuevo.')
-          window.location.href = '/login'
+          const { url } = await res.json();
+          results.push({ name: file.name, url });
         } else {
-          const { error } = await res.json()
-          alert('Error: ' + error)
+          const err = await res.json();
+          alert(`Error al subir ${file.name}: ${err.error}`);
         }
-      })
+      }
+
+      // Mostrar resultados dentro del drop-zone
+      fileList.innerHTML = '';
+      results.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'mb-2';
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.target = '_blank';
+        a.textContent = item.name;
+        a.className = 'text-primary-500 underline break-all';
+        div.appendChild(a);
+        fileList.appendChild(div);
+      });
+    });
   </script>
 </MainLayout>
