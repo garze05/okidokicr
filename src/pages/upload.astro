@@ -1,45 +1,75 @@
 ---
 import "../styles/global.css";
 import MainLayout from "../layouts/MainLayout.astro";
+import Button from "../components/Button.astro";
+import Image from "astro/components/Image.astro";
+import RanaUpload from "../images/rana_upload.png";
 ---
 
 <MainLayout title="Subir Medios">
-  <h1>Subir Foto o Video</h1>
-  <form id="upload-form">
-    <input type="file" name="file" required />
-    <button type="submit">Subir</button>
-  </form>
+  <section class="grid place-items-center min-h-[50vh]">
+    <div class="w-full max-w-lg p-3 md:p-5 lg:p-10 bg-white rounded-xl shadow-lg">
+      <div class="flex justify-center mb-4">
+        <Image
+          src={RanaUpload}
+          alt="OkiDoki Logo"
+          loading="eager"
+          class="w-1/2"
+        />
+      </div>
+      <h3 class="mt-2 font-bold text-3xl text-center">Subir Fotos y Videos a la página de <span class="font-okidoki text-4xl font-normal">oKiDoki</span></h3>
+      
+      <form id="upload-form" class="mt-6 grid gap-4">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="text-gray-400">
+              <path fill="currentColor" d="M5 20h14v-2H5v2zm7-9L5.33 9l6.67-4 6.67 4L12 11zm0 2l6.67-4-1.33-2L12 9l-5.33-4L5.33 11 12 13z"/>
+            </svg>
+          </span>
+          <input
+            type="file"
+            name="file"
+            accept="image/*,video/*"
+            required
+            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+          />
+        </div>
+
+        <div class="pt-6">
+          <Button action="submit" class="w-full">Subir</Button>
+        </div>
+      </form>
+    </div>
+  </section>
 
   <script>
     document
       .getElementById('upload-form')
       .addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
+        e.preventDefault()
+        const token = localStorage.getItem('token')
         if (!token) {
-          alert('Debes iniciar sesión');
-          return window.location.href = '/login';
+          alert('Debes iniciar sesión')
+          return window.location.href = '/login'
         }
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target)
         const res = await fetch('http://localhost:4000/api/upload', {
           method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
+          headers: { Authorization: `Bearer ${token}` },
           body: formData
-        });
+        })
 
         if (res.ok) {
-          const { url } = await res.json();
-          alert('¡Subida exitosa! URL: ' + url);
+          const { url } = await res.json()
+          alert('¡Subida exitosa! URL: ' + url)
         } else if (res.status === 401) {
-          alert('Tu sesión expiró. Por favor inicia sesión de nuevo.');
-          window.location.href = '/login';
+          alert('Tu sesión expiró. Por favor inicia sesión de nuevo.')
+          window.location.href = '/login'
         } else {
-          const { error } = await res.json();
-          alert('Error: ' + error);
+          const { error } = await res.json()
+          alert('Error: ' + error)
         }
-      });
+      })
   </script>
 </MainLayout>
