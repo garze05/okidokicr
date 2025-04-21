@@ -5,12 +5,16 @@ import {
   updateTag,
   deleteTag
 } from '../controllers/tagController.js'
+import { authenticate } from '../middlewares/authMiddleware.js'
 
 const router = Router()
 
-router.post('/', createTag)      // Crear
+router.post('/', authenticate, createTag)      // Crear
+router.put('/:id',  authenticate, updateTag)    // Actualizar
+router.delete('/:id',  authenticate, deleteTag) // Borrar
+
+// Publicos
 router.get('/', listTags)        // Leer todos
-router.put('/:id', updateTag)    // Actualizar
-router.delete('/:id', deleteTag) // Borrar
+
 
 export default router

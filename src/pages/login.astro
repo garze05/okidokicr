@@ -1,0 +1,92 @@
+---
+import "../styles/global.css";
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from "../components/Button.astro";
+
+import Image from "astro/components/Image.astro";
+
+import Logo from "../images/logo.svg";
+import Logo2 from "../images/logo2.svg";
+---
+
+<MainLayout title="Inicio de Sesión">
+  <section class="grid place-items-center min-h-[50vh]">
+    <div class="w-full max-w-lg p-3 md:p-5 lg:p-10 bg-white rounded-xl shadow-lg">
+      <div class="max-h-20 flex items-center justify-center">
+      <Image
+        src={Logo2}
+        alt="OkiDoki Producciones Rana Logo"
+        loading="eager"
+        class="w-1/2"
+      />
+      </div>
+      <h3 class="mt-4 font-bold text-3xl text-center">Inicio de Sesión</h3>
+      <form id="login-form" class="mt-6 grid gap-4">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
+              <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            name="user"
+            placeholder="Usuario"
+            required
+            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+          />
+        </div>
+  
+
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
+              <path fill="currentColor" d="M12 17a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5a5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3" />
+            </svg>
+          </span>
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            required
+            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+          />
+        </div>
+        <div class="pt-6">
+          <Button action="submit" class="w-full">Iniciar sesión</Button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  
+  <script>
+    document
+      .getElementById('login-form')
+      .addEventListener('submit', async (e) => {
+        const user = e.target.user.value
+        const password = e.target.password.value;
+
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const res = await fetch('http://localhost:4000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user, password })
+        });
+        if (res.ok) {
+          const { token } = await res.json();
+          localStorage.setItem('token', token);
+          window.location.href = '/upload';
+        } else if (res.status === 401) {
+          alert('Usuario o contraseña incorrectos');
+        } else if (res.status === 403) {
+          alert('No tienes permisos para acceder a esta sección');
+        } else if (res.status === 500) {
+          alert('Error interno del servidor');
+        } else {
+          alert('Error desconocido');
+        }
+      });
+  </script>
+</MainLayout>
