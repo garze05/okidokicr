@@ -1,105 +1,14 @@
 ---
 // import CatalogCard from "../components/Catalog/CatalogCard.astro";
 import CatalogGrid from "../components/Catalog/CatalogGrid.jsx";
+import CatalogFilterGrid from "../components/Catalog/CatalogFilterGrid.jsx";
 import MainLayout from "../layouts/MainLayout.astro";
 
 import { socialLinksList } from "../components/SocialLinks.astro";
 const whatsappLink = socialLinksList.whatsapp.url;
 
-// This data would typically come from a database or API
-// For now, we'll use static data as an example
-// const catalog = [
-//   {
-//     id: 1,
-//     name: "Mario y Luigi Bros",
-//     description: "Llega Mario Bros a tu fiesta para hacerla inolvidable. ¡Salta, corre y diviértete con el personaje más famoso de los videojuegos!",
-//     category: "Videojuegos",
-//     imageUrl: "src/images/catalogo/personajes/mario_y_luigi.jpg",
-//     totalImages: 5,
-//     totalVideos: 2,
-//     availability: true,
-//     price: 149.99
-//   },
-//   {
-//     id: 2,
-//     name: "Bob Esponja",
-//     description: "An intergalactic hero with a cool space suit that will make any party feel out of this world!",
-//     imageUrl: "src/images/catalogo/personajes/bob_esponja.jpg",
-//     totalImages: 4,
-//     totalVideos: 2,
-//     availability: true,
-//     price: 159.99
-//   },
-//   {
-//     id: 3,
-//     name: "Payaso Plim Plim",
-//     description: "A friendly dinosaur character that teaches kids about prehistoric times through fun games and activities.",
-//     imageUrl: "src/images/catalogo/personajes/payaso_plim_plim.jpg",
-//     totalImages: 6,
-//     totalVideos: 0,
-//     availability: false,
-//     price: 139.99
-//   },
-//   {
-//     id: 4,
-//     name: "Gigantes OkiDoki",
-//     description: "A sparkly unicorn character that brings magic and rainbows to every birthday party.",
-//     imageUrl: "src/images/catalogo/personajes/pandilla_selvatica.jpg",
-//     totalImages: 7,
-//     totalVideos: 4,
-//     availability: true,
-//     price: 169.99
-//   },
-//   {
-//     id: 5,
-//     name: "Paw Patrol",
-//     description: "La Patrulla Canina conformada por Chase, Marshall y Skye llega a tu fiesta para hacerla inolvidable.",
-//     imageUrl: "src/images/catalogo/personajes/paw_patrol.jpg",
-//     totalImages: 6,
-//     totalVideos: 2,
-//     availability: true,
-//     price: 159.99
-//   },
-//   {
-//     id: 6,
-//     name: "Minions",
-//     description: "A magical wizard who performs incredible magic tricks and tells fascinating stories about magical kingdoms.",
-//     imageUrl: "src/images/catalogo/personajes/minions.jpg",
-//     totalImages: 5,
-//     totalVideos: 2,
-//     availability: false,
-//     price: 149.99
-//   },
-//   {
-//     id: 7,
-//     name: "Mickey y Minie Mouse",
-//     description: "An exciting pirate character who takes children on a treasure hunt adventure with maps and golden coins.",
-//     imageUrl: "src/images/catalogo/personajes/mickey_y_minnie.jpg",
-//     totalImages: 4,
-//     totalVideos: 2,
-//     availability: true,
-//     price: 144.99
-//   },
-//   {
-//     id: 8,
-//     name: "Spiderman",
-//     description: "A delightful fairy who spreads joy with her sparkling wings and teaches children about nature and magic.",
-//     imageUrl: "src/images/catalogo/personajes/spiderman.jpg",
-//     totalImages: 8,
-//     totalVideos: 2,
-//     availability: true,
-//     price: 154.99
-//   }
-// ];
-
-const filters = [
-  { id: 1, name: "Disponibles" },
-  { id: 2, name: "Princesas" },
-  { id: 3, name: "Superhéroes" },
-  { id: 4, name: "Animales" },
-  { id: 5, name: "Videojuegos" },
-  { id: 6, name: "Series de TV" }
-];
+const res = await fetch('http://localhost:4000/api/services');
+const initialServices = await res.json();
 ---
 
 <MainLayout title="Catálogo">
@@ -107,40 +16,9 @@ const filters = [
     <section class="px-4 md:pt-5 md:pb-5">
       <h1 class="text-center text-3xl md:text-6xl xl:text-8xl text-primary-500 font-secondary font-medium">CATÁLOGO <span class="font-okidoki text-9xl">oKiDoki</span></h1>
     </section>
+    
+    <CatalogGrid initialServices={initialServices} client:visible />
 
-    <!-- Barra de busqueda con icono -->
-    <!-- <div class="flex items-center justify-center px-4 mb-12">
-      <div class="relative w-full max-w-3xl">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <input
-          id="character-search"
-          type="text"
-          class="w-full pl-10 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
-          placeholder="Buscar personajes, servicios.."
-        />
-      </div>
-    </div> -->
-
-    <!-- Filtros -->
-    <!-- <div class="flex flex-wrap items-center gap-2 px-4 mb-6">
-      <span class="text-gray-700 font-medium">Filtrar por:</span>
-      {filters.map((filter) => (
-      <button class="cursor-pointer px-3 py-1 bg-white text-primary-500 border border-primary-500 rounded-full hover:bg-primary-500 hover:text-white transition-colors duration-300">
-        {filter.name}
-      </button>
-      ))}
-    </div> -->
-    <CatalogGrid client:visible />
-
-      <!-- No Results Message -->
-      <div id="no-results" class="hidden text-center py-12">
-        <h3 class="text-xl font-medium text-gray-900">No se encontraron personajes</h3>
-        <p class="mt-2 text-gray-500">Intenta buscar con otro término</p>
-      </div>
     </div>
 
     <!-- Call to Action Section -->
@@ -155,79 +33,3 @@ const filters = [
     </section>
   </div>
 </MainLayout>
-
-<script>
-
-  // Llamada a API
-  // const responseServices = await fetch('http://localhost:4000/api/services');
-  // const responseTags = await fetch('http://localhost:4000/api/tags');
-  // // servicios
-  // const services = await responseServices.json();
-  // const tags = await responseTags.json();
-
-  // // Obtener contenedor del grid
-  // const grid = document.getElementById('catalog-grid');
-
-  // services.forEach((service) => {
-  //   // Crear tarjeta de personaje
-  //   const card = document.createElement('div');
-  //   card.className = 'character-card';
-  //   card.innerHTML = `
-  //     <CatalogCard
-  //       title="${service.name}"
-  //       description="${service.description}"
-  //       coverImg="${service.coverImg}"
-  //       totalImages="${service.totalImages}"
-  //       totalVideos="${service.totalVideos}"
-  //       availability="${service.availability}"
-  //       tags="${tags.map(tag => tag.name).join(', ')}"
-  //     />
-  //   `;
-  //   grid.appendChild(card);
-  // });
-
-  // Enhanced search functionality
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   const searchInput = document.getElementById('character-search');
-  //   const characterGrid = document.getElementById('character-grid');
-  //   const characterCards = characterGrid.querySelectorAll('.character-card');
-  //   const noResults = document.getElementById('no-results');
-    
-  //   searchInput.addEventListener('input', (e) => {
-  //     const searchTerm = e.target.value.toLowerCase();
-  //     let visibleCount = 0;
-      
-  //     characterCards.forEach(cardWrapper => {
-  //       const card = cardWrapper.querySelector('.group') || cardWrapper.firstElementChild;
-  //       const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
-  //       const description = card.querySelector('p')?.textContent.toLowerCase() || '';
-        
-  //       if (name.includes(searchTerm) || description.includes(searchTerm)) {
-  //         cardWrapper.classList.remove('hidden');
-  //         visibleCount++;
-  //       } else {
-  //         cardWrapper.classList.add('hidden');
-  //       }
-  //     });
-      
-  //     // Show/hide no results message
-  //     if (visibleCount === 0) {
-  //       noResults.classList.remove('hidden');
-  //     } else {
-  //       noResults.classList.add('hidden');
-  //     }
-  //   });
-
-  //   const filterButtons = document.querySelectorAll('.px-3.py-1.bg-white');
-  //   filterButtons.forEach(button => {
-  //     button.addEventListener('click', () => {
-  //       button.classList.toggle('bg-primary-500');
-  //       button.classList.toggle('text-white');
-  //       button.classList.toggle('bg-white');
-  //       button.classList.toggle('text-primary-500');
-        
-
-  //     });
-  //   });
-  // });
-</script>

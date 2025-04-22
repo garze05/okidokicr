@@ -42,7 +42,7 @@ export default function CatalogCard({ service }) {
         </div>
 
         {/* Contenido */}
-        <div className="p-4 flex flex-col flex-1">
+        <div className="flex flex-col flex-1">
           {/* Título */}
           <h3 className="text-lg sm:text-xl font-bold text-primary-500 transition-all duration-500 group-hover:text-white line-clamp-2">
             {title}
