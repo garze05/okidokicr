@@ -1,20 +1,23 @@
 import { Router } from 'express'
-import { uploadMedia } from '../controllers/uploadController.js'
 import { authenticate } from '../middlewares/authMiddleware.js'
+import { uploadMedia } from '../controllers/uploadController.js'
 import multer from 'multer'
 
-// Configuramos multer para almacenar en memoria
+// Multer en memoria con límite 100 MB
 const storage = multer.memoryStorage()
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 } // límite 10MB
+  limits: { fileSize: 100 * 1024 * 1024 } // 100 MB
 })
 
 const router = Router()
 
-// Recibe un solo archivo en el campo "file"
-router.post('/', upload.single('file'), uploadMedia)
-// Solo admins pueden subir archivos
-router.post('/', authenticate, upload.single('file'), uploadMedia)
+// QUITAMOS la ruta duplicada y ponemos AUTH primero
+router.post(
+  '/',
+  authenticate,
+  upload.single('file'),
+  uploadMedia
+)
 
 export default router

@@ -1,18 +1,11 @@
 ---
 import Button from '../Button.astro';
 
-export interface Props {
-  name: string;
-  description: string;
-  tags: string;
-  imageUrl: string;
-  totalImages: number;
-  totalVideos: number;
-  availability: boolean;
-  price: number;
-}
+// export interface Props {
 
-const { name, description, category, imageUrl, totalImages, totalVideos, availability, price } = Astro.props;
+// }
+
+const { title, description, coverImg, totalImages, totalVideos, availability, tags } = Astro.props;
 ---
 
 <div
@@ -26,16 +19,17 @@ const { name, description, category, imageUrl, totalImages, totalVideos, availab
     <!-- Character Image -->
     <div class="w-full h-40 sm:h-48 overflow-hidden rounded-lg sm:rounded-xl">
       <img 
-        src={imageUrl} 
-        alt={`Imagen de ${name}`} 
+        src={coverImg} 
+        alt={`${title} Costa Rica OkiDoki`} 
         class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
       />
     </div>
     
     <!-- Character Info -->
      <div class="flex gap-2 items-center">
-      <h3 class="text-lg sm:text-xl font-bold text-gray-800 transition-all duration-500 group-hover:text-white">{name}</h3> <!-- · -->
-      <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">{category}</span>
+      <h3 class="text-lg sm:text-xl font-bold text-primary-500 transition-all duration-500 group-hover:text-white">
+        {title}
+      </h3>
      </div>
     
     
@@ -50,27 +44,29 @@ const { name, description, category, imageUrl, totalImages, totalVideos, availab
     <div class="mt-auto space-y-2">
       <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
-          <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">
-            {totalImages} fotos
+          <span class="text-sm font-bold  transition-all duration-500 group-hover:text-white">
+            {totalImages} <span class="text-gray-500 font-normal">fotos</span>
           </span>
         
-          <span class="text-xs text-gray-500 transition-all duration-500 group-hover:text-white">
-            {totalVideos} videos
+          <span class="text-sm font-bold transition-all duration-500 group-hover:text-white">
+            {totalVideos} <span class="text-gray-500 font-normal">videos</span>
           </span>
           
-          <span class={`inline-flex h-2 sm:h-3 w-2 sm:w-3 rounded-full ${availability ? 'bg-green-500' : 'bg-red-500'}`}></span>
+          <span class={`text-xs ${availability ? 'text-green-500' : 'text-red-500'}`}>
+            {availability ? 'Disponible' : 'No Disponible'}
+          </span>
         </div>
       </div>
       
       <!-- <button class="cursor-pointer w-full py-1.5 sm:py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm sm:text-base rounded-lg transform transition-all duration-300 hover:scale-105">
         Pedir ahora
       </button> -->
-      <Button 
+      <!-- <Button 
         type="primary" 
         class="py-1.5 sm:py-2 text-sm sm:text-base rounded-lg"
       >
         Pedir ahora
-      </Button>
+      </Button> -->
     </div>
   </div>
 </div>

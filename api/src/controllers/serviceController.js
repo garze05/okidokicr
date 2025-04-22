@@ -62,6 +62,29 @@ export const listServices = async (req, res, next) => {
   }
 }
 
+// Listar numero de imagenes en servicio
+export const countImages = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const count = await prisma.galleryImage.count({ where: { serviceId: id } })
+    res.json({ count })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// Listar numero de videos en servicio
+export const countVideos = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const count = await prisma.video.count({ where: { serviceId: id } })
+    res.json({ count })
+  } catch (err) {
+    next(err)
+  }
+}
+
+
 // Obtener un servicio por ID
 export const getService = async (req, res, next) => {
   try {
