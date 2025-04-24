@@ -23,6 +23,8 @@ export default function CatalogCard({ service }) {
   const totalImages = service.gallery.length || 0;
   const totalVideos = service.videos.length || 0;
 
+  console.log('tags', service.tags);
+
   return (
     <div
       className="group relative cursor-pointer overflow-hidden bg-white rounded-xl sm:rounded-2xl px-4 sm:px-6 pt-8 sm:pt-10 pb-6 sm:pb-8 shadow-lg sm:shadow-xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl w-full h-full flex flex-col"
@@ -55,6 +57,18 @@ export default function CatalogCard({ service }) {
 
           {/* Spacer */}
           <div className="flex-grow" />
+
+          {/* Etiquetas */}
+          <div className="flex flex-wrap gap-2">
+          {service.tags.map((tagLink) => (
+              <span
+                key={tagLink.tagId}
+                className="text-xs font-semibold text-gray-500 bg-gray-200 rounded-full px-2 py-1"
+              >
+                {tagLink.tag?.name}
+              </span>
+          ))}
+          </div>
 
           {/* Sección inferior */}
           <div className="mt-auto space-y-2">

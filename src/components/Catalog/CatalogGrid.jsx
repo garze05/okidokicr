@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Fuse from 'fuse.js';
 import CatalogCard from './CatalogCard.jsx';
 import SearchBar from './SearchBar.jsx';
+import CatalogFilterGrid from './CatalogFilterGrid.jsx';
 
 /**
  * CatalogGrid recibe servicios iniciales y permite compartir URL con filtros.
@@ -39,22 +40,12 @@ export default function CatalogGrid({ initialServices }) {
     setQuery(q);
   };
 
-  if (!filtered.length) {
-    return (
-      <div className="flex justify-center py-20">
-        <p className="text-gray-500">No hay servicios para mostrar.</p>
-      </div>
-    );
-  }
+
 
   return (
     <>
-      <SearchBar
-        services={services}
-        initialQuery={query}
-        onSelect={handleSelect}
-        onSearch={handleSearch}
-      />
+    
+    <CatalogFilterGrid />
       <div className="px-4 pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((s) => (

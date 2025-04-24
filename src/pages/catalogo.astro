@@ -1,5 +1,6 @@
 ---
 // import CatalogCard from "../components/Catalog/CatalogCard.astro";
+import CatalogPage from "../components/Catalog/CatalogPage.jsx";
 import CatalogGrid from "../components/Catalog/CatalogGrid.jsx";
 import CatalogFilterGrid from "../components/Catalog/CatalogFilterGrid.jsx";
 import MainLayout from "../layouts/MainLayout.astro";
@@ -17,7 +18,8 @@ const initialServices = await res.json();
       <h1 class="text-center text-3xl md:text-6xl xl:text-8xl text-primary-500 font-secondary font-medium">CATÁLOGO <span class="font-okidoki text-9xl">oKiDoki</span></h1>
     </section>
     
-    <CatalogGrid initialServices={initialServices} client:visible />
+    <CatalogPage initialServices={initialServices} client:load />
+
 
     </div>
 
@@ -31,5 +33,4 @@ const initialServices = await res.json();
         </a>
       </div>
     </section>
-  </div>
 </MainLayout>
