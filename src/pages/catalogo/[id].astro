@@ -33,7 +33,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
 ---
 
 <MainLayout title={service.title}>
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-20 py-8">
     <nav class="text-sm mb-6">
       <ol class="flex items-center space-x-2">
         <li><a href="/" class="text-primary-500 hover:underline">Inicio</a></li>
@@ -45,40 +45,40 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Galería de imágenes -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        {images.length > 0 ? (
-          <div class="relative">
-            <!-- Imagen principal (clickeable para lightbox) -->
-            <div class="aspect-video bg-gray-100 cursor-zoom-in">
-              <img 
-                src={images[initialImageIndex].src} 
-                alt={`${service.title} - Imagen principal`}
-                id="mainImage"
-                class="w-full h-full object-cover"
-                data-lightbox="true"
-              />
-            </div>
-            
-            <!-- Controles de navegación para pantallas grandes -->
-            {images.length > 1 && (
-              <div class="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4">
-                <button 
-                  id="prevImage" 
-                  class="bg-white/70 hover:bg-white text-gray-800 p-2 rounded-full shadow transition"
-                  aria-label="Imagen anterior"
-                >
-                  <Icon name="mdi:chevron-left" class="w-6 h-6" />
-                </button>
-                <button 
-                  id="nextImage" 
-                  class="bg-white/70 hover:bg-white text-gray-800 p-2 rounded-full shadow transition"
-                  aria-label="Imagen siguiente"
-                >
-                  <Icon name="mdi:chevron-right" class="w-6 h-6" />
-                </button>
-              </div>
-            )}
+    <!-- Galería de imágenes -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      {images.length > 0 ? (
+        <div class="relative">
+          <!-- Imagen principal (clickeable para lightbox) -->
+          <div class="aspect-video bg-gray-100 cursor-zoom-in">
+            <img 
+              src={images[initialImageIndex].src} 
+              alt={`${service.title} - Imagen principal`}
+              id="mainImage"
+              class="w-full h-full object-cover object-[center_30%]"
+              data-lightbox="true"
+            />
+          </div>
+      
+      <!-- Controles de navegación para pantallas grandes -->
+      {images.length > 1 && (
+        <>
+          <button 
+            id="prevImage" 
+            class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 p-2 rounded-full shadow transition cursor-pointer"
+            aria-label="Imagen anterior"
+          >
+            <Icon name="mdi:chevron-left" class="w-6 h-6" />
+          </button>
+          <button 
+            id="nextImage" 
+            class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 p-2 rounded-full shadow transition cursor-pointer"
+            aria-label="Imagen siguiente"
+          >
+            <Icon name="mdi:chevron-right" class="w-6 h-6" />
+          </button>
+        </>
+      )}
             
             <!-- Contador de imágenes -->
             {images.length > 1 && (

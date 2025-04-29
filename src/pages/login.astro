@@ -77,7 +77,7 @@ import Logo2 from "../images/logo2.svg";
         if (res.ok) {
           const { token } = await res.json();
           localStorage.setItem('token', token);
-          window.location.href = '/upload';
+          window.location.href = '/dashboard';
         } else if (res.status === 401) {
           alert('Usuario o contraseña incorrectos');
         } else if (res.status === 403) {
