@@ -18,12 +18,12 @@
     "orientation": "vertical"
   },
   {
-    "videoId": "t_eventosinfinity",
-    "title": "Eventos Infinity",
+    "videoId": "t_starwars",
+    "title": "Adriana",
     "author": "",
-    "role": "Coordinador de Eventos",
-    "description": "Experiencia con nuestros servicios en eventos corporativos",
-    "metaDescription": "Testimonio sobre servicios de entretenimiento en eventos corporativos",
+    "role": "Mamá",
+    "description": "Star Wars personajes, botargas, disfraces Costa Rica",
+    "metaDescription": "Star Wars personajes, botargas, disfraces Costa Rica",
     "orientation": "vertical"
   },
   {
@@ -60,6 +60,15 @@
     "role": "Socio de OkiDoki",
     "description": "Servicio de animación con nuestro personaje Bebote",
     "metaDescription": "Testimonio de un amigo y socio muy cercano",
+    "orientation": "vertical"
+  },
+  {
+    "videoId": "t_eventosinfinity",
+    "title": "Eventos Infinity",
+    "author": "",
+    "role": "Coordinador de Eventos",
+    "description": "Experiencia con nuestros servicios en eventos corporativos",
+    "metaDescription": "Testimonio sobre servicios de entretenimiento en eventos corporativos",
     "orientation": "vertical"
   }
 ]
