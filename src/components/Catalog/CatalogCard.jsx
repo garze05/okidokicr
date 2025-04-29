@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * CatalogCard
@@ -18,12 +19,32 @@ export default function CatalogCard({ service }) {
     description,
     coverImage,
     available,
+    totalImages,
+    totalVideos,
   } = service;
+  
+  const [mediaCounts, setMediaCounts] = useState({ totalImages: 0, totalVideos: 0 });
+  useEffect(() => {
+    fetchMediaCount(service.id)
+      .then(counts => setMediaCounts(counts));
+  }, [service.id]);
+  
+  async function fetchMediaCount(serviceId) {
+    try {
+      const response = await fetch(`http://localhost:4000/api/services/${serviceId}/media-count`);
+      
+      if (!response.ok) {
+        throw new Error('Error al obtener conteo de media');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error:', error);
+      // Proporcionar valores predeterminados en caso de error
+      return { totalImages: 0, totalVideos: 0 };
+    }
+  }
 
-  const totalImages = service.gallery.length || 0;
-  const totalVideos = service.videos.length || 0;
-
-  console.log('tags', service.tags);
 
   return (
     <div
@@ -56,7 +77,7 @@ export default function CatalogCard({ service }) {
           </p>
 
           {/* Spacer */}
-          <div className="flex-grow" />
+          <div className="flex-grow h-5" />
 
           {/* Etiquetas */}
           <div className="flex flex-wrap gap-2">
@@ -71,14 +92,14 @@ export default function CatalogCard({ service }) {
           </div>
 
           {/* Sección inferior */}
-          <div className="mt-auto space-y-2">
+          <div className="mt-3 space-y-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {totalImages} <span className="text-gray-500 font-normal">fotos</span>
+                  {mediaCounts.totalImages} <span className="text-gray-500 font-normal">fotos</span>
                 </span>
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {totalVideos} <span className="text-gray-500 font-normal">videos</span>
+                  {mediaCounts.totalVideos} <span className="text-gray-500 font-normal">videos</span>
                 </span>
                 <span
                   className={`text-xs font-semibold ${

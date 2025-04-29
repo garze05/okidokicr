@@ -10,7 +10,7 @@ export default function CatalogFilterGrid({ onFilter, activeFilters }) {
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/tags')
+    fetch("http://localhost:4000/api/tags")
       .then((r) => r.json())
       .then((data) => setFilters(data))
       .catch(console.error);

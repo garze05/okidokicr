@@ -13,5 +13,6 @@ export default defineConfig({
   integrations: [icon(), react()],
   vite: {
     plugins: [tailwindcss()],
-  }
+  },
+  site: "https://okidokicr.com"
 });

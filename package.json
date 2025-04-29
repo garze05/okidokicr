@@ -24,6 +24,8 @@
     "alpinejs": "^3.14.8",
     "aos": "^2.3.4",
     "astro": "^5.7.4",
+    "astro-carousel": "^3.0.2",
+    "astro-simple-carousel": "^1.0.9",
     "canvas-confetti": "^1.9.3",
     "fuse.js": "^7.1.0",
     "photoswipe": "^5.4.4",
@@ -44,7 +46,8 @@
     "astro-icon": "^1.1.5",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "sass-embedded": "^1.87.0"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

@@ -11,9 +11,10 @@ export default function CatalogPage() {
   const [activeFilters, setActiveFilters] = useState([]);
   const [query, setQuery] = useState('');
 
+
   // Carga inicial de servicios
   useEffect(() => {
-    fetch('http://localhost:4000/api/services')
+    fetch("http://localhost:4000/api/services")
       .then((r) => r.json())
       .then((data) => {
         setServices(data);
@@ -23,7 +24,7 @@ export default function CatalogPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Instancia Fuse.js cuando cambian los servicios
+  // Instanciar Fuse.js cuando cambian los servicios
   const fuse = useRef(null);
   useEffect(() => {
     fuse.current = new Fuse(services, {
@@ -32,20 +33,7 @@ export default function CatalogPage() {
     });
   }, [services]);
 
-  // Leer query de URL al montar y aplicar búsqueda
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get('q') || '';
-      if (q && fuse.current) {
-        setQuery(q);
-        const matches = fuse.current.search(q).map(r => r.item);
-        setFiltered(matches);
-      }
-    }
-  }, [services]);
-
-  // Filtrado por etiquetas y búsqueda combinados
+  // Función para combinar filtros y búsqueda
   const computeFiltered = (items, filters, q) => {
     let results = items;
     // Aplica filtros de etiquetas
@@ -56,41 +44,46 @@ export default function CatalogPage() {
     }
     // Aplica búsqueda difusa
     if (q && fuse.current) {
-      const searchMatches = fuse.current.search(q).map(r => r.item);
-      // Intersección de resultados con filtrados previos
-      results = results.filter((s) => searchMatches.includes(s));
+      const matches = fuse.current.search(q).map((r) => r.item);
+      // Intersección
+      results = results.filter((s) => matches.includes(s));
     }
     return results;
   };
 
-  // Handlers
-  const handleFilter = (slug) => {
-    setActiveFilters(prev =>
-      prev.includes(slug) ? prev.filter(s => s !== slug) : [...prev, slug]
-    );
-  };
-
-  const clearFilters = () => setActiveFilters([]);
-
-  const handleSearch = (items, q) => {
-    setQuery(q);
-    // 'items' proviene de Fuse.search, pero recomputamos para aplicar filtros actuales
-    const resultItems = computeFiltered(services, activeFilters, q);
-    setFiltered(resultItems);
-  };
-
-  const handleSelect = (item) => {
-    setQuery(item.title);
-    setFiltered([item]);
-  };
-
-  // Actualiza filtered si cambian filtros o query sin re-fetch
+  // Recalcular cada vez que cambian servicios, filtros o query
   useEffect(() => {
     if (!loading) {
       const resultItems = computeFiltered(services, activeFilters, query);
       setFiltered(resultItems);
     }
-  }, [activeFilters]);
+  }, [services, activeFilters, query]);
+
+  // Toggle de filtros múltiples
+  const handleFilter = (slug) => {
+    setActiveFilters((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
+    );
+  };
+
+  // Búsqueda con Enter
+  const handleSearch = (_, q) => {
+    setQuery(q);
+  };
+
+  // Selección de sugerencia
+  const handleSelect = (item) => {
+    setQuery(item.title);
+  };
+
+  // Limpiar toda la búsqueda y filtros
+  const clearAll = () => {
+    setActiveFilters([]);
+    setQuery('');
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  };
 
   if (loading) {
     return (
@@ -114,10 +107,10 @@ export default function CatalogPage() {
         activeFilters={activeFilters}
       />
 
-      {activeFilters.length > 0 && (
+      {(activeFilters.length > 0 || query) && (
         <div className="px-4 mb-6">
           <button
-            onClick={clearFilters}
+            onClick={clearAll}
             className="px-4 py-2 text-sm bg-red-500 text-white font-bold hover:bg-red-300 transition-colors cursor-pointer"
           >
             Limpiar filtros
@@ -125,13 +118,31 @@ export default function CatalogPage() {
         </div>
       )}
 
-      <div className="px-4 pb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((s) => (
-            <CatalogCard key={s.id} service={s} />
-          ))}
+      {filtered.length === 0 ? (
+        <div className="flex flex-col items-center py-20">
+          <p className="text-gray-500 text-center mb-4">
+            {query
+              ? `No encontramos resultados para “${query}”${
+                  activeFilters.length > 0 ? ' con esos filtros' : ''
+                }.`
+              : 'No hay servicios para mostrar.'}
+          </p>
         </div>
-      </div>
+      ) : (
+        <div className="px-4 pb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.map((s) => (
+            <a
+              key={s.id}
+              href={`/catalogo/${s.id}`}
+              className="block h-full"           // para que ocupe todo el espacio
+            >
+              <CatalogCard key={s.id} service={s} />
+            </a>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }

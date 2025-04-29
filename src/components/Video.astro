@@ -3,21 +3,35 @@ const {
   publicId,
   profile = "testimonios",
   className = "",
-  orientation = "horizontal"
+  orientation = "horizontal",
+  url
 } = Astro.props;
 
-const playerUrl = new URL("https://player.cloudinary.com/embed/");
-const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+// Determine the URL to use
+let fullUrl;
 
-const searchParams = new URLSearchParams({
-  public_id: publicId,
-  cloud_name: cloudName,
-  profile: profile
-});
-const fullUrl = `${playerUrl}?${searchParams.toString()}`;
+if (url) {
+  // Use the provided URL directly
+  fullUrl = url;
+} else if (publicId) {
+  // Construct URL from parameters
+  const playerUrl = new URL("https://player.cloudinary.com/embed/");
+  const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+  
+  const searchParams = new URLSearchParams({
+    public_id: publicId,
+    cloud_name: cloudName,
+    profile: profile
+  });
+  fullUrl = `${playerUrl}?${searchParams.toString()}`;
+} else {
+  // Handle missing data case
+  console.error("Video component requires either 'url' or 'publicId' prop");
+  fullUrl = "";
+}
 ---
 
-<div class="relative w-full h-0" style={`padding-bottom: ${orientation === 'vertical' ? '177.78%' : '56.25%'};`}>
+<div class={`relative w-full h-0 ${className}`} style={`padding-bottom: ${orientation === 'vertical' ? '177.78%' : '56.25%'};`}>
   <iframe
     src={fullUrl}
     class="absolute top-0 left-0 w-full h-full"

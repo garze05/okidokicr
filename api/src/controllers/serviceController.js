@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+// GENERALES
 // Crear servicio
 export const createService = async (req, res, next) => {
   try {
@@ -57,28 +58,6 @@ export const listServices = async (req, res, next) => {
       }
     })
     res.json(services)
-  } catch (err) {
-    next(err)
-  }
-}
-
-// Listar numero de imagenes en servicio
-export const countImages = async (req, res, next) => {
-  try {
-    const id = Number(req.params.id)
-    const count = await prisma.galleryImage.count({ where: { serviceId: id } })
-    res.json({ count })
-  } catch (err) {
-    next(err)
-  }
-}
-
-// Listar numero de videos en servicio
-export const countVideos = async (req, res, next) => {
-  try {
-    const id = Number(req.params.id)
-    const count = await prisma.video.count({ where: { serviceId: id } })
-    res.json({ count })
   } catch (err) {
     next(err)
   }
@@ -154,6 +133,80 @@ export const deleteService = async (req, res, next) => {
     const id = Number(req.params.id)
     await prisma.service.delete({ where: { id } })
     res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+}
+
+// ESPECIFICAS
+// Listar numero de imagenes y videos en servicio
+export const countMedia = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const service = await prisma.service.findUnique({
+      where: { id },
+      select: {
+        gallery: { select: { id: true } },
+        videos: { select: { id: true } }
+      }
+    })
+    if (!service) return res.status(404).json({ error: 'Servicio no encontrado' })
+    res.json({
+      totalImages: service.gallery.length,
+      totalVideos: service.videos.length
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// Agregar imagenes a servicio
+export const addImages = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const { urls } = req.body  // Ahora esperamos un array de URLs
+    
+    const images = await prisma.galleryImage.createMany({
+      data: urls.map(url => ({ url, serviceId: id })),
+      skipDuplicates: true
+    })
+    
+    res.status(201).json({ count: images.count })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// Agregar videos a servicio
+export const addVideos = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const { urls } = req.body  // Ahora esperamos un array de URLs
+    
+    const videos = await prisma.video.createMany({
+      data: urls.map(url => ({ url, serviceId: id })),
+      skipDuplicates: true
+    })
+    
+    res.status(201).json({ count: videos.count })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// Cambiar disponibilidad de servicio
+export const toggleAvailability = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const service = await prisma.service.findUnique({ where: { id } })
+    if (!service) return res.status(404).json({ error: 'Servicio no encontrado' })
+
+    const updatedService = await prisma.service.update({
+      where: { id },
+      data: { available: !service.available }
+    })
+
+    res.json(updatedService)
   } catch (err) {
     next(err)
   }
