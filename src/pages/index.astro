@@ -103,13 +103,29 @@ const whatsappLink = socialLinksList.whatsapp.url;
 
   <!-- Servicios -->
   <section id="servicios">
-    <div class="bg-primary-500 mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-60">
-      <h1
-        data-aos="fade-in"
-        class="font-primary py-10 text-center text-4xl font-semibold text-white sm:text-7xl lg:text-8xl"
-      >
-        SERVICIOS
-      </h1>
+    <div 
+      class="relative mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-60"
+    >
+      <!-- Capa de imagen de fondo -->
+      <div class="absolute inset-0 z-0 opacity-40">
+        <img 
+          src="src/images/pandilla-bg.jpg" 
+          alt="" 
+          class="h-full w-full object-cover"
+        />
+      </div>
+      
+      <!-- Capa de gradiente -->
+      <div class="absolute inset-0 z-10 bg-gradient-to-r from-primary-500 to-[#FF7E00] opacity-80"></div>
+      
+      <!-- Contenido (encima de las capas) -->
+      <div class="relative z-20">
+        <h1
+          data-aos="fade-in"
+          class="font-primary py-10 text-center text-4xl font-semibold text-white sm:text-7xl lg:text-8xl"
+        >
+          SERVICIOS
+        </h1>
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
         <ServicioCard
           image={Botargas}

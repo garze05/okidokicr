@@ -15,7 +15,7 @@ const initialServices = await res.json();
 <MainLayout title="Catálogo">
   <div class="container mx-auto">
     <section class="px-4 md:pt-5 md:pb-5">
-      <h1 class="text-center text-3xl md:text-6xl xl:text-8xl from-primary-500 font-primary bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent leading-normal">CATÁLOGO</h1>
+      <h1 class="text-center text-4xl sm:text-6xl md:text-7xl xl:text-8xl from-primary-500 font-primary bg-gradient-to-r to-[#FF7E00] bg-clip-text font-bold text-transparent leading-normal">CATÁLOGO</h1>
     </section>
     
     <CatalogPage initialServices={initialServices} client:load />

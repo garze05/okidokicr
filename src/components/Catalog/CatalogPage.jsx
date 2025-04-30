@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Loader2 } from "lucide-react";
 import Fuse from 'fuse.js';
 import SearchBar from './SearchBar.jsx';
 import CatalogFilterGrid from './CatalogFilterGrid.jsx';
@@ -87,14 +88,16 @@ export default function CatalogPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-20">
-        <p className="text-gray-500">Cargando catálogo…</p>
+      <div className="flex flex-col items-center justify-center py-24 px-4">
+        <Loader2 className="h-12 w-12 text-primary-500 animate-spin mb-4" />
+        <p className="text-lg font-medium text-gray-700">Cargando catálogo...</p>
+        <p className="text-sm text-gray-500 mt-2">Por favor espere un momento</p>
       </div>
     );
   }
 
   return (
-    <>
+    <div className="max-w-9xl mx-auto px-2 sm:px-4">
       <SearchBar
         services={services}
         initialQuery={query}
@@ -129,7 +132,7 @@ export default function CatalogPage() {
           </p>
         </div>
       ) : (
-        <div className="px-4 pb-12">
+        <div className="pb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((s) => (
             <a
@@ -143,6 +146,6 @@ export default function CatalogPage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

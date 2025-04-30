@@ -1,0 +1,103 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsappStickyButton from "../components/WhatsappStickyButton.astro";
+
+//css
+import "swiper/css/bundle";
+
+// Scroller anims
+import "aos/dist/aos.css";
+
+// fonts
+import "@fontsource/alex-brush";
+import "@fontsource/montserrat";
+import "@fontsource-variable/lexend";
+import "@fontsource-variable/lexend-exa";
+import "@fontsource-variable/lexend-giga";
+
+//import { ViewTransitions } from "astro:transitions";
+
+// Props
+const { title, description="Empresa de Costa Rica. Ofrecemos Botargas, Fiestas de Cumpleaños, Eventos Familiares y Empresariales con 30 años de Experiencia." } = Astro.props;
+
+---
+
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>OkiDoki - {title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <!-- <ViewTransitions /> -->
+  </head>
+  <body
+    class="h-full bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
+  >
+    <div
+      class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
+    >
+      <WhatsappStickyButton />
+      <Header />
+      <main class="relative grid overflow-x-hidden">
+        <slot />
+      </main>
+      <Footer />
+      <script>
+        import AOS from "aos";
+        AOS.init();
+      </script>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* Queremos prevenir content shift, mostrando siempre la barra de scroll*/
+  html {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    overflow: visible;
+    min-height: 100%;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    // Agregar smooth scrolling a cualquier link anchor
+    const headerElement = document.querySelector("header");
+    const headerHeight = headerElement?.offsetHeight ?? 0;
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener(
+        "click",
+        function (this: HTMLAnchorElement, e: MouseEvent) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          if (!href) return;
+
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - headerHeight,
+              behavior: "smooth",
+            });
+          }
+        },
+      );
+    });
+  });
+</script>

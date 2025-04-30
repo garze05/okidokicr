@@ -33,7 +33,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
 ---
 
 <MainLayout title={service.title}>
-  <div class="container mx-auto px-20 py-8">
+  <div class="container mx-auto px-5 sm:px-10 md:px-20 py-8">
     <nav class="text-sm mb-6">
       <ol class="flex items-center space-x-2">
         <li><a href="/" class="text-primary-500 hover:underline">Inicio</a></li>
@@ -115,7 +115,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
 
       <!-- Información del servicio -->
       <div>
-        <h1 class="text-5xl font-bold text-black-okidoki mb-4">{service.title}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-4">{service.title}</h1>
         
         <div class="prose prose-lg max-w-none mb-8">
           {service.description}
@@ -140,7 +140,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
             href={`/contact?service=${service.id}`} 
             class="bg-primary-500 hover:bg-orange-700 text-white px-6 py-2 rounded-lg shadow transition flex items-center"
           >
-            <Icon name="mdi:email-outline" class="w-5 h-5 mr-2" />
+            <Icon name="simple-icons:whatsapp" class="w-5 h-5 mr-2" />
             Solicitar información
           </a>
           
@@ -195,7 +195,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
   <div class="absolute top-4 right-4 z-10">
     <button 
       id="closeLightbox" 
-      class="bg-white/20 hover:bg-white/40 rounded-full p-2 text-white transition-colors"
+      class="bg-white/20 hover:bg-white/40 rounded-full p-2 text-white transition-colors cursor-pointer"
       aria-label="Cerrar vista ampliada"
     >
       <Icon name="mdi:close" class="w-8 h-8" />
@@ -206,7 +206,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
     <!-- Controles de navegación -->
     <button 
       id="lightboxPrev" 
-      class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full shadow transition"
+      class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full shadow transition cursor-pointer"
       aria-label="Imagen anterior"
     >
       <Icon name="mdi:chevron-left" class="w-8 h-8" />
@@ -221,7 +221,7 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
     
     <button 
       id="lightboxNext" 
-      class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full shadow transition"
+      class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full shadow transition cursor-pointer"
       aria-label="Imagen siguiente"
     >
       <Icon name="mdi:chevron-right" class="w-8 h-8" />

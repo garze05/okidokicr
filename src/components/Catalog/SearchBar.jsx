@@ -59,7 +59,7 @@ export default function SearchBar({ services, initialQuery = '', onSelect, onSea
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Buscar personajes, servicios…"
-          className="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+          className="w-full pl-12 pr-4 py-2 sm:py-3 text-black-okidoki text-md sm:text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
         />
       </div>
       {results.length > 0 && (
