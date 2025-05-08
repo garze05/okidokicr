@@ -34,14 +34,12 @@ const initialImageIndex = parseInt(Astro.url.searchParams.get('image') || '0');
 
 <MainLayout title={service.title}>
   <div class="container mx-auto px-5 sm:px-10 md:px-20 py-8">
-    <nav class="text-sm mb-6">
-      <ol class="flex items-center space-x-2">
-        <li><a href="/" class="text-primary-500 hover:underline">Inicio</a></li>
-        <li><span class="mx-2">›</span></li>
-        <li><a href="/catalogo" class="text-primary-500 hover:underline">Catálogo</a></li>
-        <li><span class="mx-2">›</span></li>
+    <nav class="dui breadcrumbs text-sm">
+      <ul>
+        <li><a href="/" class="text-primary-500">Inicio</a></li>
+        <li><a href="/catalogo" class="text-primary-500">Catálogo</a></li>
         <li class="font-medium text-secondary-500">{service.title}</li>
-      </ol>
+      </ul>
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -52,14 +52,22 @@ export const listServices = async (req, res, next) => {
   try {
     const services = await prisma.service.findMany({
       include: {
-        gallery: true,
-        videos: true,
-        tags: { include: { tag: true } }
+        _count: {
+          select: {
+            gallery: true,
+            videos: true
+          }
+        },
+        tags: {
+          include: {
+            tag: true
+          }
+        }
       }
-    })
-    res.json(services)
+    });
+    res.json(services);
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 
@@ -130,13 +138,26 @@ export const updateService = async (req, res, next) => {
 // Borrar servicio
 export const deleteService = async (req, res, next) => {
   try {
-    const id = Number(req.params.id)
-    await prisma.service.delete({ where: { id } })
-    res.status(204).end()
+    const id = Number(req.params.id);
+
+    // 1. Eliminar imágenes relacionadas
+    await prisma.galleryImage.deleteMany({ where: { serviceId: id } });
+
+    // 2. Eliminar videos relacionados
+    await prisma.video.deleteMany({ where: { serviceId: id } });
+
+    // 3. Eliminar relaciones de tags
+    await prisma.serviceTag.deleteMany({ where: { serviceId: id } });
+
+    // 4. Finalmente, eliminar el servicio
+    await prisma.service.delete({ where: { id } });
+
+    res.status(204).end();
   } catch (err) {
-    next(err)
+    next(err);
   }
-}
+};
+
 
 // ESPECIFICAS
 // Listar numero de imagenes y videos en servicio

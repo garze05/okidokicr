@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="26.3.0">
+  <diagram name="Page-1" id="zU-SJicLSPkbFSQ3UPWk">
+    <mxGraphModel dx="1898" dy="1587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="80" as="sourcePoint" />
+            <mxPoint x="90" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-9" target="99MlBlvpUXdeBiI7GxGc-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-9" value="Pantalla Login" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="15" y="130" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-10" value="usuario" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-9">
+          <mxGeometry x="45" y="50" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-11" value="password" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-9">
+          <mxGeometry x="45" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-35" value="&lt;b&gt;Se ingresa:&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-9">
+          <mxGeometry x="30" y="28" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-15" target="99MlBlvpUXdeBiI7GxGc-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-15" value="Se comprueba tabla admins en la bd" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="22.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-19" target="99MlBlvpUXdeBiI7GxGc-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-19" target="99MlBlvpUXdeBiI7GxGc-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-19" value="Se encontro al admin?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="7.5" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-22" value="Pantalla Dashboard" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="280" width="590" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-38" value="ESTADISTICAS Y ANALITICAS&lt;div&gt;(GOOGLE ANALYTICS, SEO, VISITAS, GRAFICOS, ETC)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="330" y="70" width="240" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-39" value="&lt;font style=&quot;font-size: 18px; color: rgb(255, 128, 0);&quot;&gt;&lt;b&gt;Buenos dias/tardes/noches, {nombre}&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="31.25" y="70" width="248.75" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-41" value="Panel de Administracion OkiDoki" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="31.25" y="50" width="238.75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-42" value="Sesion activa restante: {tiempo_restante_jwt)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="320" y="30" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-44" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot; face=&quot;Helvetica&quot;&gt;Administrar catalogo&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="31.25" y="150" width="258.75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-46" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry x="31" y="190" width="259" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-26" value="Si?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="405" y="90" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-28" value="No?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="526.25" y="20" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-29" target="99MlBlvpUXdeBiI7GxGc-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="49.66666666666674" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="710" y="50" />
+              <mxPoint x="730" y="50" />
+              <mxPoint x="730" y="-10" />
+              <mxPoint x="-5" y="-10" />
+              <mxPoint x="-5" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-29" value="No se permite el ingreso a ningun recurso de admin" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="22.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="99MlBlvpUXdeBiI7GxGc-30" target="99MlBlvpUXdeBiI7GxGc-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-30" value="Se genera el JWT y se permite acceso al dashboard" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="363.75" y="125" width="162.5" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-36" value="okidokicr.com/admin" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="17.5" y="25" width="145" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="99MlBlvpUXdeBiI7GxGc-50" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;El admin puede:&lt;/h1&gt;&lt;p&gt;- Modificar los servicios que aparecen en el catalogo (crud), agregar fotos y videos a un servicio.&lt;/p&gt;&lt;p&gt;- Modificar las etiquetas de los servicios en el catalogo (crud)&lt;/p&gt;&lt;p&gt;- Modificar los links de las redes sociales, incluido whatsapp&lt;/p&gt;&lt;p&gt;- Generar links de whatsapp con mensajes personalizados, incluido el enlace al pedir mas info de un servicio del catalogo&lt;/p&gt;&lt;p&gt;- Ver las estadisticas, analticas y rendimiento del sitio web.&lt;/p&gt;&lt;p&gt;- Agregar promociones a la pantalla principal.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-165" y="280" width="285" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

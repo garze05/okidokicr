@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 
 // Component Imports
 import MainLayout from "../layouts/MainLayout.astro";
@@ -33,6 +32,8 @@ import WelcomeVideo from "../components/WelcomeVideo.astro";
 // Links
 import { socialLinksList } from "../components/SocialLinks.astro";
 const whatsappLink = socialLinksList.whatsapp.url;
+
+import "swiper/css/bundle";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -104,7 +105,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
   <!-- Servicios -->
   <section id="servicios">
     <div 
-      class="relative mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-60"
+      class="relative mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-50"
     >
       <!-- Capa de imagen de fondo -->
       <div class="absolute inset-0 z-0 opacity-40">
@@ -160,8 +161,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
           icon="game-icons:clown"
         >
           <Fragment slot="hover-description"
-            >Malabares, globoflexia y canciones que enamoran a niños… ¡y
-            derriten hasta a los papás más serios!</Fragment
+            >Malabares, globoflexia y canciones que enamoran a niños.</Fragment
           >
         </ServicioCard>
 
@@ -171,8 +171,7 @@ const whatsappLink = socialLinksList.whatsapp.url;
           icon="game-icons:elven-castle"
         >
           <Fragment slot="hover-description"
-            >Castillos inflabes, toboganes gigantes y juegos seguros para que la
-            diversión no pare.
+            >Castillos inflabes y toboganes gigantes.
           </Fragment>
         </ServicioCard>
 
@@ -182,9 +181,9 @@ const whatsappLink = socialLinksList.whatsapp.url;
           icon="mdi:star"
         >
           <Fragment slot="hover-description"
-            ><a href="https://wa.me/c/50688313232"
-              ><Button type="secondary" icon="mdi:arrow-up-right-thick"
-                >Ver todos los servicios</Button
+            ><a href="/catalogo"
+              ><Button textSize="text-sm" type="secondary" icon="mdi:arrow-up-right-thick"
+                >Consultar el catálogo</Button
               ></a
             ></Fragment
           >

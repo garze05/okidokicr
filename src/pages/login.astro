@@ -1,6 +1,4 @@
 ---
-import "../styles/global.css";
-import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
 
 import Image from "astro/components/Image.astro";
@@ -8,57 +6,87 @@ import Image from "astro/components/Image.astro";
 import Logo from "../images/logo.svg";
 import Logo2 from "../images/logo2.svg";
 ---
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Inicio de Sesión</title>
+    <meta name="title" content="OkiDoki Costa Rica - Login" />
+    <meta name="description" content="Inicio de Sesión de OkiDoki CR" />
+    <link rel="preload" href="/fonts/lexend-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/lexend-exa-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/lexend-giga-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/curlzmt.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-<MainLayout title="Inicio de Sesión">
-  <section class="grid place-items-center min-h-[50vh]">
-    <div class="w-full max-w-lg p-3 md:p-5 lg:p-10 bg-white rounded-xl shadow-lg">
-      <div class="max-h-20 flex items-center justify-center">
-      <Image
-        src={Logo2}
-        alt="OkiDoki Producciones Rana Logo"
-        loading="eager"
-        class="w-1/2"
-      />
+    <!-- <ViewTransitions /> -->
+  </head>
+  <body class="dui">
+    <div class="relative px-3 grid place-items-center min-h-[100vh]">
+      <!-- Capa de imagen de fondo -->
+      <div class="absolute inset-0 z-0 opacity-40">
+        <img 
+          src="src/images/login-bg.jpg" 
+          alt="" 
+          class="h-full w-full object-cover"
+        />
       </div>
-      <h3 class="mt-4 font-bold text-3xl text-center">Inicio de Sesión</h3>
-      <form id="login-form" class="mt-6 grid gap-4">
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
-              <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
-            </svg>
-          </span>
-          <input
-            type="text"
-            name="user"
-            placeholder="Usuario"
-            required
-            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
-          />
+      
+      <!-- Contenido del login (encima de las capas) -->
+      <div class="relative z-20 w-full max-w-lg px-3 md:px-5 lg:px-10 py-5 sm:py-10 bg-white rounded-xl shadow-lg">
+        <div class="flex items-center justify-center">
+          <div class="tooltip tooltip-success" data-tip="Volver a la página principal">
+            <a href="/" class="flex items-center justify-center">
+              <Image
+                src={Logo2}
+                alt="OkiDoki Producciones Rana Logo"
+                loading="eager"
+                class="w-50 transition-transform duration-300 hover:scale-105"
+              />
+            </a>
+          </div>
         </div>
-  
-
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
-              <path fill="currentColor" d="M12 17a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5a5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3" />
-            </svg>
-          </span>
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            required
-            class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
-          />
-        </div>
-        <div class="pt-6">
-          <Button action="submit" class="w-full">Iniciar sesión</Button>
-        </div>
-      </form>
+        <h3 class="mt-4 font-bold text-3xl text-center">Inicio de Sesión</h3>
+        <form id="login-form" class="mt-6 grid gap-4">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
+                <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="user"
+              placeholder="Usuario"
+              required
+              class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+            />
+          </div>
+    
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-gray-400">
+                <path fill="currentColor" d="M12 17a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5a5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3" />
+              </svg>
+            </span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              required
+              class="w-full pl-12 pr-4 py-3 text-black-okidoki text-lg bg-gray-300 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-3 focus:ring-primary-500 focus:bg-gray-50 rounded-3xl transition-all duration-300 shadow-2xl"
+            />
+          </div>
+          <div class="pt-6">
+            <Button action="submit" class="w-full">Iniciar sesión</Button>
+          </div>
+        </form>
+      </div>
     </div>
-  </section>
-  
+  </body>
+</html>
   
   <script>
     document
@@ -77,7 +105,7 @@ import Logo2 from "../images/logo2.svg";
         if (res.ok) {
           const { token } = await res.json();
           localStorage.setItem('token', token);
-          window.location.href = '/dashboard';
+          window.location.href = '/admin/dashboard'; // Si hay varios roles luego, cambiar esto
         } else if (res.status === 401) {
           alert('Usuario o contraseña incorrectos');
         } else if (res.status === 403) {
@@ -89,4 +117,4 @@ import Logo2 from "../images/logo2.svg";
         }
       });
   </script>
-</MainLayout>
+</MLayout>

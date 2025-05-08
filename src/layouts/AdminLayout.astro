@@ -1,21 +1,10 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import WhatsappStickyButton from "../components/WhatsappStickyButton.astro";
-
-//css
-import "swiper/css/bundle";
+import Header from "../components/Admin/Header.astro";
+import Footer from "../components/Admin/Footer.astro";
 
 // Scroller anims
 import "aos/dist/aos.css";
-
-// fonts
-import "@fontsource/alex-brush";
-import "@fontsource/montserrat";
-import "@fontsource-variable/lexend";
-import "@fontsource-variable/lexend-exa";
-import "@fontsource-variable/lexend-giga";
 
 //import { ViewTransitions } from "astro:transitions";
 
@@ -36,12 +25,11 @@ const { title, description="Empresa de Costa Rica. Ofrecemos Botargas, Fiestas d
     <!-- <ViewTransitions /> -->
   </head>
   <body
-    class="h-full bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
+    class="dui h-full bg-gradient-to-br from-gray-400 to-gray-900 bg-fixed bg-no-repeat"
   >
     <div
       class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
     >
-      <WhatsappStickyButton />
       <Header />
       <main class="relative grid overflow-x-hidden">
         <slot />
