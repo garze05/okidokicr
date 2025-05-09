@@ -1,0 +1,228 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+
+
+const { id } = Astro.params;
+
+// Fetch the specific service to edit
+let service, allTags;
+try {
+  const serviceRes = await fetch(`http://localhost:4000/api/services/${id}`);
+  if (!serviceRes.ok) throw new Error(`Servicio ${id} no encontrado. Status: ${serviceRes.status}`);
+  service = await serviceRes.json();
+
+  // Fetch all tags for the form
+  const tagsRes = await fetch('http://localhost:4000/api/tags');
+  if (!tagsRes.ok) throw new Error(`Error al cargar las etiquetas. Status: ${tagsRes.status}`);
+  allTags = await tagsRes.json();
+
+} catch (error) {
+  console.error("Error fetching data for service edit page:", error);
+  // Redirect to a 404 or error page if data isn't found or on error
+  return Astro.redirect('/404'); // Or a more specific error page
+}
+
+const serviceTagIds = new Set(service.tags?.map(t => t.tagId) || []);
+---
+
+<AdminLayout
+  title={`Editar ${service.title}`}
+  description="Panel de control para administrar el sitio web de OkiDoki."
+>
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-primary">Editar: <span class="text-secondary">{service.title}</span></h1>
+      <a href="/admin/dashboard" class="btn btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        Volver al Dashboard
+      </a>
+    </div>
+
+    <form id="editServiceForm" class="space-y-6 bg-base-100 p-6 rounded-lg shadow-xl">
+      <input type="hidden" name="id" value={service.id} />
+
+      {/* Title */}
+      <div class="form-control">
+        <label for="title" class="label">
+          <span class="label-text text-lg font-semibold">Título del Servicio</span>
+        </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value={service.title}
+          required
+          class="input input-bordered input-lg w-full"
+        />
+      </div>
+
+      {/* Description */}
+      <div class="form-control">
+        <label for="description" class="label">
+          <span class="label-text text-lg font-semibold">Descripción</span>
+        </label>
+        <textarea
+          name="description"
+          id="description"
+          rows="5"
+          required
+          class="textarea textarea-bordered textarea-lg w-full"
+        >
+{service.description}
+        </textarea>
+      </div>
+
+      {/* Cover Image */}
+      <div class="form-control">
+        <label for="coverImage" class="label">
+          <span class="label-text text-lg font-semibold">URL de Imagen de Portada</span>
+        </label>
+        <input
+          type="url"
+          name="coverImage"
+          id="coverImage"
+          value={service.coverImage}
+          placeholder="https://ejemplo.com/imagen.jpg"
+          class="input input-bordered input-lg w-full"
+        />
+      </div>
+      
+      {/* Availability */}
+      <div class="form-control">
+        <label class="label cursor-pointer justify-start gap-4">
+          <span class="label-text text-lg font-semibold">Disponible</span>
+          <input 
+            type="checkbox" 
+            name="available"
+            id="available"
+            class="toggle toggle-primary toggle-lg" 
+            checked={service.available} 
+          />
+        </label>
+      </div>
+
+      {/* Tags */}
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text text-lg font-semibold">Etiquetas</span>
+        </label>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 border border-base-300 rounded-lg">
+          {allTags.map(tag => (
+            <label class="label cursor-pointer justify-start gap-2">
+              <input 
+                type="checkbox" 
+                name="tagIds" 
+                value={tag.id} 
+                checked={serviceTagIds.has(tag.id)}
+                class="checkbox checkbox-primary" 
+              />
+              <span class="label-text">{tag.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Gallery Images */}
+      <div class="form-control">
+        <label for="gallery" class="label">
+          <span class="label-text text-lg font-semibold">Galería de Imágenes (URLs, una por línea)</span>
+        </label>
+        <textarea
+          name="gallery"
+          id="gallery"
+          rows="5"
+          placeholder="https://ejemplo.com/imagen1.jpg\nhttps://ejemplo.com/imagen2.jpg"
+          class="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+        >
+{service.gallery?.map(img => img.url).join('\n') || ''}
+        </textarea>
+      </div>
+
+      {/* Videos */}
+      <div class="form-control">
+        <label for="videos" class="label">
+          <span class="label-text text-lg font-semibold">Videos (URLs, una por línea)</span>
+        </label>
+        <textarea
+          name="videos"
+          id="videos"
+          rows="5"
+          placeholder="https://youtube.com/watch?v=video1\nhttps://vimeo.com/video2"
+          class="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+        >
+{service.videos?.map(vid => vid.url).join('\n') || ''}
+        </textarea>
+      </div>
+      
+      {/* Action Buttons */}
+      <div class="flex justify-end gap-4 pt-4">
+        <a href="/admin/dashboard" class="btn btn-ghost btn-lg">Cancelar</a>
+        <button type="submit" class="btn btn-primary btn-lg">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</AdminLayout>
+
+<script define:vars={{ serviceId: id }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('editServiceForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        alert('Error de autenticación. Por favor, inicie sesión de nuevo.');
+        // Potentially redirect to login: window.location.href = '/login';
+        return;
+      }
+
+      const galleryUrls = formData.get('gallery').split('\n').map(url => url.trim()).filter(url => url);
+      const videoUrls = formData.get('videos').split('\n').map(url => url.trim()).filter(url => url);
+      
+      const selectedTagIds = [];
+      form.querySelectorAll('input[name="tagIds"]:checked').forEach(checkbox => {
+        selectedTagIds.push(parseInt(checkbox.value));
+      });
+
+      const data = {
+        title: formData.get('title'),
+        description: formData.get('description'),
+        coverImage: formData.get('coverImage'),
+        available: form.querySelector('input[name="available"]').checked,
+        gallery: galleryUrls,
+        videos: videoUrls,
+        tagIds: selectedTagIds,
+      };
+
+      try {
+        const response = await fetch(`http://localhost:4000/api/services/${serviceId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          alert('Servicio actualizado con éxito!');
+          // Optional: redirect to dashboard or view page
+          window.location.href = '/admin/dashboard'; 
+        } else {
+          const errorData = await response.json();
+          console.error('Error al actualizar el servicio:', errorData);
+          alert(`Error al actualizar: ${errorData.message || response.statusText}`);
+        }
+      } catch (error) {
+        console.error('Error de red o al procesar la solicitud:', error);
+        alert('Error de conexión al intentar actualizar el servicio.');
+      }
+    });
+  });
+</script>
+
