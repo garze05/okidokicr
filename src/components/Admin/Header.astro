@@ -9,10 +9,13 @@ import Image from "astro/components/Image.astro";
 
 <div class="sticky top-0 z-50">
   <header
-    class="bg-white mx-auto flex max-h-40 h-full w-full items-center justify-between p-2 xl:p-10"
+    class="mx-auto flex h-full max-h-40 w-full items-center justify-between bg-white p-2 xl:p-10"
   >
-    <h1 class="text-2xl font-bold text-secondary-500">Panel de Administrador <span class="font-okidoki font-normal text-4xl">oKiDoki</span></h1>
-    <LogoutButton />
+    <h1 class="text-secondary-500 text-2xl font-bold">
+      Panel de Administrador <span class="font-okidoki text-4xl font-normal"
+        >oKiDoki</span>
+    </h1>
+    <LogoutButton client:load />
     <!-- Mobile menu button -->
     <button
       class="text-secondary-500 z-20 cursor-pointer hover:text-orange-600 lg:hidden"
@@ -24,7 +27,6 @@ import Image from "astro/components/Image.astro";
       <Icon class="hidden" id="burger-btn-close" name="mdi:close" size="45" />
       <span class="sr-only">Abrir menu principal</span>
     </button>
-
   </header>
 </div>
 
@@ -89,5 +91,5 @@ import Image from "astro/components/Image.astro";
   setupHeader();
 
   // Run on view transitions
-  document.addEventListener('astro:after-swap', setupHeader);
+  document.addEventListener("astro:after-swap", setupHeader);
 </script>

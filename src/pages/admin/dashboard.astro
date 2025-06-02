@@ -1,8 +1,14 @@
 ---
-import AdminLayout from '../../layouts/AdminLayout.astro';
-import Dashboard from '../../components/Admin/Dashboard';
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import ProtectedRoute from "../../components/ProtectedRoute";
+import Dashboard from "../../components/Admin/Dashboard";
 ---
 
-<AdminLayout title="Panel de Control" description="Panel de control para administrar el sitio web de OkiDoki.">
-  <Dashboard client:load />
+<AdminLayout
+  title="Panel de Control"
+  description="Panel de control para administrar el sitio web de OkiDoki."
+>
+  <ProtectedRoute client:load>
+    <Dashboard client:load />
+  </ProtectedRoute>
 </AdminLayout>

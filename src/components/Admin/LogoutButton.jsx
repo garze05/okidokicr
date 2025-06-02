@@ -1,11 +1,13 @@
-// src/components/LogoutButton.jsx
+// src/components/Admin/LogoutButton.jsx
 import React from "react";
 
 export default function LogoutButton() {
   const handleLogout = () => {
-    // Aquí ponés la lógica para cerrar sesión
+    // Clear the authentication token
     localStorage.removeItem("token");
-    window.location.href = "/login"; // Redirigir al login
+
+    // Redirect to login
+    window.location.href = "/login";
   };
 
   return (
