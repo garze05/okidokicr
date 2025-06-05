@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import FileUpload from "../shared/FileUpload.jsx";
+import VideoInput from "../shared/VideoInput.jsx";
 
 export default function EditService({
   service,
@@ -11,8 +13,8 @@ export default function EditService({
     description: service?.description || "",
     coverImage: service?.coverImage || "",
     available: service?.available || false,
-    gallery: service?.gallery?.map((img) => img.url).join("\n") || "",
-    videos: service?.videos?.map((vid) => vid.url).join("\n") || "",
+    gallery: service?.gallery?.map((img) => img.url) || [],
+    videos: service?.videos?.map((vid) => vid.url) || [],
     tagIds: service?.tags?.map((t) => t.tagId) || [],
   });
   const [loading, setLoading] = useState(false);
@@ -27,13 +29,28 @@ export default function EditService({
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
   const handleTagChange = (tagId) => {
     setFormData((prev) => ({
       ...prev,
       tagIds: prev.tagIds.includes(tagId)
         ? prev.tagIds.filter((id) => id !== tagId)
         : [...prev.tagIds, tagId],
+    }));
+  };
+
+  // Handle gallery files change
+  const handleGalleryChange = (files) => {
+    setFormData((prev) => ({
+      ...prev,
+      gallery: files,
+    }));
+  };
+
+  // Handle videos change
+  const handleVideosChange = (videos) => {
+    setFormData((prev) => ({
+      ...prev,
+      videos: videos,
     }));
   };
 
@@ -48,17 +65,11 @@ export default function EditService({
       setLoading(false);
       return;
     }
-
     try {
-      const galleryUrls = formData.gallery
-        .split("\n")
-        .map((url) => url.trim())
-        .filter((url) => url);
-
-      const videoUrls = formData.videos
-        .split("\n")
-        .map((url) => url.trim())
-        .filter((url) => url);
+      const galleryUrls = Array.isArray(formData.gallery)
+        ? formData.gallery
+        : [];
+      const videoUrls = Array.isArray(formData.videos) ? formData.videos : [];
 
       const data = {
         title: formData.title,
@@ -170,7 +181,6 @@ export default function EditService({
             className="input input-bordered input-lg w-full"
           />
         </div>
-
         {/* Description */}
         <div className="form-control">
           <label htmlFor="description" className="label">
@@ -187,26 +197,39 @@ export default function EditService({
             required
             className="textarea textarea-bordered textarea-lg w-full"
           />
-        </div>
-
+        </div>{" "}
         {/* Cover Image */}
         <div className="form-control">
           <label htmlFor="coverImage" className="label">
             <span className="label-text text-lg font-semibold">
-              URL de Imagen de Portada
+              Imagen de Portada
             </span>
           </label>
-          <input
-            type="url"
-            name="coverImage"
-            id="coverImage"
-            value={formData.coverImage}
-            onChange={handleInputChange}
-            placeholder="https://ejemplo.com/imagen.jpg"
-            className="input input-bordered input-lg w-full"
+          <FileUpload
+            initialFiles={formData.coverImage ? [formData.coverImage] : []}
+            accept="image/*"
+            multiple={false}
+            label="Arrastra y suelta la imagen de portada aquí"
+            onFilesChange={(files) =>
+              setFormData((prev) => ({ ...prev, coverImage: files[0] || "" }))
+            }
+            disabled={loading}
           />
+          <div className="mt-2">
+            <label className="label">
+              <span className="label-text text-sm">O ingresa una URL:</span>
+            </label>
+            <input
+              type="url"
+              name="coverImage"
+              value={formData.coverImage}
+              onChange={handleInputChange}
+              placeholder="https://ejemplo.com/imagen.jpg"
+              className="input input-bordered w-full"
+              disabled={loading}
+            />
+          </div>
         </div>
-
         {/* Availability */}
         <div className="form-control">
           <label className="label cursor-pointer justify-start gap-4">
@@ -220,7 +243,6 @@ export default function EditService({
             />
           </label>
         </div>
-
         {/* Tags */}
         <div className="form-control">
           <label className="label">
@@ -242,44 +264,34 @@ export default function EditService({
               </label>
             ))}
           </div>
-        </div>
-
+        </div>{" "}
         {/* Gallery Images */}
         <div className="form-control">
-          <label htmlFor="gallery" className="label">
+          <label className="label">
             <span className="label-text text-lg font-semibold">
-              Galería de Imágenes (URLs, una por línea)
+              Galería de Imágenes
             </span>
           </label>
-          <textarea
-            name="gallery"
-            id="gallery"
-            rows="5"
-            value={formData.gallery}
-            onChange={handleInputChange}
-            placeholder="https://ejemplo.com/imagen1.jpg&#10;https://ejemplo.com/imagen2.jpg"
-            className="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+          <FileUpload
+            initialFiles={formData.gallery}
+            accept="image/*"
+            multiple={true}
+            label="Arrastra y suelta imágenes aquí para la galería"
+            onFilesChange={handleGalleryChange}
+            disabled={loading}
           />
         </div>
-
         {/* Videos */}
         <div className="form-control">
-          <label htmlFor="videos" className="label">
-            <span className="label-text text-lg font-semibold">
-              Videos (URLs, una por línea)
-            </span>
+          <label className="label">
+            <span className="label-text text-lg font-semibold">Videos</span>
           </label>
-          <textarea
-            name="videos"
-            id="videos"
-            rows="5"
-            value={formData.videos}
-            onChange={handleInputChange}
-            placeholder="https://youtube.com/watch?v=video1&#10;https://vimeo.com/video2"
-            className="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+          <VideoInput
+            initialVideos={formData.videos}
+            onVideosChange={handleVideosChange}
+            disabled={loading}
           />
         </div>
-
         {/* Action Buttons */}
         <div className="flex justify-end gap-4 pt-4">
           <button

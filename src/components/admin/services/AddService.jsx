@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import FileUpload from "../shared/FileUpload.jsx";
+import VideoInput from "../shared/VideoInput.jsx";
 
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
@@ -8,12 +10,11 @@ export default function AddService({ allTags }) {
     description: "",
     coverImage: "",
     available: true,
-    gallery: "",
-    videos: "",
+    gallery: [],
+    videos: [],
     tagIds: [],
   });
   const [loading, setLoading] = useState(false);
-
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -31,6 +32,22 @@ export default function AddService({ allTags }) {
     }));
   };
 
+  // Handle gallery files change
+  const handleGalleryChange = (files) => {
+    setFormData((prev) => ({
+      ...prev,
+      gallery: files,
+    }));
+  };
+
+  // Handle videos change
+  const handleVideosChange = (videos) => {
+    setFormData((prev) => ({
+      ...prev,
+      videos: videos,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,18 +57,9 @@ export default function AddService({ allTags }) {
       alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
       window.location.href = "/login";
       return;
-    }
-
-    // Process gallery and video URLs
-    const galleryUrls = formData.gallery
-      .split("\n")
-      .map((url) => url.trim())
-      .filter((url) => url);
-
-    const videoUrls = formData.videos
-      .split("\n")
-      .map((url) => url.trim())
-      .filter((url) => url);
+    } // Process gallery and video URLs
+    const galleryUrls = Array.isArray(formData.gallery) ? formData.gallery : [];
+    const videoUrls = Array.isArray(formData.videos) ? formData.videos : [];
 
     const data = {
       title: formData.title,
@@ -140,7 +148,6 @@ export default function AddService({ allTags }) {
             disabled={loading}
           />
         </div>
-
         {/* Description */}
         <div className="form-control">
           <label htmlFor="description" className="label">
@@ -158,27 +165,39 @@ export default function AddService({ allTags }) {
             className="textarea textarea-bordered textarea-lg w-full"
             disabled={loading}
           />
-        </div>
-
+        </div>{" "}
         {/* Cover Image */}
         <div className="form-control">
           <label htmlFor="coverImage" className="label">
             <span className="label-text text-lg font-semibold">
-              URL de Imagen de Portada
+              Imagen de Portada
             </span>
           </label>
-          <input
-            type="url"
-            name="coverImage"
-            id="coverImage"
-            value={formData.coverImage}
-            onChange={handleInputChange}
-            placeholder="https://ejemplo.com/imagen.jpg"
-            className="input input-bordered input-lg w-full"
+          <FileUpload
+            initialFiles={formData.coverImage ? [formData.coverImage] : []}
+            accept="image/*"
+            multiple={false}
+            label="Arrastra y suelta la imagen de portada aquí"
+            onFilesChange={(files) =>
+              setFormData((prev) => ({ ...prev, coverImage: files[0] || "" }))
+            }
             disabled={loading}
           />
+          <div className="mt-2">
+            <label className="label">
+              <span className="label-text text-sm">O ingresa una URL:</span>
+            </label>
+            <input
+              type="url"
+              name="coverImage"
+              value={formData.coverImage}
+              onChange={handleInputChange}
+              placeholder="https://ejemplo.com/imagen.jpg"
+              className="input input-bordered w-full"
+              disabled={loading}
+            />
+          </div>
         </div>
-
         {/* Availability */}
         <div className="form-control">
           <label className="label cursor-pointer justify-start gap-4">
@@ -193,7 +212,6 @@ export default function AddService({ allTags }) {
             />
           </label>
         </div>
-
         {/* Tags */}
         <div className="form-control">
           <label className="label">
@@ -223,46 +241,34 @@ export default function AddService({ allTags }) {
               </p>
             )}
           </div>
-        </div>
-
+        </div>{" "}
         {/* Gallery Images */}
         <div className="form-control">
-          <label htmlFor="gallery" className="label">
+          <label className="label">
             <span className="label-text text-lg font-semibold">
-              Galería de Imágenes (URLs, una por línea)
+              Galería de Imágenes
             </span>
           </label>
-          <textarea
-            name="gallery"
-            id="gallery"
-            rows="5"
-            value={formData.gallery}
-            onChange={handleInputChange}
-            placeholder="https://ejemplo.com/imagen1.jpg&#10;https://ejemplo.com/imagen2.jpg"
-            className="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+          <FileUpload
+            initialFiles={formData.gallery}
+            accept="image/*"
+            multiple={true}
+            label="Arrastra y suelta imágenes aquí para la galería"
+            onFilesChange={handleGalleryChange}
             disabled={loading}
           />
         </div>
-
         {/* Videos */}
         <div className="form-control">
-          <label htmlFor="videos" className="label">
-            <span className="label-text text-lg font-semibold">
-              Videos (URLs, una por línea)
-            </span>
+          <label className="label">
+            <span className="label-text text-lg font-semibold">Videos</span>
           </label>
-          <textarea
-            name="videos"
-            id="videos"
-            rows="5"
-            value={formData.videos}
-            onChange={handleInputChange}
-            placeholder="https://youtube.com/watch?v=video1&#10;https://vimeo.com/video2"
-            className="textarea textarea-bordered textarea-lg w-full font-mono text-sm"
+          <VideoInput
+            initialVideos={formData.videos}
+            onVideosChange={handleVideosChange}
             disabled={loading}
           />
         </div>
-
         {/* Action Buttons */}
         <div className="flex justify-end gap-4 pt-4">
           <a href="/admin" className="btn btn-ghost btn-lg">
