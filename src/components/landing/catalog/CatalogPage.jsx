@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import { Loader2 } from "lucide-react";
-import Fuse from 'fuse.js';
-import SearchBar from './SearchBar.jsx';
-import CatalogFilterGrid from './CatalogFilterGrid.jsx';
-import CatalogCard from './CatalogCard.jsx';
+import Fuse from "fuse.js";
+import SearchBar from "./SearchBar.jsx";
+import CatalogFilterGrid from "./CatalogFilterGrid.jsx";
+import CatalogCard from "./CatalogCard.jsx";
+
+const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 export default function CatalogPage() {
   const [services, setServices] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState([]);
-  const [query, setQuery] = useState('');
-
+  const [query, setQuery] = useState("");
 
   // Carga inicial de servicios
   useEffect(() => {
-    fetch("http://localhost:4000/api/services")
+    fetch(`${apiUrl}/services`)
       .then((r) => r.json())
       .then((data) => {
         setServices(data);
@@ -29,7 +30,7 @@ export default function CatalogPage() {
   const fuse = useRef(null);
   useEffect(() => {
     fuse.current = new Fuse(services, {
-      keys: ['title', 'description', 'tags.tag.name'],
+      keys: ["title", "description", "tags.tag.name"],
       threshold: 0.3,
     });
   }, [services]);
@@ -40,7 +41,7 @@ export default function CatalogPage() {
     // Aplica filtros de etiquetas
     if (filters.length > 0) {
       results = results.filter((s) =>
-        filters.every((slug) => s.tags.some((t) => t.tag.slug === slug))
+        filters.every((slug) => s.tags.some((t) => t.tag.slug === slug)),
       );
     }
     // Aplica búsqueda difusa
@@ -63,7 +64,7 @@ export default function CatalogPage() {
   // Toggle de filtros múltiples
   const handleFilter = (slug) => {
     setActiveFilters((prev) =>
-      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
     );
   };
 
@@ -80,18 +81,22 @@ export default function CatalogPage() {
   // Limpiar toda la búsqueda y filtros
   const clearAll = () => {
     setActiveFilters([]);
-    setQuery('');
-    if (typeof window !== 'undefined') {
-      window.history.replaceState(null, '', window.location.pathname);
+    setQuery("");
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", window.location.pathname);
     }
   };
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 px-4">
-        <Loader2 className="h-12 w-12 text-primary-500 animate-spin mb-4" />
-        <p className="text-lg font-medium text-gray-700">Cargando catálogo...</p>
-        <p className="text-sm text-gray-500 mt-2">Por favor espere un momento</p>
+      <div className="flex flex-col items-center justify-center px-4 py-24">
+        <Loader2 className="text-primary-500 mb-4 h-12 w-12 animate-spin" />
+        <p className="text-lg font-medium text-gray-700">
+          Cargando catálogo...
+        </p>
+        <p className="mt-2 text-sm text-gray-500">
+          Por favor espere un momento
+        </p>
       </div>
     );
   }
@@ -111,10 +116,10 @@ export default function CatalogPage() {
       />
 
       {(activeFilters.length > 0 || query) && (
-        <div className="px-4 mb-6">
+        <div className="mb-6 px-4">
           <button
             onClick={clearAll}
-            className="px-4 py-2 text-sm bg-red-500 text-white font-bold hover:bg-red-300 transition-colors cursor-pointer"
+            className="cursor-pointer bg-red-500 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-red-300"
           >
             Limpiar filtros
           </button>
@@ -123,25 +128,25 @@ export default function CatalogPage() {
 
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center py-20">
-          <p className="text-gray-500 text-center mb-4">
+          <p className="mb-4 text-center text-gray-500">
             {query
               ? `No encontramos resultados para “${query}”${
-                  activeFilters.length > 0 ? ' con esos filtros' : ''
+                  activeFilters.length > 0 ? " con esos filtros" : ""
                 }.`
-              : 'No hay servicios para mostrar.'}
+              : "No hay servicios para mostrar."}
           </p>
         </div>
       ) : (
         <div className="pb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((s) => (
-            <a
-              key={s.id}
-              href={`/catalogo/${s.id}`}
-              className="block h-full"           // para que ocupe todo el espacio
-            >
-              <CatalogCard key={s.id} service={s} />
-            </a>
+              <a
+                key={s.id}
+                href={`/catalogo/${s.id}`}
+                className="block h-full" // para que ocupe todo el espacio
+              >
+                <CatalogCard key={s.id} service={s} />
+              </a>
             ))}
           </div>
         </div>

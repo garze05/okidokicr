@@ -1,7 +1,10 @@
 ---
 export const prerender = false;
+
+const apiUrl = import.meta.env.PUBLIC_API_URL;
+
 // 1. Imports y rutas
-import MainLayout from '../../layouts/MainLayout.astro';
+import MainLayout from '@layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
@@ -9,7 +12,7 @@ import { Icon } from 'astro-icon/components';
 const { id } = Astro.params;
 
 // 2. Fetch del servicio (now runs at request time)
-const res = await fetch(`http://localhost:4000/api/services/${id}`);
+const res = await fetch(`${apiUrl}/services/${id}`);
 if (!res.ok) return Astro.redirect('/404'); // Handle not found services
 const service = await res.json();
 

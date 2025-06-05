@@ -1,14 +1,14 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Logo from "../images/logo.svg";
-import Logo2 from "../images/logo2.svg";
-import Button from "./Button.astro";
+import Navigation from "@components/shared/Navigation.astro";
+import Logo from "@images/logo.svg";
+import Logo2 from "@images/logo2.svg";
+import Button from "@components/shared/Button.astro";
 // Astro Components
 import { Icon } from "astro-icon/components";
 import Image from "astro/components/Image.astro";
 
 // Links
-import { socialLinksList } from "./SocialLinks.astro";
+import { socialLinksList } from "@components/shared/SocialLinks.astro";
 const whatsappLink = socialLinksList.whatsapp.url;
 ---
 
@@ -155,5 +155,5 @@ const whatsappLink = socialLinksList.whatsapp.url;
   setupHeader();
 
   // Run on view transitions
-  document.addEventListener('astro:after-swap', setupHeader);
+  document.addEventListener("astro:after-swap", setupHeader);
 </script>

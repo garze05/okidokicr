@@ -1,0 +1,327 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Página no encontrada"
+  description="Lo sentimos, la página que buscas no existe."
+  bodyClass="bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
+  includeGlobalCSS={true}
+  includeFonts={true}
+>
+  <!-- Animated background -->
+  <div class="fixed inset-0 overflow-hidden">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+  </div>
+
+  <!-- Dark overlay for text readability -->
+
+  <!-- Main content -->
+  <div
+    class="relative z-10 flex min-h-[100dvh] w-full items-center justify-center px-4"
+  >
+    <div class="max-w-2xl text-center">
+      <!-- Animated 404 -->
+      <div class="error-code mb-8">
+        <span class="number">4</span>
+        <span class="number delay-100">0</span>
+        <span class="number delay-200">4</span>
+      </div>
+
+      <!-- Content -->
+      <div class="content-fade-in">
+        <h1
+          class="mb-6 text-3xl font-bold text-gray-900 drop-shadow-sm md:text-4xl lg:text-5xl"
+        >
+          ¡Oops! Página no encontrada
+        </h1>
+        <p class="mb-8 text-lg text-gray-800 drop-shadow-sm md:text-xl">
+          Parece que esta página se perdió en el espacio digital. No te
+          preocupes, te ayudamos a encontrar el camino de vuelta.
+        </p>
+
+        <!-- Action buttons -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/"
+            class="group relative overflow-hidden rounded-full bg-gradient-to-r from-[#FF4500] to-[#FF7E00] px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#FF4500]/25"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+              Ir a inicio
+            </span>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-[#FFCC00] to-[#FF7E00] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            >
+            </div>
+          </a>
+
+          <button
+            onclick="history.back()"
+            class="group rounded-full border-2 border-gray-800/40 bg-white/80 px-8 py-4 font-semibold text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-[#FF4500]/60 hover:bg-white/90"
+          >
+            <span class="flex items-center justify-center gap-2">
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                ></path>
+              </svg>
+              Volver atrás
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Floating background shapes */
+  .floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+  }
+
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    animation-delay: 0s;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 69, 0, 0.2),
+      rgba(255, 126, 0, 0.15)
+    );
+  }
+
+  .shape-2 {
+    width: 120px;
+    height: 120px;
+    left: 70%;
+    animation-delay: -5s;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 204, 0, 0.18),
+      rgba(255, 69, 0, 0.12)
+    );
+  }
+
+  .shape-3 {
+    width: 60px;
+    height: 60px;
+    left: 20%;
+    animation-delay: -10s;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 69, 0, 0.15),
+      rgba(255, 204, 0, 0.2)
+    );
+  }
+
+  .shape-4 {
+    width: 100px;
+    height: 100px;
+    left: 80%;
+    animation-delay: -15s;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 126, 0, 0.12),
+      rgba(255, 69, 0, 0.18)
+    );
+  }
+
+  .shape-5 {
+    width: 140px;
+    height: 140px;
+    left: 40%;
+    animation-delay: -7s;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 69, 0, 0.18),
+      rgba(255, 204, 0, 0.15)
+    );
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* 404 Number animation */
+  .error-code {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .number {
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff4500, #ff7e00, #ffcc00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .number.delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .number.delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes glow {
+    from {
+      filter: brightness(1) drop-shadow(2px 2px 8px rgba(255, 69, 0, 0.3));
+    }
+    to {
+      filter: brightness(1.1) drop-shadow(2px 2px 12px rgba(255, 126, 0, 0.4));
+    }
+  }
+
+  /* Content fade in animation */
+  .content-fade-in {
+    animation: fadeInUp 1s ease-out 0.5s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Additional hover effects */
+  .group:hover .relative {
+    transform: translateY(-1px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .error-code {
+      gap: 0.5rem;
+    }
+
+    .shape {
+      display: none;
+    }
+
+    .shape-1,
+    .shape-3 {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  // Add some interactive elements
+  document.addEventListener("DOMContentLoaded", () => {
+    // Parallax effect for shapes on mouse move
+    document.addEventListener("mousemove", (e) => {
+      const shapes = document.querySelectorAll(".shape");
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.02;
+        const xPos = (x - 0.5) * speed * 100;
+        const yPos = (y - 0.5) * speed * 100;
+
+        shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+      });
+    });
+
+    // Add click effect to buttons with business colors
+    document.querySelectorAll("a, button").forEach((button) => {
+      button.addEventListener("click", function (e) {
+        const ripple = document.createElement("div");
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        // Use business colors for ripple effect
+        const isActionButton = this.classList.contains("from-[#FF4500]");
+        const rippleColor = isActionButton
+          ? "rgba(255, 126, 0, 0.4)"
+          : "rgba(255, 69, 0, 0.3)";
+
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: ${rippleColor};
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+          `;
+
+        this.style.position = "relative";
+        this.style.overflow = "hidden";
+        this.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  });
+
+  // Add ripple animation
+  const style = document.createElement("style");
+  style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+  document.head.appendChild(style);
+</script>

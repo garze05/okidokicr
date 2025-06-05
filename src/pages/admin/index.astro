@@ -1,0 +1,11 @@
+---
+import AdminLayout from "@layouts/AdminLayout.astro";
+import Dashboard from "@components/admin/auth/Dashboard";
+---
+
+<AdminLayout
+  title="Panel de Control"
+  description="Panel de control para administrar el sitio web de OkiDoki."
+>
+  <Dashboard client:load />
+</AdminLayout>

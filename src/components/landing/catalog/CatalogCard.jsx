@@ -1,5 +1,6 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
+const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 /**
  * CatalogCard
@@ -22,91 +23,92 @@ export default function CatalogCard({ service }) {
     totalImages,
     totalVideos,
   } = service;
-  
-  const [mediaCounts, setMediaCounts] = useState({ totalImages: 0, totalVideos: 0 });
+
+  const [mediaCounts, setMediaCounts] = useState({
+    totalImages: 0,
+    totalVideos: 0,
+  });
   useEffect(() => {
-    fetchMediaCount(service.id)
-      .then(counts => setMediaCounts(counts));
+    fetchMediaCount(service.id).then((counts) => setMediaCounts(counts));
   }, [service.id]);
-  
+
   async function fetchMediaCount(serviceId) {
     try {
-      const response = await fetch(`http://localhost:4000/api/services/${serviceId}/media-count`);
-      
+      const response = await fetch(
+        `${apiUrl}/services/${serviceId}/media-count`,
+      );
+
       if (!response.ok) {
-        throw new Error('Error al obtener conteo de media');
+        throw new Error("Error al obtener conteo de media");
       }
-      
+
       return await response.json();
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Proporcionar valores predeterminados en caso de error
       return { totalImages: 0, totalVideos: 0 };
     }
   }
 
-
   return (
-    <div
-      className="group relative cursor-pointer overflow-hidden bg-white rounded-xl sm:rounded-2xl px-4 sm:px-6 pt-8 sm:pt-10 pb-6 sm:pb-8 shadow-lg sm:shadow-xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl w-full h-full flex flex-col"
-    >
-      <span
-        className="absolute top-0 left-0 z-0 h-24 sm:h-32 w-24 sm:w-32 rounded-full bg-gradient-to-r bg-black-okidoki transition-all duration-500 transform group-hover:scale-[15]"
-      ></span>
-      <div className="relative z-10 mx-auto flex flex-col h-full w-full gap-3 sm:gap-4">
+    <div className="group relative flex h-full w-full transform cursor-pointer flex-col overflow-hidden rounded-xl bg-white px-4 pt-8 pb-6 shadow-lg ring-1 ring-gray-900/5 transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-2xl sm:px-6 sm:pt-10 sm:pb-8 sm:shadow-xl">
+      <span className="bg-black-okidoki absolute top-0 left-0 z-0 h-24 w-24 transform rounded-full bg-gradient-to-r transition-all duration-500 group-hover:scale-[15] sm:h-32 sm:w-32"></span>
+      <div className="relative z-10 mx-auto flex h-full w-full flex-col gap-3 sm:gap-4">
         {/* Imagen de portada */}
-        <div className="w-full h-40 sm:h-48 overflow-hidden rounded-lg sm:rounded-xl">
+        <div className="h-40 w-full overflow-hidden rounded-lg sm:h-48 sm:rounded-xl">
           <img
             src={coverImage}
             alt={`${title} – Costa Rica OkiDoki`}
-            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
             loading="lazy"
           />
         </div>
 
         {/* Contenido */}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           {/* Título */}
-          <h3 className="text-lg sm:text-xl font-bold text-primary-500 transition-all duration-500 group-hover:text-white line-clamp-2">
+          <h3 className="text-primary-500 line-clamp-2 text-lg font-bold transition-all duration-500 group-hover:text-white sm:text-xl">
             {title}
           </h3>
 
           {/* Descripción */}
-          <p className="mt-1 text-xs sm:text-sm leading-relaxed text-gray-600 transition-all duration-500 group-hover:text-white overflow-hidden line-clamp-2 sm:line-clamp-3">
+          <p className="mt-1 line-clamp-2 overflow-hidden text-xs leading-relaxed text-gray-600 transition-all duration-500 group-hover:text-white sm:line-clamp-3 sm:text-sm">
             {description}
           </p>
 
           {/* Spacer */}
-          <div className="flex-grow h-5" />
+          <div className="h-5 flex-grow" />
 
           {/* Etiquetas */}
           <div className="flex flex-wrap gap-2">
-          {service.tags.map((tagLink) => (
+            {service.tags.map((tagLink) => (
               <span
                 key={tagLink.tagId}
-                className="text-xs font-semibold text-gray-500 bg-gray-200 rounded-full px-2 py-1"
+                className="rounded-full bg-gray-200 px-2 py-1 text-xs font-semibold text-gray-500"
               >
                 {tagLink.tag?.name}
               </span>
-          ))}
+            ))}
           </div>
 
           {/* Sección inferior */}
           <div className="mt-3 space-y-2">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {mediaCounts.totalImages} <span className="text-gray-500 font-normal">fotos</span>
+                  {mediaCounts.totalImages}{" "}
+                  <span className="font-normal text-gray-500">fotos</span>
                 </span>
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {mediaCounts.totalVideos} <span className="text-gray-500 font-normal">videos</span>
+                  {mediaCounts.totalVideos}{" "}
+                  <span className="font-normal text-gray-500">videos</span>
                 </span>
                 <span
                   className={`text-xs font-semibold ${
-                    available ? 'text-green-500' : 'text-red-500'
+                    available ? "text-green-500" : "text-red-500"
                   }`}
                 >
-                  {available ? 'Disponible' : 'No Disponible'}
+                  {available ? "Disponible" : "No Disponible"}
                 </span>
               </div>
             </div>

@@ -1,37 +1,18 @@
 ---
-
 // Component Imports
-import MainLayout from "../layouts/MainLayout.astro";
-import Button from "../components/Button.astro";
-import ServicioCard from "../components/ServicioCard.astro";
-import HeroCarousel from "../components/HeroCarousel.astro";
-import Testimonios from "../components/Testimonios.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+import HeroCarousel from "@components/landing/sections/HeroCarousel.astro";
+import Servicios from "@components/landing/sections/Servicios.astro";
+import Testimonios from "@components/landing/sections/Testimonios.astro";
+import CTA from "@components/landing/sections/CTA.astro";
+
 // Astro
 import Image from "astro/components/Image.astro";
-import { Icon } from "astro-icon/components";
-
-// Images
-// Hero
-import RanaHero from "../images/rana_rocky2.png";
-import AniversarioHero from "../images/aniversario-hero.svg";
 
 // Que es OkiDoki
-import RanaRockera from "../images/rana_rocky1.png";
+import RanaRockera from "@images/rana_rocky1.png";
 
-// promos.sort((a, b) => a.priority - b.priority);
-
-// Servicios
-import Botargas from "../images/MarioBros.jpeg";
-import Magos from "../images/MagoLuigi.jpg";
-import PintaCaritas from "../images/PintaCaritas.jpg";
-import Payasos from "../images/Payasita.jpg";
-import Inflables from "../images/Inflable.jpg";
-import MasServicios from "../images/grupopersonajes.jpg";
-import WelcomeVideo from "../components/WelcomeVideo.astro";
-
-// Links
-import { socialLinksList } from "../components/SocialLinks.astro";
-const whatsappLink = socialLinksList.whatsapp.url;
+import WelcomeVideo from "@components/landing/sections/WelcomeVideo.astro";
 
 import "swiper/css/bundle";
 
@@ -40,11 +21,10 @@ import "swiper/css/bundle";
 ---
 
 <MainLayout title="Inicio">
-  <WelcomeVideo pathMp4="/media/30aniversario.mp4" />
+  <!-- <WelcomeVideo pathMp4="/media/30aniversario.mp4" /> -->
   <!-- Hero Carousel -->
-  <section class="relative">
-    <HeroCarousel />
-  </section>
+
+  <HeroCarousel />
   <!-- Timeline -->
   <!-- <div class="container mx-auto px-4 py-16">
     <h2 class="text-3xl font-bold text-center mb-12">Nuestra Historia</h2>
@@ -103,220 +83,8 @@ import "swiper/css/bundle";
   <Testimonios />
 
   <!-- Servicios -->
-  <section id="servicios">
-    <div 
-      class="relative mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-50"
-    >
-      <!-- Capa de imagen de fondo -->
-      <div class="absolute inset-0 z-0 opacity-40">
-        <img 
-          src="src/images/pandilla-bg.jpg" 
-          alt="" 
-          class="h-full w-full object-cover"
-        />
-      </div>
-      
-      <!-- Capa de gradiente -->
-      <div class="absolute inset-0 z-10 bg-gradient-to-r from-primary-500 to-[#FF7E00] opacity-80"></div>
-      
-      <!-- Contenido (encima de las capas) -->
-      <div class="relative z-20">
-        <h1
-          data-aos="fade-in"
-          class="font-primary py-10 text-center text-4xl font-semibold text-white sm:text-7xl lg:text-8xl"
-        >
-          SERVICIOS
-        </h1>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-        <ServicioCard
-          image={Botargas}
-          title="Botargas"
-          icon="hugeicons:super-mario"
-        >
-          <Fragment slot="hover-description"
-            >Más de <span class="text-xl font-semibold">100</span> personajes del
-            cine, videojuegos y TV</Fragment
-          >
-        </ServicioCard>
-
-        <ServicioCard image={Magos} title="Magos" icon="mdi:magic">
-          <Fragment slot="hover-description"
-            >Efectos mágicos que sorprenden a chicos y adultos</Fragment
-          >
-        </ServicioCard>
-
-        <ServicioCard
-          image={PintaCaritas}
-          title="Pinta Caritas"
-          icon="mdi:paintbrush-outline"
-        >
-          <Fragment slot="hover-description"
-            >Diseños únicos y personalizados para cada niño y niña.</Fragment
-          >
-        </ServicioCard>
-
-        <ServicioCard
-          image={Payasos}
-          title="Payasos(sitas)"
-          icon="game-icons:clown"
-        >
-          <Fragment slot="hover-description"
-            >Malabares, globoflexia y canciones que enamoran a niños.</Fragment
-          >
-        </ServicioCard>
-
-        <ServicioCard
-          image={Inflables}
-          title="Inflables"
-          icon="game-icons:elven-castle"
-        >
-          <Fragment slot="hover-description"
-            >Castillos inflabes y toboganes gigantes.
-          </Fragment>
-        </ServicioCard>
-
-        <ServicioCard
-          image={MasServicios}
-          title="Y mucho más..."
-          icon="mdi:star"
-        >
-          <Fragment slot="hover-description"
-            ><a href="/catalogo"
-              ><Button textSize="text-sm" type="secondary" icon="mdi:arrow-up-right-thick"
-                >Consultar el catálogo</Button
-              ></a
-            ></Fragment
-          >
-        </ServicioCard>
-      </div>
-    </div>
-  </section>
+  <Servicios />
 
   <!-- CTA -->
-  <section class="relative px-4 py-30 text-center sm:px-10 lg:px-30 xl:px-40">
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      class="absolute inset-0 h-full w-full object-cover"
-    >
-      <source src="/media/fireworks.mp4" type="video/mp4" />
-    </video>
-    <div class="bg-black-okidoki/80 absolute inset-0"></div>
-    <div class="relative z-10">
-      <h2
-        class="font-primary text-3xl font-bold text-white md:text-5xl lg:text-6xl"
-      >
-        ¡30 años de magia merecen una <span
-          class="from-primary-500 bg-gradient-to-r to-[#FF7E00] bg-clip-text text-transparent uppercase"
-          >celebración</span
-        > a TU medida!
-      </h2>
-      <h3 class="text-gray-okidoki mx-auto mt-6 max-w-3xl text-lg md:text-xl">
-        Reserva hoy y lleva a casa la experiencia OkiDoki.
-      </h3>
-      <div class="mt-10 max-w-2xl mx-auto">
-        <a href={whatsappLink}>
-          <Button icon="mdi:whatsapp">¡Sí, quiero mi evento OkiDoki!</Button
-          >
-        </a>
-      </div>
-      <!-- <h4 class="text-gray-okidoki mt-6 text-sm font-medium">
-        ⏳ Solo hasta el 28 de febrero: Este descuento desaparece con las
-        últimas campanadas del mes.
-      </h4> -->
-    </div>
-  </section>
+  <CTA />
 </MainLayout>
-
-<style is:global>
-  .testimonios-slider {
-    width: 100%;
-    height: auto;
-    padding: 1rem 0;
-    overflow: visible;
-  }
-
-  .testimonio.swiper-slide {
-    width: min(320px, 90vw);
-    height: auto;
-    aspect-ratio: 9/16;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform;
-  }
-
-  @media (max-width: 640px) {
-    .testimonios-slider {
-      padding: 0.5rem;
-      overflow: hidden;
-    }
-
-    .testimonio.swiper-slide {
-      width: 100%;
-    }
-
-    .testimonios-slider .swiper-button-prev,
-    .testimonios-slider .swiper-button-next {
-      display: none;
-    }
-  }
-</style>
-
-<script>
-  import Swiper from "swiper/bundle";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const testimoniosSlider = new Swiper(".testimonios-slider", {
-      effect: "cards",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      initialSlide: 0,
-      updateOnWindowResize: true,
-      observer: true,
-      observeParents: true,
-      navigation: {
-        nextEl: ".testimonios-slider .swiper-button-next",
-        prevEl: ".testimonios-slider .swiper-button-prev",
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1,
-          effect: "slide",
-          spaceBetween: 16,
-          watchOverflow: true,
-        },
-        640: {
-          slidesPerView: "auto",
-          effect: "cards",
-          spaceBetween: 24,
-        },
-      },
-      on: {
-        init: function () {
-          setTimeout(() => {
-            this.update();
-          }, 100);
-        },
-        slideChange: function () {
-          const videos = document.querySelectorAll(".testimonios-slider video");
-          videos.forEach((video) => video.pause());
-        },
-      },
-    });
-
-    // Handle video playback
-    const videos = document.querySelectorAll(".testimonios-slider video");
-    videos.forEach((video) => {
-      video.pause();
-      video.addEventListener("play", () => {
-        videos.forEach((v) => {
-          if (v !== video) v.pause();
-        });
-      });
-    });
-  });
-</script>

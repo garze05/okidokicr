@@ -1,98 +1,30 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import WhatsappStickyButton from "../components/WhatsappStickyButton.astro";
+import BaseLayout from "./BaseLayout.astro";
+import Header from "@components/landing/layout/Header.astro";
+import Footer from "@components/landing/layout/Footer.astro";
+import WhatsappStickyButton from "@components/landing/sections/WhatsappStickyButton.astro";
 
-// Scroller anims
-import "aos/dist/aos.css";
+interface Props {
+  title: string;
+  description?: string;
+}
 
-//import { ViewTransitions } from "astro:transitions";
-
-// Props
-const { title, description="Empresa de Costa Rica. Ofrecemos Botargas, Fiestas de Cumpleaños, Eventos Familiares y Empresariales con 30 años de Experiencia." } = Astro.props;
-
+const { title, description } = Astro.props;
 ---
 
-<html lang="es" class="h-full">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    <meta name="generator" content={Astro.generator} />
-    <title>OkiDoki - {title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <link rel="preload" href="/fonts/lexend-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/fonts/lexend-exa-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/fonts/lexend-giga-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/fonts/curlzmt.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-
-    <!-- <ViewTransitions /> -->
-  </head>
-  <body
-    class="h-full bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
-  >
-    <div
-      class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]"
-    >
-      <WhatsappStickyButton />
-      <Header />
-      <main class="relative grid overflow-x-hidden">
-        <slot />
-      </main>
-      <Footer />
-      <script>
-        import AOS from "aos";
-        AOS.init();
-      </script>
-    </div>
-  </body>
-</html>
-
-<style>
-  /* Queremos prevenir content shift, mostrando siempre la barra de scroll*/
-  html {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin: 0;
-  }
-
-  body {
-    margin: 0;
-    overflow: visible;
-    min-height: 100%;
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    // Agregar smooth scrolling a cualquier link anchor
-    const headerElement = document.querySelector("header");
-    const headerHeight = headerElement?.offsetHeight ?? 0;
-
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener(
-        "click",
-        function (this: HTMLAnchorElement, e: MouseEvent) {
-          e.preventDefault();
-          const href = this.getAttribute("href");
-          if (!href) return;
-
-          const targetId = href.substring(1);
-          const targetElement = document.getElementById(targetId);
-
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - headerHeight,
-              behavior: "smooth",
-            });
-          }
-        },
-      );
-    });
-  });
-</script>
+<BaseLayout
+  title={title}
+  description={description}
+  bodyClass="bg-gradient-to-tl from-indigo-200 via-red-200 to-yellow-100 bg-fixed bg-no-repeat"
+  includeGlobalCSS={true}
+  includeFonts={true}
+>
+  <div class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr_auto]">
+    <WhatsappStickyButton />
+    <Header />
+    <main class="relative grid overflow-x-hidden">
+      <slot />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

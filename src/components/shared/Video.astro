@@ -4,7 +4,7 @@ const {
   profile = "testimonios",
   className = "",
   orientation = "horizontal",
-  url
+  url,
 } = Astro.props;
 
 // Determine the URL to use
@@ -17,11 +17,11 @@ if (url) {
   // Construct URL from parameters
   const playerUrl = new URL("https://player.cloudinary.com/embed/");
   const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
-  
+
   const searchParams = new URLSearchParams({
     public_id: publicId,
     cloud_name: cloudName,
-    profile: profile
+    profile: profile,
   });
   fullUrl = `${playerUrl}?${searchParams.toString()}`;
 } else {
@@ -31,10 +31,13 @@ if (url) {
 }
 ---
 
-<div class={`relative w-full h-0 ${className}`} style={`padding-bottom: ${orientation === 'vertical' ? '177.78%' : '56.25%'};`}>
+<div
+  class={`relative w-full h-0 ${className}`}
+  style={`padding-bottom: ${orientation === "vertical" ? "177.78%" : "56.25%"};`}
+>
   <iframe
     src={fullUrl}
-    class="absolute top-0 left-0 w-full h-full"
+    class="absolute top-0 left-0 h-full w-full"
     allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
     allowfullscreen
     frameborder="0"
