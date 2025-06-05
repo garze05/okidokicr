@@ -1,0 +1,14 @@
+---
+import AdminLayout from "@layouts/AdminLayout.astro";
+import ProtectedRoute from "@components/admin/layout/ProtectedRoute.jsx";
+import AddTag from "@components/admin/tags/AddTag.jsx";
+---
+
+<AdminLayout
+  title="Agregar Etiqueta"
+  description="Agregar nueva etiqueta al sistema"
+>
+  <ProtectedRoute client:only="react">
+    <AddTag client:only="react" />
+  </ProtectedRoute>
+</AdminLayout>

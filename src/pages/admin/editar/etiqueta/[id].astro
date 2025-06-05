@@ -1,0 +1,35 @@
+---
+export const prerender = false;
+import AdminLayout from "@layouts/AdminLayout.astro";
+import ProtectedRoute from "@components/admin/layout/ProtectedRoute.jsx";
+import EditTag from "@components/admin/tags/EditTag.jsx";
+
+const apiUrl = import.meta.env.PUBLIC_API_URL;
+const { id } = Astro.params;
+
+// Fetch the specific tag to edit
+let tag;
+try {
+  const tagRes = await fetch(`${apiUrl}/tags`);
+  if (!tagRes.ok)
+    throw new Error(`Error al cargar las etiquetas. Status: ${tagRes.status}`);
+  const allTags = await tagRes.json();
+  tag = allTags.find((t) => t.id === parseInt(id));
+
+  if (!tag) {
+    throw new Error(`Etiqueta ${id} no encontrada`);
+  }
+} catch (error) {
+  console.error("Error fetching tag for edit page:", error);
+  return Astro.redirect("/404");
+}
+---
+
+<AdminLayout
+  title={`Editar ${tag.name}`}
+  description="Editar etiqueta existente"
+>
+  <ProtectedRoute client:only="react">
+    <EditTag client:only="react" tag={tag} />
+  </ProtectedRoute>
+</AdminLayout>

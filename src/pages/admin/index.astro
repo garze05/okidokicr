@@ -1,11 +1,14 @@
 ---
 import AdminLayout from "@layouts/AdminLayout.astro";
-import Dashboard from "@components/admin/auth/Dashboard";
+import ProtectedRoute from "@components/admin/layout/ProtectedRoute.jsx";
+import Dashboard from "@components/admin/auth/Dashboard.jsx";
 ---
 
 <AdminLayout
-  title="Panel de Control"
-  description="Panel de control para administrar el sitio web de OkiDoki."
+  title="Admin Dashboard"
+  description="Admin dashboard for OkiDoki CR"
 >
-  <Dashboard client:load />
+  <ProtectedRoute client:only="react">
+    <Dashboard client:only="react" />
+  </ProtectedRoute>
 </AdminLayout>

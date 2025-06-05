@@ -1,11 +1,15 @@
 // src/components/LogoutButton.jsx
 import React from "react";
+import { isAuthenticated, logout } from "@utils/auth"; // Adjust the import path as necessary
 
 export default function LogoutButton() {
   const handleLogout = () => {
-    // Aquí ponés la lógica para cerrar sesión
-    localStorage.removeItem("token");
-    window.location.href = "/login"; // Redirigir al login
+    if (!isAuthenticated()) {
+      // Si no está autenticado, no hacemos nada
+      return;
+    }
+
+    logout();
   };
 
   return (
