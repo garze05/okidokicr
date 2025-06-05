@@ -15,14 +15,7 @@ const apiUrl = import.meta.env.PUBLIC_API_URL;
  * }} props.service
  */
 export default function CatalogCard({ service }) {
-  const {
-    title,
-    description,
-    coverImage,
-    available,
-    totalImages,
-    totalVideos,
-  } = service;
+  const { title, description, coverImage, available } = service;
 
   const [mediaCounts, setMediaCounts] = useState({
     totalImages: 0,
@@ -51,9 +44,8 @@ export default function CatalogCard({ service }) {
   }
 
   return (
-    <div className="group relative flex h-full w-full transform cursor-pointer flex-col overflow-hidden rounded-xl bg-white px-4 pt-8 pb-6 shadow-lg ring-1 ring-gray-900/5 transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-2xl sm:px-6 sm:pt-10 sm:pb-8 sm:shadow-xl">
-      <span className="bg-black-okidoki absolute top-0 left-0 z-0 h-24 w-24 transform rounded-full bg-gradient-to-r transition-all duration-500 group-hover:scale-[15] sm:h-32 sm:w-32"></span>
-      <div className="relative z-10 mx-auto flex h-full w-full flex-col gap-3 sm:gap-4">
+    <div className="group hover:bg-black-okidoki relative flex h-full w-full transform cursor-pointer flex-col overflow-hidden rounded-xl bg-white px-4 py-3 shadow-lg ring-1 ring-gray-900/5 transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-2xl sm:px-6 sm:pt-10 sm:pb-8 sm:shadow-xl">
+      <div className="mx-auto flex h-full w-full flex-col gap-3 sm:gap-4">
         {/* Imagen de portada */}
         <div className="h-40 w-full overflow-hidden rounded-lg sm:h-48 sm:rounded-xl">
           <img
@@ -97,11 +89,15 @@ export default function CatalogCard({ service }) {
               <div className="flex items-center gap-4">
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
                   {mediaCounts.totalImages}{" "}
-                  <span className="font-normal text-gray-500">fotos</span>
+                  <span className="font-normal text-gray-500 group-hover:text-gray-300">
+                    fotos
+                  </span>
                 </span>
                 <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
                   {mediaCounts.totalVideos}{" "}
-                  <span className="font-normal text-gray-500">videos</span>
+                  <span className="font-normal text-gray-500 group-hover:text-gray-300">
+                    videos
+                  </span>
                 </span>
                 <span
                   className={`text-xs font-semibold ${

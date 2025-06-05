@@ -326,6 +326,61 @@ const ServiceInfo = ({ service }) => (
   </div>
 );
 
+// CloudinaryVideoPlayer Component
+const CloudinaryVideoPlayer = ({ url, title, orientation = "landscape" }) => {
+  // Extract public_id from Cloudinary URL
+  const getPublicIdFromUrl = (cloudinaryUrl) => {
+    // Handle different Cloudinary URL formats
+    const patterns = [
+      /\/video\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]*)?$/,
+      /\/raw\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]*)?$/,
+      /\/auto\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]*)?$/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = cloudinaryUrl.match(pattern);
+      if (match) {
+        // Remove file extension if present
+        return match[1].replace(/\.[^.]*$/, "");
+      }
+    }
+
+    // Fallback: try to extract everything after the last slash
+    const parts = cloudinaryUrl.split("/");
+    const fileName = parts[parts.length - 1];
+    return fileName.replace(/\.[^.]*$/, "");
+  };
+  const publicId = getPublicIdFromUrl(url);
+  const cloudName =
+    import.meta.env?.PUBLIC_CLOUDINARY_CLOUD_NAME ||
+    "fiestas-eventos-costarica-okidoki";
+
+  // Create Cloudinary player URL
+  const playerUrl = new URL("https://player.cloudinary.com/embed/");
+  const searchParams = new URLSearchParams({
+    public_id: publicId,
+    cloud_name: cloudName,
+    profile: "testimonios",
+  });
+  const embedUrl = `${playerUrl}?${searchParams.toString()}`;
+
+  // Determine aspect ratio based on orientation
+  const paddingBottom = orientation === "vertical" ? "177.78%" : "56.25%";
+
+  return (
+    <div className="relative h-0 w-full" style={{ paddingBottom }}>
+      <iframe
+        src={embedUrl}
+        title={title}
+        className="absolute top-0 left-0 h-full w-full"
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        allowFullScreen
+        frameBorder="0"
+      />
+    </div>
+  );
+};
+
 // Related Videos Component
 const RelatedVideos = ({ videos, serviceTitle }) => (
   <div className="mt-12">
@@ -355,6 +410,24 @@ const RelatedVideos = ({ videos, serviceTitle }) => (
           if (vimeoMatch) {
             embedUrl = `https://player.vimeo.com/video/${vimeoMatch[1]}`;
           }
+        } // Determine video orientation for Cloudinary videos
+        // Priority: 1) video.orientation field, 2) keywords in title, 3) default to landscape
+        let videoOrientation = "landscape";
+
+        if (video.orientation) {
+          videoOrientation =
+            video.orientation === "vertical" || video.orientation === "portrait"
+              ? "vertical"
+              : "landscape";
+        } else if (video.title) {
+          const titleLower = video.title.toLowerCase();
+          if (
+            titleLower.includes("vertical") ||
+            titleLower.includes("portrait") ||
+            titleLower.includes("story")
+          ) {
+            videoOrientation = "vertical";
+          }
         }
 
         return (
@@ -362,19 +435,16 @@ const RelatedVideos = ({ videos, serviceTitle }) => (
             key={index}
             className="overflow-hidden rounded-lg bg-white shadow-md"
           >
-            <div className="aspect-video">
+            <div className={isCloudinary ? "" : "aspect-video"}>
               {isCloudinary ? (
-                <video
-                  controls
-                  className="h-full w-full object-cover"
-                  poster={video.url.replace(
-                    "/video/",
-                    "/video/w_400,h_300,c_fill/",
-                  )}
-                >
-                  <source src={video.url} type="video/mp4" />
-                  Tu navegador no soporta el elemento video.
-                </video>
+                <CloudinaryVideoPlayer
+                  url={video.url}
+                  title={
+                    video.title ||
+                    `Video ${index + 1} de ${serviceTitle.replace(/['"]/g, "")}`
+                  }
+                  orientation={videoOrientation}
+                />
               ) : (
                 <iframe
                   src={embedUrl}
@@ -387,18 +457,6 @@ const RelatedVideos = ({ videos, serviceTitle }) => (
                   allowFullScreen
                 />
               )}
-            </div>
-            <div className="p-4">
-              <p className="mb-1 text-xs text-gray-500">
-                {isYouTube
-                  ? "YouTube"
-                  : isVimeo
-                    ? "Vimeo"
-                    : isCloudinary
-                      ? "Video"
-                      : "Video externo"}
-              </p>
-              {video.title && <h3 className="font-medium">{video.title}</h3>}
             </div>
           </div>
         );

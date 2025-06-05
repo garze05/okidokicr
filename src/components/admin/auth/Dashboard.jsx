@@ -401,18 +401,19 @@ export default function Dashboard() {
                             <div className="flex space-x-2">
                               <a
                                 href={`/catalogo/${s.id}`}
-                                className="btn btn-ghost btn-sm"
+                                className="btn btn-accent btn-md"
+                                target="_blank"
                               >
                                 Ver
                               </a>
                               <a
                                 href={`/admin/editar/servicio/${s.id}`}
-                                className="btn btn-ghost btn-sm"
+                                className="btn btn-secondary btn-md"
                               >
                                 Editar
                               </a>{" "}
                               <button
-                                className="btn text-error btn-ghost btn-sm"
+                                className="btn btn-error btn-md"
                                 onClick={() => handleDeleteClick(s, "service")}
                               >
                                 Eliminar
@@ -478,12 +479,8 @@ export default function Dashboard() {
             ) : (
               <div className="">
                 <div className="mb-6 max-w-lg">
-                  {" "}
                   {/* Container for search bar */}
                   <div className="relative">
-                    <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <SearchIcon />
-                    </span>
                     <input
                       type="text"
                       className="input input-bordered mb-4 w-full pl-10" // Style consistent with services search
@@ -512,12 +509,12 @@ export default function Dashboard() {
                               {" "}
                               <a
                                 href={`/admin/editar/etiqueta/${tag.id}`}
-                                className="btn btn-accent btn-sm"
+                                className="btn btn-secondary btn-md"
                               >
                                 Editar
                               </a>
                               <button
-                                className="btn btn-error btn-sm"
+                                className="btn btn-error btn-md"
                                 onClick={() => handleDeleteClick(tag, "tag")}
                               >
                                 Eliminar
