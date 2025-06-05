@@ -1,0 +1,139 @@
+/* Service Detail Component Styles */
+
+/* Gallery Thumbnails */
+.gallery-thumbs {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.gallery-thumbs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.thumbnail-btn {
+  transition: all 0.2s ease;
+}
+
+.thumbnail-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Main Image Transitions */
+.main-image {
+  transition: opacity 0.3s ease;
+}
+
+/* Lightbox Styles */
+.lightbox-modal {
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-image {
+  transition: transform 0.3s ease;
+}
+
+.cursor-zoom-in {
+  cursor: zoom-in;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lightbox-modal {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.lightbox-image {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+/* Loading States */
+.loading-spinner {
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .thumbnail-btn {
+    min-width: 60px;
+    height: 48px;
+  }
+
+  .gallery-thumbs {
+    padding: 0 1rem;
+  }
+}
+
+/* Focus States for Accessibility */
+.thumbnail-btn:focus,
+.navigation-btn:focus,
+.lightbox-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .thumbnail-btn {
+    border-width: 3px;
+  }
+
+  .navigation-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+
+  .lightbox-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .thumbnail-btn,
+  .main-image,
+  .lightbox-modal,
+  .lightbox-image {
+    transition: none;
+    animation: none;
+  }
+
+  .thumbnail-btn:hover {
+    transform: none;
+  }
+}
