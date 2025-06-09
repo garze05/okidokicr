@@ -22,7 +22,7 @@ jobs:
             cd ~/okidokicr
             git pull origin main
             cd api
-            pnpm install --frozen-lockfile || npm install
+            npm install --frozen-lockfile || npm install
             npx prisma generate
             prisma migrate deploy
             pm2 restart okidoki-api
