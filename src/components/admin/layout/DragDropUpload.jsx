@@ -1,6 +1,8 @@
 // src/components/Admin/DragDropUpload.jsx
 import React, { useState, useRef } from "react";
 
+const apiUrl = import.meta.env.PUBLIC_API_URL;
+
 export default function DragDropUpload({
   onFilesUploaded,
   accept = "image/*,video/*",
@@ -90,7 +92,7 @@ export default function DragDropUpload({
         formData.append("file", fileObj.file);
 
         try {
-          const response = await fetch("http://localhost:4000/api/upload", {
+          const response = await fetch(`${apiUrl}/upload`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
