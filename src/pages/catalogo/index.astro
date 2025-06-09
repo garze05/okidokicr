@@ -1,0 +1,48 @@
+---
+// import CatalogCard from "../components/landing/catalog/CatalogCard.astro";
+import CatalogPage from "@components/landing/catalog/CatalogPage.jsx";
+import MainLayout from "@layouts/MainLayout.astro";
+
+import { socialLinksList } from "@components/shared/SocialLinks.astro";
+const whatsappLink = socialLinksList.whatsapp.url;
+
+const apiUrl = import.meta.env.PUBLIC_API_URL;
+
+const res = await fetch(`${apiUrl}/services`);
+const initialServices = await res.json();
+---
+
+<MainLayout title="Catálogo">
+  <div class="container mx-auto">
+    <section class="px-4 md:pt-5 md:pb-5">
+      <h1
+        class="from-primary-500 font-primary bg-gradient-to-r to-[#FF7E00] bg-clip-text text-center text-4xl leading-normal font-bold text-transparent sm:text-6xl md:text-7xl xl:text-8xl"
+      >
+        CATÁLOGO
+      </h1>
+    </section>
+
+    <CatalogPage initialServices={initialServices} client:load />
+  </div>
+
+  <!-- Call to Action Section -->
+  <section
+    class="from-primary-500 to-secondary-500 mx-4 mb-12 rounded-lg bg-gradient-to-r px-4 py-10 text-white"
+  >
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="mb-4 text-2xl font-bold md:text-3xl">
+        ¿No encuentras lo que buscas?
+      </h2>
+      <p class="mb-6 text-lg">
+        Podemos personalizar personajes específicos para tu evento. ¡Cuéntanos
+        tu idea!
+      </p>
+      <a
+        href={whatsappLink}
+        class="text-primary-500 inline-block rounded-lg bg-white px-6 py-3 font-bold transition-colors duration-300 hover:bg-gray-100"
+      >
+        Contáctanos
+      </a>
+    </div>
+  </section>
+</MainLayout>

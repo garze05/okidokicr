@@ -5,12 +5,21 @@ import react from "@astrojs/react";
 
 import netlify from "@astrojs/netlify";
 
-export default defineConfig({
-  server: {
-    proxy: { '/api': 'http://localhost:4000' },
-  },
+import sitemap from "@astrojs/sitemap";
 
-  integrations: [icon(), react()],
+import robotsTxt from "astro-robots-txt";
+
+export default defineConfig({
+  alias: {
+    "@components": "./src/components",
+    "@layouts": "./src/layouts",
+    "@pages": "./src/pages",
+    "@data": "./src/data",
+    "@images": "./src/images",
+    "@styles": "./src/styles",
+    "@utils": "./src/utils",
+  },
+  integrations: [icon(), react(), sitemap(), robotsTxt()],
 
   vite: {
     plugins: [tailwindcss()],

@@ -1,0 +1,25 @@
+---
+const links = [
+  { href: "/", text: "Inicio" },
+  { href: "/#testimonios", text: "Testimonios" },
+  { href: "/#servicios", text: "Servicios" },
+  { href: "/catalogo", text: "Catálogo" },
+];
+
+// If we are in dev mode, add a pruebas link { href: "/index2", text: "Pruebas" }
+// if (import.meta.env.MODE === "development") {
+//   links.push({ href: "/index2", text: "Pruebas" });
+// }
+---
+
+{
+  //loop
+  links.map((link) => (
+    <a
+      class="hover:text-primary-500 transition-colors duration-300 ease-in-out"
+      href={link.href}
+    >
+      {link.text}
+    </a>
+  ))
+}

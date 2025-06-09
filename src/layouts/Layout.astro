@@ -1,0 +1,24 @@
+---
+import MainLayout from "./MainLayout.astro";
+import AdminLayout from "./AdminLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  type?: "landing" | "admin";
+}
+
+const { title, description, type = "landing" } = Astro.props;
+---
+
+{
+  type === "landing" ? (
+    <MainLayout title={title} description={description}>
+      <slot />
+    </MainLayout>
+  ) : (
+    <AdminLayout title={title} description={description}>
+      <slot />
+    </AdminLayout>
+  )
+}

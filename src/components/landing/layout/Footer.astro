@@ -1,0 +1,63 @@
+---
+// components/Footer.astro
+import Social from "./Social.astro";
+import { Icon } from "astro-icon/components";
+import { socialLinksList } from "@components/shared/SocialLinks.astro";
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="bg-secondary-500 text-gray-okidoki font-primary px-2 py-10 text-xs font-light sm:px-5 sm:text-sm md:px-10"
+>
+  <div
+    class="mx-auto grid items-center gap-5 lg:grid-cols-3 lg:grid-rows-[auto_1fr]"
+  >
+    <div class="items-center gap-2 text-center">
+      <div class="font-okidoki text-5xl">oKiDoki</div>
+      <span class="flex items-center justify-center gap-2">
+        <Icon name="mdi:phone" />
+        <p>(506) 8831-3232</p>
+      </span>
+    </div>
+    <ul class="flex justify-center gap-5 lg:order-3">
+      {
+        Object.values(socialLinksList).map((link) => (
+          <Social
+            platform={link.platform}
+            iconName={link.icon}
+            username={link.username}
+            url={link.url}
+            size={20}
+            key={link.platform}
+          />
+        ))
+      }
+    </ul>
+    <div class="text-center lg:order-2">
+      <p>&copy; {year}, OkiDoki Costa Rica</p>
+    </div>
+    <div class="text-center lg:col-start-2 lg:row-start-2">
+      <a href="https://api.whatsapp.com/send?phone=50660839570"
+        ><p
+          class="hover:text-primary-500 text-xs transition-colors duration-300"
+        >
+          Desarrollado con ❤️ por Gabriel Rodríguez
+        </p></a
+      >
+    </div>
+  </div>
+</footer>
+<script is:inline>
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "OkiDoki Producciones",
+    url: "https://okidokicr.com",
+    logo: "https://okidokicr.com/logo.webp",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+506-8831-3232",
+      contactType: "customer service",
+    },
+  };
+</script>

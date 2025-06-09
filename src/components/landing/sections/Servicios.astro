@@ -1,0 +1,104 @@
+---
+import ServicioCard from "./ServicioCard.astro";
+import Button from "@components/shared/Button.astro";
+
+// Imagenes servicios
+import Botargas from "@images/MarioBros.jpeg";
+import Magos from "@images/MagoLuigi.jpg";
+import PintaCaritas from "@images/PintaCaritas.jpg";
+import Payasos from "@images/Payasita.jpg";
+import Inflables from "@images/Inflable.jpg";
+import MasServicios from "@images/grupopersonajes.jpg";
+import { Image } from "astro:assets";
+
+import ServicesBG from "@images/pandilla-bg.jpg";
+---
+
+<section id="servicios">
+  <div class="relative mx-auto px-4 py-20 sm:px-10 lg:px-10 xl:px-50">
+    <!-- Capa de imagen de fondo -->
+    <div class="absolute inset-0 z-0 opacity-40">
+      <Image src={ServicesBG} alt="" class="h-full w-full object-cover" />
+    </div>
+
+    <!-- Capa de gradiente -->
+    <div
+      class="from-primary-500 absolute inset-0 z-10 bg-gradient-to-r to-[#FF7E00] opacity-80"
+    >
+    </div>
+
+    <!-- Contenido (encima de las capas) -->
+    <div class="relative z-20">
+      <h1
+        data-aos="fade-in"
+        class="font-primary py-10 text-center text-4xl font-semibold text-white sm:text-7xl lg:text-8xl"
+      >
+        SERVICIOS
+      </h1>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <ServicioCard
+          image={Botargas}
+          title="Botargas"
+          icon="hugeicons:super-mario"
+        >
+          <Fragment slot="hover-description"
+            >Más de <span class="text-xl font-semibold">100</span> personajes del
+            cine, videojuegos y TV</Fragment
+          >
+        </ServicioCard>
+
+        <ServicioCard image={Magos} title="Magos" icon="mdi:magic">
+          <Fragment slot="hover-description"
+            >Efectos mágicos que sorprenden a chicos y adultos</Fragment
+          >
+        </ServicioCard>
+
+        <ServicioCard
+          image={PintaCaritas}
+          title="Pinta Caritas"
+          icon="mdi:paintbrush-outline"
+        >
+          <Fragment slot="hover-description"
+            >Diseños únicos y personalizados para cada niño y niña.</Fragment
+          >
+        </ServicioCard>
+
+        <ServicioCard
+          image={Payasos}
+          title="Payasos(sitas)"
+          icon="game-icons:clown"
+        >
+          <Fragment slot="hover-description"
+            >Malabares, globoflexia y canciones que enamoran a niños.</Fragment
+          >
+        </ServicioCard>
+
+        <ServicioCard
+          image={Inflables}
+          title="Inflables"
+          icon="game-icons:elven-castle"
+        >
+          <Fragment slot="hover-description"
+            >Castillos inflabes y toboganes gigantes.
+          </Fragment>
+        </ServicioCard>
+
+        <ServicioCard
+          image={MasServicios}
+          title="Y mucho más..."
+          icon="mdi:star"
+        >
+          <Fragment slot="hover-description"
+            ><a href="/catalogo"
+              ><Button
+                textSize="text-sm"
+                type="secondary"
+                icon="mdi:arrow-up-right-thick">Consultar el catálogo</Button
+              ></a
+            ></Fragment
+          >
+        </ServicioCard>
+      </div>
+    </div>
+  </div>
+</section>

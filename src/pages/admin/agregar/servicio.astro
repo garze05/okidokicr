@@ -1,11 +1,30 @@
 ---
-import AdminLayout from "../../../layouts/AdminLayout.astro";
-import ProtectedRoute from "../../../components/ProtectedRoute.jsx";
-import AddServiceForm from "../../../components/Admin/AddServiceForm.jsx";
+export const prerender = false;
+import AdminLayout from "@layouts/AdminLayout.astro";
+import ProtectedRoute from "@components/admin/layout/ProtectedRoute.jsx";
+import AddService from "@components/admin/services/AddService.jsx";
+
+const apiUrl = import.meta.env.PUBLIC_API_URL;
+// Fetch all tags for the form
+let allTags;
+try {
+  const tagsRes = await fetch(`${apiUrl}/tags`);
+  if (!tagsRes.ok)
+    throw new Error(`Error al cargar las etiquetas. Status: ${tagsRes.status}`);
+  allTags = await tagsRes.json();
+} catch (error) {
+  console.error("Error fetching tags for add service page:", error);
+  return alert(
+    "No se pudieron cargar las etiquetas. Por favor, inténtalo más tarde.",
+  );
+}
 ---
 
-<AdminLayout title="Añadir Nuevo Servicio">
+<AdminLayout
+  title="Añadir Nuevo Servicio"
+  description="Panel de control para agregar nuevos servicios al sitio web de OkiDoki."
+>
   <ProtectedRoute client:load>
-    <AddServiceForm />
+    <AddService allTags={allTags} client:load />
   </ProtectedRoute>
 </AdminLayout>

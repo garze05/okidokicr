@@ -1,14 +1,14 @@
 ---
 import AdminLayout from "@layouts/AdminLayout.astro";
 import ProtectedRoute from "@components/admin/layout/ProtectedRoute.jsx";
-import AddTag from "@components/admin/tags/AddTag.jsx";
+import Dashboard from "@components/admin/auth/Dashboard.jsx";
 ---
 
 <AdminLayout
-  title="Agregar Etiqueta"
-  description="Agregar nueva etiqueta al sistema"
+  title="Admin Dashboard"
+  description="Admin dashboard for OkiDoki CR"
 >
   <ProtectedRoute client:only="react">
-    <AddTag client:only="react" />
+    <Dashboard client:only="react" />
   </ProtectedRoute>
 </AdminLayout>

@@ -1,0 +1,82 @@
+---
+import LogoutButton from "./LogoutButton";
+// Astro Components
+import { Icon } from "astro-icon/components";
+---
+
+<div class="sticky top-0 z-50">
+  <header
+    class="mx-auto flex h-full max-h-40 w-full items-center justify-between bg-white p-7"
+  >
+    <h1 class="text-secondary-500 text-2xl font-bold">
+      Panel de Administrador <span class="font-okidoki text-4xl font-normal"
+        >oKiDoki</span
+      >
+    </h1>
+    <LogoutButton client:only />
+  </header>
+</div>
+
+<style>
+  header {
+    transition:
+      backdrop-filter 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  header.scrolled {
+    width: 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+</style>
+
+<script>
+  function setupHeader() {
+    // Mobile menu
+    const menuButton = document.getElementById("menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const openBtn = document.getElementById("burger-btn-open");
+    const closeBtn = document.getElementById("burger-btn-close");
+
+    menuButton?.addEventListener("click", () => {
+      const isExpanded = menuButton?.getAttribute("aria-expanded") === "true";
+      menuButton?.setAttribute("aria-expanded", (!isExpanded).toString());
+      mobileMenu?.classList.toggle("hidden");
+      openBtn?.classList.toggle("hidden");
+      closeBtn?.classList.toggle("hidden");
+    });
+
+    // Sticky header classes
+    const header = document.querySelector("header");
+    const SCROLL_TRIGGER_HEIGHT = 100;
+
+    function updateHeaderScroll() {
+      if (!header) return;
+      if (window.scrollY > SCROLL_TRIGGER_HEIGHT) {
+        header.classList.add("scrolled");
+
+        // If menu is open, close it
+        if (!mobileMenu?.classList.contains("hidden")) {
+          mobileMenu?.classList.add("hidden");
+          openBtn?.classList.remove("hidden");
+          closeBtn?.classList.add("hidden");
+        }
+      } else {
+        header.classList.remove("scrolled");
+      }
+    }
+
+    if (header) {
+      updateHeaderScroll();
+      window.addEventListener("scroll", updateHeaderScroll);
+    }
+  }
+
+  // Run on initial load
+  setupHeader();
+
+  // Run on view transitions
+  document.addEventListener("astro:after-swap", setupHeader);
+</script>
