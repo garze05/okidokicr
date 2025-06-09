@@ -23,54 +23,30 @@ cloudinary.config();
 // Para poder recibir JSON
 app.use(express.json());
 
-// Permitir peticiones desde frontend en 4321
+// Cuales frontends pueden hacer peticiones a la API
+const whitelist = ["https://okidokicr.com", "http://localhost:4321"];
+
+// Configuración de CORS
 app.use(
   cors({
-    origin: function (origin, callback) {
-      console.log("Incoming request from origin:", origin); // Debug log
-
-      // Allow requests with no origin
-      if (!origin) return callback(null, true);
-
-      // Allow localhost and production origins
-      const allowedOrigins = [
-        "https://okidokicr.com", // Removed trailing slash
-        "https://okidokicr.com:3000",
-        "https://okidokicr.com:4000",
-        process.env.FRONTEND_URL,
-        // Add mobile-friendly variations
-        "http://192.168.1.11:4321", // Direct IP access
-        "capacitor://localhost", // For Capacitor/Ionic apps
-        "ionic://localhost", // For older Ionic apps
-      ].filter(Boolean);
-
-      // More flexible matching for development
-      const isDev =
-        process.env.MODE === "development" ||
-        process.env.NODE_ENV === "development";
-
-      if (isDev) {
-        console.log("Development mode: CORS allowed");
-        return callback(null, true);
-      }
-
-      // Check if origin is in allowed list
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        console.log(`CORS request from ${origin} allowed`);
+    origin: (origin, callback) => {
+      // Permitir llamadas desde Postman o curl (sin origin)
+      if (!origin || whitelist.includes(origin)) {
         callback(null, true);
       } else {
-        console.log(`CORS request from ${origin} denied`);
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error("CORS no permitido"));
       }
     },
-    credentials: true, // Allow credentials (cookies, etc.)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Si se llegaran a usar cookies
   }),
 );
 
 // Rutas públicas
 app.use("/api/auth", authRoutes);
+
+app.get("/api/test", (req, res) => {
+  res.json({ msg: "La api funciona" });
+});
 
 // Endpoint para subir fotos/videos
 app.use("/api/upload", uploadRoutes);
