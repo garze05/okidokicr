@@ -129,10 +129,10 @@ const ServiceDetail = ({ serviceId, initialImageIndex = 0 }) => {
 
   return (
     <>
-      <div className="container mx-auto px-5 py-8 sm:px-10 md:px-20">
+      <div className="container mx-auto px-3 py-8 sm:px-10 md:px-20">
         {/* Breadcrumbs */}
-        <nav className="breadcrumbs mb-8 text-sm">
-          <ul className="flex space-x-2">
+        <nav className="breadcrumbs mb-4 max-w-sm text-xs sm:mb-8 sm:text-sm">
+          <ul>
             <li>
               <a href="/" className="text-primary-500 hover:underline">
                 Inicio
@@ -273,20 +273,20 @@ const ImageGallery = ({
 // Service Info Component
 const ServiceInfo = ({ service }) => (
   <div>
-    <h1 className="text-secondary-500 mb-4 text-4xl font-bold md:text-5xl">
+    <h1 className="text-secondary-500 mb-3 text-4xl font-bold md:text-5xl">
       {service.title}
     </h1>
 
-    <div className="prose prose-lg mb-2 max-w-none">
-      <p>{service.description}</p>
-    </div>
-
     <div
-      className={`dui badge ${service.available ? "badge-success" : "badge-error"} mb-4`}
+      className={`dui badge ${service.available ? "badge-success" : "badge-error"} mb-3`}
     >
       <span className="font-semibold">
         {service.available ? "Disponible" : "No Disponible"}
       </span>
+    </div>
+
+    <div className="prose prose-lg mb-2 max-w-none">
+      <p>{service.description}</p>
     </div>
 
     {service.features && service.features.length > 0 && (
@@ -303,20 +303,20 @@ const ServiceInfo = ({ service }) => (
       </div>
     )}
 
-    <div className="flex flex-wrap gap-4">
+    <div className="mt-4 flex flex-col flex-wrap gap-4 sm:flex-row md:mt-10">
       <a
         href={`https://api.whatsapp.com/send?phone=50688313232&text=Hola%20Oki%20Doki%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20servicio%20de%20${service.title}:%20https://okidokicr.com/catalogo/${service.id}`}
         target="_blank"
-        className="bg-primary-500 flex items-center rounded-lg px-6 py-2 text-white shadow transition hover:bg-orange-700"
+        className="bg-primary-500 flex w-full items-center justify-center rounded-lg px-6 py-2 text-white shadow transition hover:bg-orange-700 sm:w-auto"
       >
-        <MessageCircle className="mr-2 h-5 w-5" />
+        <MessageCircle className="mr-2 h-10 w-8" />
         Solicitar información
       </a>
 
       {service.brochureUrl && (
         <a
           href={service.brochureUrl}
-          className="flex items-center rounded-lg border border-gray-300 bg-white px-6 py-2 text-gray-800 shadow transition hover:bg-gray-50"
+          className="flex w-full items-center justify-center rounded-lg border border-gray-300 bg-white px-6 py-2 text-gray-800 shadow transition hover:bg-gray-50 sm:w-auto"
           download
         >
           <Download className="mr-2 h-5 w-5" />
@@ -385,7 +385,7 @@ const CloudinaryVideoPlayer = ({ url, title, orientation = "landscape" }) => {
 // Related Videos Component
 const RelatedVideos = ({ videos, serviceTitle }) => (
   <div className="mt-12">
-    <h2 className="mb-6 text-2xl font-bold text-gray-800">
+    <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 sm:text-4xl md:text-left">
       Videos relacionados
     </h2>
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
