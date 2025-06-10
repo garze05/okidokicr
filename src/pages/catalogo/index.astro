@@ -12,7 +12,10 @@ const res = await fetch(`${apiUrl}/services`);
 const initialServices = await res.json();
 ---
 
-<MainLayout title="Catálogo">
+<MainLayout
+  title="Catálogo"
+  description="Explore todo nuestro catálogo de servicios y personajes para eventos especiales."
+>
   <div class="container mx-auto">
     <section class="px-4 md:pt-5 md:pb-5">
       <h1
@@ -34,8 +37,8 @@ const initialServices = await res.json();
         ¿No encuentras lo que buscas?
       </h2>
       <p class="mb-6 text-lg">
-        Podemos personalizar personajes específicos para tu evento. ¡Cuéntanos
-        tu idea!
+        Ponete en contacto y te ayudaremos a encontrar el servicio perfecto para
+        tu evento.
       </p>
       <a
         href={whatsappLink}

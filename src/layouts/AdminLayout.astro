@@ -11,7 +11,12 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} bodyClass="dui bg-base-200">
+<BaseLayout
+  title={title}
+  description={description}
+  bodyClass="dui bg-base-200"
+  includeSitemap={false}
+>
   <div class="grid min-h-[100dvh] w-full max-w-full grid-rows-[auto_1fr]">
     <Header />
     <main class="relative container mx-auto grid overflow-x-hidden">

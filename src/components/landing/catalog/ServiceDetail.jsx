@@ -282,7 +282,7 @@ const ServiceInfo = ({ service }) => (
     </div>
 
     <div
-      className={`badge ${service.available ? "badge-success" : "badge-error"} mb-4`}
+      className={`dui badge ${service.available ? "badge-success" : "badge-error"} mb-4`}
     >
       <span className="font-semibold">
         {service.available ? "Disponible" : "No Disponible"}
@@ -305,7 +305,8 @@ const ServiceInfo = ({ service }) => (
 
     <div className="flex flex-wrap gap-4">
       <a
-        href={`/contact?service=${service.id}`}
+        href={`https://api.whatsapp.com/send?phone=50688313232&text=Hola%20Oki%20Doki%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20servicio%20de%20${service.title}:%20https://okidokicr.com/catalogo/${service.id}`}
+        target="_blank"
         className="bg-primary-500 flex items-center rounded-lg px-6 py-2 text-white shadow transition hover:bg-orange-700"
       >
         <MessageCircle className="mr-2 h-5 w-5" />
