@@ -48,11 +48,9 @@ export default function FileUpload({
       }
     });
   };
-
   // Handle file selection
   const handleFileSelect = async (selectedFiles) => {
     const fileArray = Array.from(selectedFiles);
-    setFiles(fileArray);
 
     // Create previews for files
     const previews = await Promise.all(
@@ -174,8 +172,7 @@ export default function FileUpload({
   };
 
   return (
-    <div className="space-y-4">
-      {/* Drag & Drop Zone */}
+    <div className="space-y-4">      {/* Drag & Drop Zone */}
       <div
         className={`relative rounded-3xl border-2 border-dashed p-8 text-center transition-all duration-300 ${
           isDragOver
@@ -193,7 +190,7 @@ export default function FileUpload({
           type="file"
           accept={accept}
           multiple={multiple}
-          className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+          className="hidden"
           onChange={(e) => handleFileSelect(e.target.files)}
           disabled={disabled}
         />
