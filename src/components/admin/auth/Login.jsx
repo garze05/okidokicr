@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { login } from "@utils/auth"; // Assuming jsconfig.json or similar for @utils path
 import Button from "@components/shared/Button.astro"; // This might need to be a React component or handled differently
 import Image from "astro/components/Image.astro"; // This might need to be a React component or handled differently
-import Logo2 from "@images/logo2.svg"; // Ensure this path is resolvable or pass as prop
+import Logo2 from "/logo2.svg"; // Ensure this path is resolvable or pass as prop
 
 const Login = () => {
   const [user, setUser] = useState("");
