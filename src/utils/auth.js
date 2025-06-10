@@ -82,3 +82,11 @@ export const isAuthenticated = () => {
 
   return !isTokenExpired();
 };
+
+export const checkAuthAndRedirect = () => {
+  if (!isAuthenticated()) {
+    window.location.href = "/login";
+    return false;
+  }
+  return true;
+};
