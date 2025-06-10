@@ -55,7 +55,7 @@ export default function AddService({ allTags }) {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
       return;
     } // Process gallery and video URLs
     const galleryUrls = Array.isArray(formData.gallery) ? formData.gallery : [];
@@ -86,7 +86,7 @@ export default function AddService({ allTags }) {
         window.location.href = "/admin";
       } else if (response.status === 401 || response.status === 403) {
         alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
-        window.location.href = "/login";
+        window.location.href = "/admin/login";
       } else {
         const errorData = await response.json();
         alert(

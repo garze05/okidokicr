@@ -18,7 +18,7 @@ export default function EditTag({ tag }) {
 
     if (!token) {
       alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
       return;
     }
 
@@ -37,7 +37,7 @@ export default function EditTag({ tag }) {
         window.location.href = "/admin";
       } else if (response.status === 401 || response.status === 403) {
         alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
-        window.location.href = "/login";
+        window.location.href = "/admin/login";
       } else {
         const errorData = await response.json();
         alert(

@@ -75,7 +75,7 @@ export default function FileUpload({
 
     if (!token) {
       alert("Error de autenticación. Por favor, inicia sesión de nuevo.");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
       return;
     }
 
@@ -172,7 +172,8 @@ export default function FileUpload({
   };
 
   return (
-    <div className="space-y-4">      {/* Drag & Drop Zone */}
+    <div className="space-y-4">
+      {/* Drag & Drop Zone */}
       <div
         className={`relative rounded-3xl border-2 border-dashed p-8 text-center transition-all duration-300 ${
           isDragOver
@@ -210,7 +211,6 @@ export default function FileUpload({
           <p className="text-primary-500">Haz clic para seleccionar archivos</p>
         </div>
       </div>
-
       {/* Selected Files (before upload) */}
       {files.length > 0 && (
         <div className="space-y-4">
@@ -298,7 +298,6 @@ export default function FileUpload({
           </button>
         </div>
       )}
-
       {/* Uploaded Files */}
       {uploadedFiles.length > 0 && (
         <div className="space-y-4">

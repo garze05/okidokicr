@@ -115,7 +115,7 @@ export default function Dashboard() {
     if (!tokenExpiration) {
       // Token is invalid or doesn't exist
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
       return;
     }
 
@@ -125,7 +125,7 @@ export default function Dashboard() {
       // Token already expired
       localStorage.removeItem("token");
       alert("Tu sesión ha expirado. Por favor, inicia sesión de nuevo.");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
       return;
     }
 
@@ -139,7 +139,7 @@ export default function Dashboard() {
           clearInterval(timerInterval);
           localStorage.removeItem("token");
           alert("Tu sesión ha expirado. Por favor, inicia sesión de nuevo.");
-          window.location.href = "/login";
+          window.location.href = "/admin/login";
           return 0;
         }
         return newTime;

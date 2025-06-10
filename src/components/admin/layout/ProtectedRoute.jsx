@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
       if (!isAuthenticated()) {
         // Check if running in a browser environment before redirecting
         if (typeof window !== "undefined") {
-          window.location.href = "/login";
+          window.location.href = "/admin/login";
         }
       } else {
         setIsAuth(true);
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
       const handleStorageChange = (event) => {
         if (event.key === "token") {
           if (!event.newValue) {
-            window.location.href = "/login";
+            window.location.href = "/admin/login";
           }
         }
       };
