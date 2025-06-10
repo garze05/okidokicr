@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { login } from "@utils/auth"; // Assuming jsconfig.json or similar for @utils path
 import Button from "@components/shared/Button.astro"; // This might need to be a React component or handled differently
 import Image from "astro/components/Image.astro"; // This might need to be a React component or handled differently
-import Logo2 from "/logo2.svg"; // Ensure this path is resolvable or pass as prop
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -48,12 +47,8 @@ const Login = () => {
             data-tip="Volver a la página principal"
           >
             <a href="/" className="flex items-center justify-center">
-              {/* <Image /> Astro components like Image cannot be directly used in React.
-                  You'll need to use a regular <img> tag or a React-specific image component.
-                  For simplicity, using <img> tag here.
-              */}
               <img
-                src={Logo2.src} // Assuming Logo2 is imported correctly and .src provides the path
+                src="/images/logo2.svg"
                 alt="OkiDoki Producciones Rana Logo"
                 // loading="eager" // loading attribute is standard HTML
                 className="w-50 transition-transform duration-300 hover:scale-105"
@@ -148,21 +143,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// Note:
-// 1. Astro components like `<Image>` and your custom `<Button>` from .astro files
-//    cannot be directly used in React JSX. You'll need to:
-//    a. Create React equivalents for these components.
-//    b. Use standard HTML tags (e.g., `<img>`, `<button>`) and style them accordingly.
-//    c. If these Astro components are simple enough, you might pass their props to HTML tags.
-//    For the `Image` component, I've used a standard `<img>` tag.
-//    For the `Button` component, I've used a standard `<button>` tag. You'll need to style it.
-// 2. Ensure that image paths like `Logo2` and `login-bg.jpg` are correctly resolved.
-//    `Logo2` is imported, so `Logo2.src` (or similar, depending on your bundler/setup for SVGs in React) should provide the path.
-//    The background image path `/src/images/login-bg.jpg` assumes it's served from the public directory.
-//    If your setup is different, adjust the paths.
-// 3. The `@utils/auth` import assumes you have a path alias configured in your `jsconfig.json` or `tsconfig.json`.
-//    If not, use a relative path like `import { login } from "../../../utils/auth";`.
-// 4. The `Button.astro` and `Image.astro` imports are commented out or replaced as they are not directly usable.
-//    You will need to replace them with React-compatible components or HTML elements.
-//    I've used a standard HTML button and img tag as placeholders.

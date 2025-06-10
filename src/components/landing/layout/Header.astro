@@ -1,7 +1,5 @@
 ---
 import Navigation from "@components/shared/Navigation.astro";
-import Logo from "/logo.svg";
-import Logo2 from "/logo2.svg";
 import Button from "@components/shared/Button.astro";
 // Astro Components
 import { Icon } from "astro-icon/components";
@@ -33,8 +31,8 @@ const whatsappLink = socialLinksList.whatsapp.url;
         <div
           class="absolute inset-0 flex items-center justify-center transition-opacity duration-350 ease-in-out group-hover:opacity-0"
         >
-          <Image
-            src={Logo}
+          <img
+            src="/images/logo.svg"
             alt="OkiDoki Producciones Rana Logo"
             loading="eager"
             class="h-full w-full"
@@ -43,8 +41,8 @@ const whatsappLink = socialLinksList.whatsapp.url;
         <div
           class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-350 ease-in-out group-hover:opacity-100"
         >
-          <Image
-            src={Logo2}
+          <img
+            src="/images/logo2.svg"
             alt="OkiDoki Producciones Rana Logo"
             loading="eager"
             class="h-full w-full"
