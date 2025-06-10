@@ -107,7 +107,7 @@ export default function AddServiceForm() {
         <h1 className="text-primary text-3xl font-bold">
           Añadir Nuevo Servicio
         </h1>
-        <a href="/admin/dashboard" className="btn btn-ghost">
+        <a href="/admin" className="btn btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="mr-2 h-5 w-5"

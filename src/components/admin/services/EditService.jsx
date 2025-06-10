@@ -119,10 +119,7 @@ export default function EditService({
         <h1 className="text-primary text-3xl font-bold">
           Editar: <span className="text-secondary">{service?.title}</span>
         </h1>
-        <button
-          onClick={onCancel || (() => (window.location.href = "/admin"))}
-          className="btn btn-ghost"
-        >
+        <a href="/admin" className="btn btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="mr-2 h-5 w-5"
@@ -138,7 +135,7 @@ export default function EditService({
             />
           </svg>
           Volver al Dashboard
-        </button>
+        </a>
       </div>
 
       {error && (

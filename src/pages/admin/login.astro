@@ -1,7 +1,7 @@
 ---
 import Button from "@components/shared/Button.astro";
 import "@styles/global.css";
-import Image from "astro/components/Image.astro";
+import LoginBG from "@images/login-bg.jpg";
 ---
 
 <html lang="es" class="h-full">
@@ -41,18 +41,12 @@ import Image from "astro/components/Image.astro";
       type="font/ttf"
       crossorigin="anonymous"
     />
-
-    <!-- <ViewTransitions /> -->
   </head>
   <body class="dui">
     <div class="relative grid min-h-[100vh] place-items-center px-3">
       <!-- Capa de imagen de fondo -->
       <div class="absolute inset-0 z-0 opacity-40">
-        <img
-          src="src/images/login-bg.jpg"
-          alt=""
-          class="h-full w-full object-cover"
-        />
+        <img src={LoginBG.src} alt="" class="h-full w-full object-cover" />
       </div>
 
       <!-- Contenido del login (encima de las capas) -->

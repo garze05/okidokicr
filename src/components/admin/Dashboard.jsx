@@ -413,8 +413,8 @@ export default function Dashboard() {
               </span>
               <div className="flex space-x-2">
                 <div className="dropdown dropdown-end">
-                  <label tabIndex={0} className="btn btn-ghost btn-lg">
-                    Acciones ▼
+                  <label tabIndex={0} disabled className="btn btn-ghost btn-lg">
+                    Acciones (Proximamente) ▼
                   </label>
                   <ul
                     tabIndex={0}
