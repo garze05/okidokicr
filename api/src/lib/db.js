@@ -18,22 +18,3 @@ function getPrismaClient() {
 
 // Export the singleton instance
 export const db = getPrismaClient();
-
-// Graceful shutdown
-process.on("beforeExit", async () => {
-  if (prisma) {
-    await prisma.$disconnect();
-  }
-});
-
-process.on("SIGTERM", async () => {
-  if (prisma) {
-    await prisma.$disconnect();
-  }
-});
-
-process.on("SIGINT", async () => {
-  if (prisma) {
-    await prisma.$disconnect();
-  }
-});
