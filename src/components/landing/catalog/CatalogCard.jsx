@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
+import { Image, Film } from "lucide-react";
+
 /**
  * CatalogCard
  * @param {{
@@ -18,11 +20,24 @@ export default function CatalogCard({ service }) {
   const { title, description, coverImage, available } = service;
 
   const [mediaCounts, setMediaCounts] = useState({
-    totalImages: 0,
-    totalVideos: 0,
+    totalImages: null, // Initialize with null for loading state
+    totalVideos: null, // Initialize with null for loading state
   });
+  const [loadingMediaCount, setLoadingMediaCount] = useState(true);
+
   useEffect(() => {
-    fetchMediaCount(service.id).then((counts) => setMediaCounts(counts));
+    setLoadingMediaCount(true);
+    fetchMediaCount(service.id)
+      .then((counts) => {
+        setMediaCounts(counts);
+      })
+      .catch(() => {
+        // Handle error case, e.g., set to default or error state
+        setMediaCounts({ totalImages: 0, totalVideos: 0 });
+      })
+      .finally(() => {
+        setLoadingMediaCount(false);
+      });
   }, [service.id]);
 
   async function fetchMediaCount(serviceId) {
@@ -39,44 +54,60 @@ export default function CatalogCard({ service }) {
     } catch (error) {
       console.error("Error:", error);
       // Proporcionar valores predeterminados en caso de error
-      return { totalImages: 0, totalVideos: 0 };
+      return { totalImages: 0, totalVideos: 0 }; // Or specific error indicators like -1 or null
     }
   }
-
   return (
-    <div className="group hover:bg-black-okidoki relative flex h-full w-full transform cursor-pointer flex-col overflow-hidden rounded-xl bg-white px-4 py-3 shadow-lg ring-1 ring-gray-900/5 transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-2xl sm:px-6 sm:pt-10 sm:pb-8 sm:shadow-xl">
-      <div className="mx-auto flex h-full w-full flex-col gap-3 sm:gap-4">
+    <div className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:ring-slate-300/50 sm:rounded-2xl">
+      <div className="relative flex h-full w-full flex-col">
         {/* Imagen de portada */}
-        <div className="h-40 w-full overflow-hidden rounded-lg sm:h-48 sm:rounded-xl">
+        <div className="relative h-52 w-full overflow-hidden rounded-t-xl sm:h-48 sm:rounded-t-2xl">
           <img
             src={coverImage}
             alt={`${title} – Costa Rica OkiDoki`}
-            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
+            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
             loading="lazy"
           />
-        </div>
+          {/* Image overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
 
+          {/* Status badge positioned on image */}
+          <div className="absolute top-3 right-3">
+            <div
+              className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium backdrop-blur-sm ${
+                available
+                  ? "bg-emerald-500/90 text-white shadow-lg shadow-emerald-500/25"
+                  : "bg-red-500/90 text-white shadow-lg shadow-red-500/25"
+              }`}
+            >
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${available ? "bg-emerald-200" : "bg-red-200"}`}
+              />
+              {available ? "Disponible" : "No Disponible"}
+            </div>
+          </div>
+        </div>{" "}
         {/* Contenido */}
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
           {/* Título */}
-          <h3 className="text-primary-500 line-clamp-2 text-lg font-bold transition-all duration-500 group-hover:text-white sm:text-xl">
+          <h3 className="text-primary-500 line-clamp-2 text-lg leading-tight font-bold transition-all duration-300 group-hover:text-slate-800 sm:text-xl">
             {title}
           </h3>
 
           {/* Descripción */}
-          <p className="mt-1 line-clamp-2 overflow-hidden text-xs leading-relaxed text-gray-600 transition-all duration-500 group-hover:text-white sm:line-clamp-3 sm:text-sm">
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-600 transition-all duration-300 group-hover:text-slate-700 sm:text-base">
             {description}
           </p>
 
           {/* Spacer */}
-          <div className="h-5 flex-grow" />
+          <div className="flex-grow" />
 
           {/* Etiquetas */}
-          <div className="flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
             {service.tags.map((tagLink) => (
               <span
                 key={tagLink.tagId}
-                className="rounded-full bg-gray-200 px-2 py-1 text-xs font-semibold text-gray-500"
+                className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 transition-colors duration-200 group-hover:bg-slate-200 sm:px-3 sm:text-sm"
               >
                 {tagLink.tag?.name}
               </span>
@@ -84,37 +115,40 @@ export default function CatalogCard({ service }) {
           </div>
 
           {/* Sección inferior */}
-          <div className="mt-3 space-y-2">
+          <div className="mt-4 space-y-3 border-t border-slate-100 pt-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {mediaCounts.totalImages}{" "}
-                  <span className="font-normal text-gray-500 group-hover:text-gray-300">
-                    fotos
-                  </span>
-                </span>
-                <span className="text-sm font-bold transition-all duration-500 group-hover:text-white">
-                  {mediaCounts.totalVideos}{" "}
-                  <span className="font-normal text-gray-500 group-hover:text-gray-300">
-                    videos
-                  </span>
-                </span>
-                <span
-                  className={`text-xs font-semibold ${
-                    available ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {available ? "Disponible" : "No Disponible"}
-                </span>
+                {loadingMediaCount ? (
+                  <>
+                    <div className="flex items-center gap-1">
+                      <div className="h-4 w-4 animate-pulse rounded bg-slate-200" />
+                      <div className="h-3 w-8 animate-pulse rounded bg-slate-200" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="h-4 w-4 animate-pulse rounded bg-slate-200" />
+                      <div className="h-3 w-8 animate-pulse rounded bg-slate-200" />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors duration-200 group-hover:text-slate-800">
+                      <Image size={16} className="text-slate-500" />
+                      <span>{mediaCounts.totalImages ?? "--"}</span>
+                      <span className="text-xs font-normal text-slate-500">
+                        fotos
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors duration-200 group-hover:text-slate-800">
+                      <Film size={16} className="text-slate-500" />
+                      <span>{mediaCounts.totalVideos ?? "--"}</span>
+                      <span className="text-xs font-normal text-slate-500">
+                        videos
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
-
-            {/* Botón (descomenta si lo necesitas) */}
-            {/*
-            <button className="w-full py-1.5 sm:py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm sm:text-base rounded-lg transform transition-all duration-300 hover:scale-105">
-              Pedir ahora
-            </button>
-            */}
           </div>
         </div>
       </div>
