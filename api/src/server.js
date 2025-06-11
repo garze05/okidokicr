@@ -2,7 +2,7 @@ import app from "./app.js";
 import { db } from "./lib/db.js";
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`API corriendo en http://localhost:${PORT}/`);
 });
 
