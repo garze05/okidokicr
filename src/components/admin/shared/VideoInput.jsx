@@ -101,7 +101,7 @@ export default function VideoInput({
           initialFiles={uploadedVideos}
           accept="video/*"
           multiple={true}
-          label="Arrastra y suelta videos aquí o haz clic para seleccionar"
+          label="Haz clic para seleccionar"
           onFilesChange={handleUploadedVideosChange}
           disabled={disabled}
         />

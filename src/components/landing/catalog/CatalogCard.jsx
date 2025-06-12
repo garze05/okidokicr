@@ -65,7 +65,7 @@ export default function CatalogCard({ service }) {
           <img
             src={coverImage}
             alt={`${title} – Costa Rica OkiDoki`}
-            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover object-[25%_30%] transition-all duration-500 group-hover:scale-105"
             loading="lazy"
           />
           {/* Image overlay for better text contrast */}

@@ -177,26 +177,12 @@ export default function AddService({ allTags }) {
             initialFiles={formData.coverImage ? [formData.coverImage] : []}
             accept="image/*"
             multiple={false}
-            label="Arrastra y suelta la imagen de portada aquí"
+            label="Subir Imagen de Portada"
             onFilesChange={(files) =>
               setFormData((prev) => ({ ...prev, coverImage: files[0] || "" }))
             }
             disabled={loading}
           />
-          <div className="mt-2">
-            <label className="label">
-              <span className="label-text text-sm">O ingresa una URL:</span>
-            </label>
-            <input
-              type="url"
-              name="coverImage"
-              value={formData.coverImage}
-              onChange={handleInputChange}
-              placeholder="https://ejemplo.com/imagen.jpg"
-              className="input input-bordered w-full"
-              disabled={loading}
-            />
-          </div>
         </div>
         {/* Availability */}
         <div className="form-control">
@@ -253,7 +239,7 @@ export default function AddService({ allTags }) {
             initialFiles={formData.gallery}
             accept="image/*"
             multiple={true}
-            label="Arrastra y suelta imágenes aquí para la galería"
+            label="Subir Imágenes para Galería"
             onFilesChange={handleGalleryChange}
             disabled={loading}
           />
