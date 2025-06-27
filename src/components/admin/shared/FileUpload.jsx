@@ -92,7 +92,7 @@ export default function FileUpload({
     if (scriptLoaded && window.cloudinary && !cloudinaryWidgetRef.current) {
       if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
         console.error(
-          "Cloudinary 'cloudName' or 'uploadPreset' is not configured in environment variables (VITE_CLOUDINARY_CLOUD_NAME, VITE_CLOUDINARY_UPLOAD_PRESET).",
+          "Cloudinary 'cloudName' or 'uploadPreset' is not configured in environment variables (PUBLIC_CLOUDINARY_CLOUD_NAME, PUBLIC_CLOUDINARY_UPLOAD_PRESET).",
         );
         alert(
           "Error: La configuración para subir archivos no está completa. Contacta al administrador.",
