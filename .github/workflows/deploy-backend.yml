@@ -1,0 +1,28 @@
+name: Deploy backend to Oracle Cloud
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Connect via SSH and deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.ORACLE_HOST }}
+          username: ubuntu
+          key: ${{ secrets.ORACLE_PRIVATE_KEY }}
+          script: |
+            cd ~/okidokicr
+            git pull origin main
+            cd api
+            npm install --frozen-lockfile || npm install
+            npx prisma generate
+            prisma migrate deploy
+            pm2 restart okidoki-api
