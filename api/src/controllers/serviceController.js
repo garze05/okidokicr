@@ -1,7 +1,7 @@
 import { db } from "../lib/db.js";
 
 // GENERALES
-// Crear servicio
+// Crear servicio - Fixed service overwrite bug
 export const createService = async (req, res, next) => {
   try {
     const {

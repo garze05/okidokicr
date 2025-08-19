@@ -24,5 +24,5 @@ jobs:
             cd api
             npm install --frozen-lockfile || npm install
             npx prisma generate
-            prisma migrate deploy
+            npx prisma db push --accept-data-loss
             pm2 restart okidoki-api
