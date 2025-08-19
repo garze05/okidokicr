@@ -19,6 +19,15 @@ jobs:
           username: ubuntu
           key: ${{ secrets.ORACLE_PRIVATE_KEY }}
           script: |
+            # Load environment (nvm, node, etc.)
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            
+            # Also try to load from common locations
+            [ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+            [ -s "$HOME/.profile" ] && source "$HOME/.profile"
+            
             cd ~/okidokicr
             git pull origin main
             cd api
