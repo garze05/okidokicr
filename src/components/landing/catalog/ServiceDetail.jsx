@@ -311,7 +311,7 @@ const ImageGallery = ({
           {images.map((img, idx) => (
             <button
               key={idx}
-              className={`thumbnail-btn h-16 min-w-[80px] flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+              className={`thumbnail-btn aspect-[4/3] h-16 w-[85px] flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
                 idx === currentIndex
                   ? "border-primary-500 ring-primary-500/20 ring-2"
                   : "border-slate-200 hover:border-slate-300"
@@ -322,7 +322,7 @@ const ImageGallery = ({
               <img
                 src={img.src}
                 alt={`${serviceTitle} - Miniatura ${idx + 1}`}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-center"
               />
             </button>
           ))}
