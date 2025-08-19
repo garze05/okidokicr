@@ -1,4 +1,4 @@
-[![Gabriel Rodriguez Portfolio Social Banner](./public/og.jpg)](https://gabrielro.com)
+[![OkiDoki Social Banner](./public/og.jpg)](https://okidokicr.com)
 
 # OkiDokiCR Website
 
