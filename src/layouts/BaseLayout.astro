@@ -2,6 +2,8 @@
 import "aos/dist/aos.css";
 import "@styles/global.css";
 
+import { SEO } from "astro-seo";
+
 interface Props {
   title: string;
   description?: string;
@@ -19,18 +21,34 @@ const {
 
 <html lang="es" class="h-full">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>OkiDoki - {title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="Botargas, Fiestas de Cumpleaños, Eventos Familiares, Eventos Empresariales, Animación Infantil, OkiDoki"
+    <SEO
+      title={`OkiDoki - ${title}`}
+      description={description}
+      openGraph={{
+        basic: {
+          title: "OkiDoki Fiestas y Eventos Costa Rica",
+          type: "website",
+          image: "/og.jpg",
+        },
+      }}
+      charset="utf-8"
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        meta: [
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1.0",
+          },
+          { name: "generator", content: Astro.generator },
+          {
+            name: "keywords",
+            content:
+              "Botargas, Fiestas de Cumpleaños, Eventos Familiares, Eventos Empresariales, Animación Infantil, OkiDoki",
+          },
+          { name: "author", content: "Gabriel Rodriguez Ovares" },
+        ],
+      }}
     />
-    <meta name="author" content="OkiDoki" />
     {includeSitemap && <link rel="sitemap" href="/sitemap-index.xml" />}
   </head>
   <body class={`h-full ${bodyClass}`}>

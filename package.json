@@ -27,6 +27,7 @@
     "astro": "^5.7.4",
     "astro-carousel": "^3.0.2",
     "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^0.8.4",
     "astro-simple-carousel": "^1.0.9",
     "canvas-confetti": "^1.9.3",
     "fuse.js": "^7.1.0",
