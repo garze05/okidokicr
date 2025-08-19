@@ -9,9 +9,9 @@ datasource db {
 
 model Service {
   id          Int             @id @default(autoincrement())
-  title       String
-  description String
-  coverImage  String
+  title       String          @db.VarChar(255)
+  description String          @db.Text
+  coverImage  String          @db.VarChar(500)
   // Relaciones a las tablas de multimedia:
   gallery     GalleryImage[]
   videos      Video[]

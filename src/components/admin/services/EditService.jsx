@@ -59,6 +59,25 @@ export default function EditService({
     setLoading(true);
     setError("");
 
+    // Client-side validation
+    if (!formData.title.trim()) {
+      setError("El título es obligatorio");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.description.trim()) {
+      setError("La descripción es obligatoria");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.description.length > 65535) {
+      setError("La descripción es demasiado larga. Máximo 65,535 caracteres.");
+      setLoading(false);
+      return;
+    }
+
     const token = localStorage.getItem("token");
     if (!token) {
       setError("Error de autenticación. Por favor, inicie sesión de nuevo.");

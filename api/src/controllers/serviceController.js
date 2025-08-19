@@ -102,32 +102,93 @@ export const updateService = async (req, res, next) => {
       videos = [],
       tagIds = [],
       available,
-    } = req.body; // Primero, borramos galerías, videos y tags previos
-    await db.galleryImage.deleteMany({ where: { serviceId: id } });
-    await db.video.deleteMany({ where: { serviceId: id } });
-    await db.serviceTag.deleteMany({ where: { serviceId: id } });
+    } = req.body;
 
-    // Luego actualizamos el servicio y reinsertamos relaciones
-    const service = await db.service.update({
+    // Validate that required data exists before making any changes
+    if (!title || !description) {
+      return res.status(400).json({ 
+        error: "Título y descripción son obligatorios" 
+      });
+    }
+
+    // Verify service exists before updating
+    const existingService = await db.service.findUnique({ 
       where: { id },
-      data: {
-        title,
-        description,
-        coverImage,
-        available,
-        gallery: { create: gallery.map((url) => ({ url })) },
-        videos: { create: videos.map((url) => ({ url })) },
-        tags: { create: tagIds.map((tagId) => ({ tagId })) },
-      },
       include: {
         gallery: true,
         videos: true,
         tags: { include: { tag: true } },
-      },
+      }
+    });
+    
+    if (!existingService) {
+      return res.status(404).json({ error: "Servicio no encontrado" });
+    }
+
+    // Use transaction to ensure atomicity
+    const service = await db.$transaction(async (prisma) => {
+      // Update basic service info first
+      const updatedService = await prisma.service.update({
+        where: { id },
+        data: {
+          title,
+          description,
+          coverImage,
+          available,
+        },
+      });
+
+      // Only update media if arrays are provided and not empty
+      if (Array.isArray(gallery)) {
+        // Delete existing gallery images
+        await prisma.galleryImage.deleteMany({ where: { serviceId: id } });
+        // Add new gallery images if any
+        if (gallery.length > 0) {
+          await prisma.galleryImage.createMany({
+            data: gallery.map((url) => ({ url, serviceId: id })),
+            skipDuplicates: true,
+          });
+        }
+      }
+
+      if (Array.isArray(videos)) {
+        // Delete existing videos
+        await prisma.video.deleteMany({ where: { serviceId: id } });
+        // Add new videos if any
+        if (videos.length > 0) {
+          await prisma.video.createMany({
+            data: videos.map((url) => ({ url, serviceId: id })),
+            skipDuplicates: true,
+          });
+        }
+      }
+
+      if (Array.isArray(tagIds)) {
+        // Delete existing tag relationships
+        await prisma.serviceTag.deleteMany({ where: { serviceId: id } });
+        // Add new tag relationships if any
+        if (tagIds.length > 0) {
+          await prisma.serviceTag.createMany({
+            data: tagIds.map((tagId) => ({ serviceId: id, tagId })),
+            skipDuplicates: true,
+          });
+        }
+      }
+
+      // Return the complete updated service
+      return await prisma.service.findUnique({
+        where: { id },
+        include: {
+          gallery: true,
+          videos: true,
+          tags: { include: { tag: true } },
+        },
+      });
     });
 
     res.json(service);
   } catch (err) {
+    console.error('Error updating service:', err);
     next(err);
   }
 };
