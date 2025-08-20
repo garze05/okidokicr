@@ -7,6 +7,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 OkiDoki is a full-stack web application for a Costa Rican event planning company. The project follows a monorepo structure with separate frontend and backend applications:
 
 ### Frontend (Astro.js)
+
 - **Framework**: Astro 5.x with React components for interactive elements
 - **Styling**: TailwindCSS 4.x with DaisyUI components
 - **Location**: Root directory (`/`)
@@ -17,6 +18,7 @@ OkiDoki is a full-stack web application for a Costa Rican event planning company
   - `src/utils/` - Utility functions and auth helpers
 
 ### Backend (Express.js API)
+
 - **Framework**: Express.js with Prisma ORM
 - **Database**: MySQL with Prisma migrations
 - **Location**: `api/` directory
@@ -27,7 +29,9 @@ OkiDoki is a full-stack web application for a Costa Rican event planning company
   - `api/prisma/` - Database schema and migrations
 
 ### Database Schema
+
 The application manages:
+
 - **Services** - Event planning services with gallery images and videos
 - **Tags** - Categorization system for services
 - **Media** - Images and videos stored via Cloudinary integration
@@ -35,6 +39,7 @@ The application manages:
 ## Development Commands
 
 ### Frontend Development
+
 ```bash
 # Start development server (port 4321)
 pnpm dev
@@ -47,6 +52,7 @@ pnpm preview
 ```
 
 ### Backend Development
+
 ```bash
 # Navigate to API directory
 cd api
@@ -65,6 +71,7 @@ npx prisma db push         # Push schema changes without migration
 ```
 
 ### Database Setup
+
 ```bash
 cd api
 
@@ -79,6 +86,7 @@ npx prisma db seed
 ```
 
 ### Code Quality
+
 ```bash
 # Format code (both frontend and backend)
 npx prettier --write .
@@ -89,10 +97,13 @@ npx prettier --write .
 ## Environment Configuration
 
 ### Frontend (.env)
+
 The frontend uses environment variables primarily for API endpoints. Variables are typically prefixed with `PUBLIC_` for client-side access.
 
 ### Backend (api/.env)
+
 Required environment variables (see `api/.env.example`):
+
 - `DATABASE_URL` - MySQL connection string
 - `CLOUDINARY_*` - Image/video upload service credentials
 - `JWT_SECRET` - Authentication token secret
@@ -101,16 +112,19 @@ Required environment variables (see `api/.env.example`):
 ## Key Features & Components
 
 ### Admin System
+
 - **Location**: `src/components/admin/` and `src/pages/admin/`
 - **Authentication**: JWT-based with protected routes
 - **Features**: Service management, tag management, media uploads
 
 ### Public Catalog
+
 - **Location**: `src/components/landing/catalog/`
 - **Features**: Service browsing, filtering, search functionality
 - **Dynamic routing**: `/catalogo/[id].astro` for individual service pages
 
 ### Media Management
+
 - **Images**: Stored in Cloudinary, managed through upload controller
 - **Local assets**: `src/images/` for static assets
 - **Component**: Drag-and-drop upload functionality in admin panel
@@ -118,11 +132,13 @@ Required environment variables (see `api/.env.example`):
 ## Deployment
 
 ### Frontend
+
 - **Platform**: Netlify (configured in `astro.config.mjs`)
 - **Build command**: `pnpm build`
 - **Deploy**: Automatic on push to main branch
 
 ### Backend
+
 - **Platform**: Oracle Cloud
 - **Process manager**: PM2
 - **Deployment**: GitHub Actions workflow (`.github/workflows/deploy-backend.yml`)
@@ -131,6 +147,7 @@ Required environment variables (see `api/.env.example`):
 ## Path Aliases
 
 The project uses path aliases for clean imports:
+
 - `@components/*` → `src/components/*`
 - `@layouts/*` → `src/layouts/*`
 - `@pages/*` → `src/pages/*`
@@ -142,6 +159,7 @@ The project uses path aliases for clean imports:
 ## Technology Stack
 
 ### Frontend
+
 - Astro 5.x (Static Site Generator)
 - React 19.x (Interactive components)
 - TailwindCSS 4.x + DaisyUI (Styling)
@@ -151,6 +169,7 @@ The project uses path aliases for clean imports:
 - AOS (Scroll animations)
 
 ### Backend
+
 - Express.js 5.x (Web framework)
 - Prisma (ORM and migrations)
 - MySQL (Database)

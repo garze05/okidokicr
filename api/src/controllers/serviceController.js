@@ -14,6 +14,11 @@ export const createService = async (req, res, next) => {
       available,
     } = req.body;
 
+    // Add coverImage to the beginning of the gallery if it exists and is not already there
+    if (coverImage && !gallery.includes(coverImage)) {
+      gallery.unshift(coverImage);
+    }
+
     const service = await db.service.create({
       data: {
         title,
@@ -106,23 +111,28 @@ export const updateService = async (req, res, next) => {
 
     // Validate that required data exists before making any changes
     if (!title || !description) {
-      return res.status(400).json({ 
-        error: "Título y descripción son obligatorios" 
+      return res.status(400).json({
+        error: "Título y descripción son obligatorios",
       });
     }
 
     // Verify service exists before updating
-    const existingService = await db.service.findUnique({ 
+    const existingService = await db.service.findUnique({
       where: { id },
       include: {
         gallery: true,
         videos: true,
         tags: { include: { tag: true } },
-      }
+      },
     });
-    
+
     if (!existingService) {
       return res.status(404).json({ error: "Servicio no encontrado" });
+    }
+
+    // Add coverImage to the beginning of the gallery if it exists and is not already there
+    if (coverImage && !gallery.includes(coverImage)) {
+      gallery.unshift(coverImage);
     }
 
     // Use transaction to ensure atomicity
@@ -188,7 +198,7 @@ export const updateService = async (req, res, next) => {
 
     res.json(service);
   } catch (err) {
-    console.error('Error updating service:', err);
+    console.error("Error updating service:", err);
     next(err);
   }
 };
