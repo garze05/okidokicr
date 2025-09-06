@@ -1,7 +1,7 @@
 // src/middleware.ts
 import { defineMiddleware } from "astro/middleware";
 const MAINTENANCE = import.meta.env.PUBLIC_MAINTENANCE_MODE === "true";
-
+import RanaWIP from "@images/ranawip.png";
 export const onRequest = defineMiddleware(async (ctx, next) => {
   // Permite estáticos/health
   const url = new URL(ctx.request.url);
@@ -26,7 +26,7 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       </style>
     </head><body>
       <div class="box">
-        <img src="src/images/ranawip.png" height="150px" alt="Logo OkiDoki Costa Rica Mantenimiento"/>
+        <img src=${RanaWIP.src} height="150px" alt="Logo OkiDoki Costa Rica Mantenimiento"/>
         <h1>Volvemos en un ratito 🚧🐸</h1>
         <p>Estamos haciendo mantenimiento para mejorar tu experiencia.</p>
       </div>
