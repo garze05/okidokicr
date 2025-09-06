@@ -1,6 +1,6 @@
 // src/middleware.ts
 import { defineMiddleware } from "astro/middleware";
-const MAINTENANCE = import.meta.env.MAINTENANCE_MODE === "true";
+const MAINTENANCE = import.meta.env.PUBLIC_MAINTENANCE_MODE === "true";
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
   // Permite estáticos/health
