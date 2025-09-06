@@ -1,0 +1,40 @@
+---
+// Astro
+import { Image } from "astro:assets";
+
+// Que es OkiDoki
+import RanaWIP from "@images/rana_rocky1.png";
+import WhatsappStickyButton from "./sections/WhatsappStickyButton.astro";
+// Full Astro Component Syntax:
+// https://docs.astro.build/basics/astro-components/
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>OkiDoki - Mantenimiento</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <style>
+      body {
+        font-family: system-ui;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .box {
+        max-width: 600px;
+        text-align: center;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <Image src={RanaWIP} alt="A description of my image." />
+      <h1>🚧 Volvemos pronto 🚧</h1>
+      <p>Estamos trabajando para mejorar su experiencia.</p>
+      <WhatsappStickyButton />
+    </div>
+  </body>
+</html>
